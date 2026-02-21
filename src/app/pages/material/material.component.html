@@ -1,0 +1,267 @@
+<div class="container">
+    <br><br><br><br>
+    <div class="text-center">
+        <h2>All Material Details </h2>
+    </div>
+    <br>
+
+    <div class="text-end">
+        <button type="button" class="btn text-light btt btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            title="Add Materials">
+            Add Material <i class="fa-solid fa-square-plus"></i>
+        </button> <br> <br>
+    </div>
+
+
+    <br><br>
+    <div class="row">
+        <!-- <div class="col-md-3">
+            <div class="input-group mb-3">
+                <label for="Material_Weight">Select Material Weight.<br>
+                    <select name="Material_Weight" id="Material_Weight" [(ngModel)]="Material_Weight"
+                        class="form-select" placeholder="Select Material_Weight" aria-label="Multiple select example">
+                        <option *ngFor="let b of AllMAterials " [value]="b.Material_Weight">{{b.Material_Weight}}
+                        </option>
+                    </select>
+                </label>
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
+                        class="fa-solid fa-magnifying-glass" (click)="MaterialByWeight()"></i></button>
+            </div>
+        </div><br> -->
+
+        <!-- <div class="col-md-3">
+            <div class="input-group mb-3">
+                <label for="Material_Name">Select Material Name.<br>
+                    <select name="Material_Name" id="Material_Name" [(ngModel)]="Material_Name" class="form-select"
+                        placeholder="Select Material_Name" aria-label="Multiple select example">
+                        <option *ngFor="let b of AllMAterials " [value]="b.Material_Name">{{b.Material_Name}}</option>
+                    </select>
+                </label><button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
+                        class="fa-solid fa-magnifying-glass" (click)="MaterialByName()"></i></button>
+            </div>
+        </div><br> -->
+
+        <div class="col-md-3">
+            <div>
+                <label for="Material_Name">Select Material Name.<br>
+                    <select name="Material_Name" id="Material_Name" [(ngModel)]="Material_Name" class="form-select"
+                        placeholder="Select Material_Name" aria-label="Multiple select example">
+                        <option *ngFor="let b of MaterialTypes" [value]="b.Material_Name">{{b.Material_Name}}</option>
+                    </select>
+                </label>
+                <button class="btn bttns" type="button" id="button-addon2"><i class="fa-solid fa-magnifying-glass"
+                        (click)="MaterialByName()"></i></button>
+            </div>
+        </div><br>
+
+        <div class="col-md-3">
+            <div>
+                <label for="Material_Type">Select Material Type.<br>
+                    <select name="Material_Type" id="Material_Type" [(ngModel)]="Material_Type" class="form-select"
+                        placeholder="Select Material_Type" aria-label="Multiple select example">
+                        <option *ngFor="let b of MaterialTypes" [value]="b.Material_Type">{{b.Material_Type}}</option>
+                    </select>
+                </label>
+                <button class="btn bttns" type="button" id="button-addon2"><i class="fa-solid fa-magnifying-glass"
+                        (click)="MaterialByType()"></i></button>
+            </div>
+        </div><br>
+
+        <div class="col-md-3">
+            <div>
+                <label for="Material_Size">Select Material Size.<br>
+                    <select name="Material_Size" id="Material_Size" [(ngModel)]="Material_Size" class="form-select"
+                        placeholder="Select Material_Size" aria-label="Multiple select example">
+                        <option *ngFor="let b of MaterialTypes " [value]="b.Material_Size">{{b.Material_Size}}</option>
+                    </select>
+                </label>
+                <button class="btn bttns" type="button" id="button-addon2"><i class="fa-solid fa-magnifying-glass"
+                        (click)="MaterialBySize()"></i></button>
+            </div>
+        </div><br>
+
+        <div class="col-md-3">
+            <label for="">Download a Material Excelsheet</label>
+            <br>
+            <button class="btn btn-success" (click)="exportexcel()" title="Download excelfile">Download
+                Excelsheet</button>
+            <br> <br>
+        </div>
+
+        <div class="col-md-1">
+            <br>
+            <a class="btn bttns" (click)="AllMaterial()" style="color: white;" title="Refresh Materials"><i
+                    class="fa-solid fa-arrow-rotate-right"></i></a>
+        </div>
+
+    </div>
+    <br><br>
+
+
+    <table class="table table-striped" id="excel-table">
+        <thead>
+            <tr>
+                <th>Material ID</th>
+                <th>Material Name</th>
+                <th>Material Size</th>
+                <th>Material Type</th>
+                <th>Material Weight</th>
+                <th>Added Date</th>
+                <th>Material Status</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let Material of AllMAterials | paginate:{itemsPerPage : 10, currentPage:pro}, let i = index">
+                <td [routerLink]="['/Home/MaterialsDetails',Material.Material_id]" title="View Information"
+                    class="info">{{
+                    Material.Material_id }}</td>
+                <td>{{ Material.Material_Name }}</td>
+                <td>{{ Material.Material_Size }}</td>
+                <td>{{ Material.Material_Type }}</td>
+                <td>{{ Material.Material_Weight }}</td>
+                <!-- <td>{{ Material.Material_Quantity }}</td> -->
+                <!-- <td>{{ Material.Available_Material_Quantity }}</td> -->
+                <!-- <td>{{ Material.Total_Used }}</td> -->
+                <td>{{ Material.Added_Date | date }} <br> {{Material.Added_Date | date:'h:mm a' }}</td>
+                <td>
+                    <span [ngClass]="{
+                          'text-success': Material.Material_Status == 1,
+                          'text-danger': Material.Material_Status != 1
+                          }">
+                        <i class="fa-solid fa-circle fa-sm"></i> {{ Material.Material_Status == 1 ? 'Available' :
+                        'NotAvailable' }}
+                    </span>
+                </td>
+
+                <td> <a type="button" (click)="EditMaterial(Material.Material_id)" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal1" title="Edit a Material">
+                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                    </a>
+                </td>
+
+                <td><a type="button" (click)="DeleteMaterial(Material['Material_id'])" title="Delete a Material"><i
+                            class="fa-regular fa-trash-can fa-lg"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        <pagination-controls (pageChange)=" pro = $event "
+            style="background-color: #252847 !important; z-index: -2 !important;"></pagination-controls>
+    </div>
+
+    <br>
+
+    <br>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Material</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+
+                        <form [formGroup]="MaterialAddForms">
+                            <label for="Material_Size">Material Size</label>
+                            <input type="text" formControlName="Material_Size" class="form-control"
+                                placeholder="Enter Material Size">
+                            <br>
+                            <label for="Material_Name">Material Name</label>
+                            <input type="text" formControlName="Material_Name" class="form-control"
+                                placeholder="Enter Material Name">
+                            <br>
+
+                            <label for="Material_Type">Material Type</label>
+                            <input type="text" formControlName="Material_Type" class="form-control"
+                                placeholder="Enter Material Type">
+                            <br>
+
+                            <div class="mb-3">
+                                <label for="Material_Weight" class="form-label">Material Weight</label>
+                                <input type="text" class="form-control" id="Material_Weight"
+                                    formControlName="Material_Weight" (blur)="formatWeight()"
+                                    placeholder="Enter Weight (e.g. 500)" />
+                            </div>
+
+                            <!-- <label for="Material_Weight">Material Weight</label>
+                            <input type="text" formControlName="Material_Weight" class="form-control"
+                                placeholder="Material_Weight"> -->
+                            <br>
+
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="Material_Status"
+                                    formControlName="Material_Status" (change)="ToggleStatus($event)">
+                                <label class="form-check-label" for="Material_Status">Checked Material is Available or
+                                    Not</label>
+                            </div>
+                            <br>
+                            <button class="btn btn-success btn-lg mb-4" (click)="AddMaterial()">Add Material</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <br>
+
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Material</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <br>
+                        <form [formGroup]="EditMaterialForms">
+                            <label for="Material_Size">Material Size</label>
+                            <input type="text" formControlName="Material_Size" class="form-control"
+                                placeholder="Enter Material Size">
+                            <br>
+                            <label for="Material_Name">Material Name</label>
+                            <input type="text" formControlName="Material_Name" class="form-control"
+                                placeholder="Enter Material Name">
+                            <br>
+                            <label for="Material_Type">Material Type</label>
+                            <input type="text" formControlName="Material_Type" class="form-control"
+                                placeholder="Enter Material Type">
+                            <br>
+
+                            <div class="mb-3">
+                                <label for="Material_Weight" class="form-label">Material Weight</label>
+                                <input type="text" class="form-control" id="Material_Weight"
+                                    formControlName="Material_Weight" (blur)="formatMaterialWeight()"
+                                    placeholder="Enter weight (e.g. 500)" />
+                            </div>
+                            <!-- <label for="Material_Weight">Material Weight</label>
+                            <input type="text" formControlName="Material_Weight" class="form-control"
+                                placeholder="Material_Weight"> -->
+                            <br>
+
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="Material_Status"
+                                    formControlName="Material_Status" (change)="ToggleStatus($event)">
+                                <label class="form-check-label" for="Material_Status">Checked Material is Available or
+                                    Not</label>
+                            </div>
+                            <br>
+                            <button class="btn btn-success btn-lg mb-4" (click)="UpdateMaterial()">Update
+                                Material</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

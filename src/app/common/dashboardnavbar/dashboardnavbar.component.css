@@ -1,0 +1,51 @@
+nav {
+    background-color: #2E3257;
+    color: white;
+}
+
+.offcanvas {
+    background-color: #2E3257;
+    color: white;
+}
+
+.dropdown-menu {
+    background-color: #2E3257;
+    color: white;
+}
+
+a {
+    color: white;
+}
+
+li {
+    list-style: none;
+}
+
+.container-fluid {
+    padding-right: 5%;
+}
+
+.justify-content-center {
+    /* border-top: 2px solid white; */
+    margin-left: 35%;
+}
+
+.active-link {
+    background-color: #5B4c75 !important;
+    /* Active clicked color */
+    color: white !important;
+    border-bottom: 2px solid white;
+}
+
+b{
+    font-size: large;
+}
+
+h5{
+    text-decoration: underline;
+}
+
+.img{
+    width: 100px;
+    background-color: white;
+}

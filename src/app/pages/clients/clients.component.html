@@ -1,0 +1,162 @@
+<div class="container-fluid"> <br><br>
+    <br>
+    <div class="text-center">
+        <h2>All Client Data</h2>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-5">
+            <div class="card" style="position: fixed; width: 30%;">
+                <div class="card-header">Add Client</div>
+                <div class="card-body">
+                    <form [formGroup]="AddClientDataForm" (submit)="AddClient()">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Client Name : </label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                formControlName="Client_Name" placeholder="Enter Client Name">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Client Phone No : </label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                formControlName="Client_PhoneNo" placeholder="Enter Client Phone No">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Client Email : </label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                formControlName="Client_Email" placeholder="Enter Client Email">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Client Address : </label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                formControlName="Client_Address" placeholder="Enter Client Address">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">GST Number: </label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                formControlName="GST_No" placeholder="Enter Client Address">
+                        </div>
+
+
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-success">Add Client</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="col-1"></div> -->
+        <br><br>
+
+        <div class="col-7">
+
+            <div class="row">
+                <br>
+                <!-- <div class="div">
+                    <label for="">Download Admin Data in Excelsheet </label>
+                    <br> <button class="btn btn-success" (click)="exportexcel()" title="Download excelfile">Download
+                        Excelsheet</button> <br> <br>
+                </div> -->
+                <br><br><br>
+
+                <div class="col-md-6" *ngFor="let a of AllData, let i = index">
+                    <div class="card">
+                        <div class="card-body">
+                            <td>
+                                <a type="button" (click)="editClient(a.Client_id)" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal1" title="Edit a Client">
+                                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                </a>
+                                <span style="margin-left:15px;cursor: pointer;" +.><a
+                                        (click)="DeleteClient(a.Client_id)" title="Delete a Client"> <i
+                                            class="fa-solid fa-trash-can"></i></a></span>
+                            </td>
+                            <p>Client Code : {{a.Client_Code}}</p>
+                            <p>Client Name : {{a.Client_Name}}</p>
+                            <p>Client Phone No : {{a.Client_PhoneNo}}</p>
+                            <p>Client Email : {{a.Client_Email}}</p>
+                            <p>Client Address : {{a.Client_Address}}</p>
+                            <p>GST Number : {{a.GST_No}}</p>
+                            <p>Added Date : {{a.Added_Date | date}} <br>
+                                <span>Added Time : {{a.Added_Date | date :'hh:mm:ss:a'}}</span>
+                            </p>
+                            <p>Updated Date : {{a.Updated_Date | date}} <br>
+                                <span>Updated Time : </span> {{a.Updated_Date | date :'hh:mm:ss:a'}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Client</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12">
+
+                            <form [formGroup]="EditClientDataForm">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Client Name : </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" formControlName="Client_Name"
+                                        placeholder="Enter Client Name">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Client Phone No : </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" formControlName="Client_PhoneNo"
+                                        placeholder="Enter Client Phone No">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Client Email : </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" formControlName="Client_Email"
+                                        placeholder="Enter Client Email">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Client Address : </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" formControlName="Client_Address"
+                                        placeholder="Enter Client Client_Address">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">GST Number: </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" formControlName="GST_No"
+                                        placeholder="Enter Client Address">
+                                </div>
+
+                                <!-- <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="Status" formControlName="Status"
+                                        (change)="updateStatus($event)">
+                                    <label class="form-check-label" for="Status">Checked Admin is Active or Not</label>
+                                </div> -->
+                                <br>
+                                <button class="btn btn-success mb-4" (click)="UpdateClient()">Update Client</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <br><br>
+
+</div>

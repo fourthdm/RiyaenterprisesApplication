@@ -1,0 +1,43 @@
+.main {
+    background: linear-gradient(#781c7faf, #2b1d60ab);
+}
+
+.card {
+    background: linear-gradient(#ffffff61, #ffffff3a);
+    border-radius: 5%;
+}
+
+label {
+    font-size: larger;
+    color: #000;
+}
+
+.fa-eye-slash {
+    color: #827f7fef;
+}
+
+input {
+    background: linear-gradient(#ffffff5a, #ffffff3a);
+    color: white;
+    border: 2px solid white;
+}
+
+input:placeholder-shown {
+    background: linear-gradient(#ffffff5a, #ffffff3a);
+    color: white;
+    /* color: #000; */
+}
+
+.card-body {
+    padding: 5%;
+}
+
+.logins {
+    font-size: 2.5em;
+    color: white;
+}
+
+::placeholder {
+    color: white !important;
+    opacity: 1 !important;
+}

@@ -1,0 +1,23 @@
+h5{
+    text-align: center;
+}
+
+.card-text{
+    text-align: center;
+}
+
+.card{
+    padding:  4% 4% 2% 4%;
+    background-color: #c3c4d12f;
+    color: white;
+    border: 1px solid white;
+}
+.btn-outline{
+    border-color: white;
+}
+
+.wrapper {
+  background: linear-gradient(#781c7faf, #2b1d60ab);
+  /* height: 100vh; */
+  min-height: 100vh;
+}

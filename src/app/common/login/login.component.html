@@ -1,0 +1,62 @@
+<div class="main">
+    <div class="container">
+        <section class="vh-100">
+            <div class="container  h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col col-xl-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+
+                                    <form [formGroup]="Loginform" (ngSubmit)="login()">
+                                        <br>
+                                        <div class="text-center">
+                                            <p class="logins">LOGIN </p>
+                                        </div>
+                                        <br>
+                                        <div class="col-md-12">
+                                            <label for="Username"> Username :</label>
+                                            <input type="text" class="form-control" id="Username" autocomplete="username"
+                                                formControlName="Username" value="" placeholder="Enter Username"
+                                                required>
+                                            <div class="valid-feedback">
+                                                Your Name
+                                            </div>
+                                        </div><br>
+
+                                        <div class="col-md-12">
+                                            <label for="Password">Password :</label>
+                                            <div class="input-group mb-3">
+                                                <input [type]="liked ? 'text' : 'password'" type="Password"
+                                                    class="form-control" id="validationCustom03" id="Password"
+                                                    formControlName="Password" placeholder="Enter Password" required>
+                                                <button class="btn btn-light" type="button" [ngClass]="{
+                                                        'fa-eye-slash': !liked,
+                                                        'fa-eye': liked }" (click)="Show()" id="button-addon2"><i
+                                                          class="fa-solid fa-eye-slash"></i>
+                                                </button>   
+                                            </div>
+                                        </div>
+                                        <!-- <label for="Password">Password</label>
+                                        <input [type]="liked ? 'text' : 'password'" type="password"
+                                            formControlName="Password" class="form-control" id="Password"
+                                            placeholder="Password">
+                                        <button class="btn btn-light" type="button" [ngClass]="{
+                                                        'fa-eye-slash': !liked,
+                                                        'fa-eye': liked }" (click)="Show()" id="button-addon2"><i
+                                                class="fa-solid fa-eye-slash"></i>
+                                        </button> -->
+                                        <br>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-outline-light btn-lg" > Log in</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="container"><br><br><br>
+    <form [formGroup]="Requirementform" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+
+        <label for="Client_Name">Client Name</label>
+        <br>
+        <select formControlName="Client_Name" class="Se">
+            <option *ngFor="let mat of AllclientData" [value]="mat.Client_Name">
+                {{mat.Client_Name}}</option>
+        </select> <br>
+
+        <div class="row">
+            <label for="Client_Address"> Client Address </label>
+            <br>
+            <textarea class="form-control" formControlName="Client_Address" placeholder="Client Address"></textarea>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="Client_Email"> Client Email </label>
+                <br>
+                <input class="form-control" formControlName="Client_Email" placeholder="Client Email">
+            </div>
+            <div class="col-md-6">
+                <label for="Client_PhoneNo"> Phone Number </label>
+                <br>
+                <input class="form-control" formControlName="Client_PhoneNo" placeholder="Phone Number">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="GST_No"> GST Number </label>
+                <br>
+                <input class="form-control" formControlName="GST_No" placeholder="GST Number">
+            </div>
+
+            <div class="col-md-6">
+                <label for="Status"> Status</label>
+                <br>
+                <select class="form-control" formControlName="Status">
+                    <option value="Create">Create</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Complete">Complete</option>
+                    <option value="Cancel">Cancel</option>
+                </select>
+            </div>
+
+        </div>
+        <hr>
+        <div formArrayName="products">
+
+            <div *ngFor="let p of products.controls; let i=index" [formGroupName]="i" class="border p-3 mb-3">
+
+                <h6>Product {{ i + 1 }}</h6>
+
+                <input class="form-control" formControlName="Product_Name" placeholder="Product Name">
+
+                <select class="form-control" formControlName="Material_Type">
+                    <option *ngFor="let mat of AllMaterials" [value]="mat.Material_Name">
+                        {{ mat.Material_Name }}
+                    </option>
+                </select>
+
+                <input class="form-control" formControlName="Product_Quantity" placeholder="Quantity">
+                <input class="form-control" formControlName="HSN_Code" placeholder="HSN Code">
+
+                <input type="file" (change)="onDesignFileSelect($event, i)">
+                <input type="file" (change)="onPDFFileSelect($event, i)">
+
+                <button type="button" class="btn btn-danger mt-2" (click)="removeProduct(i)">
+                    Remove Product
+                </button>
+
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-secondary" (click)="addProduct()">+ Add Product</button>
+
+        <button type="submit" class="btn btn-primary mt-3">Add Requirement</button>
+
+    </form>
+</div>

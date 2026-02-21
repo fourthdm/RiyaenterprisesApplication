@@ -1,0 +1,292 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <!-- <a href="index3.html" class="brand-link">
+        <img src="assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8">
+        <span class="brand-text font-weight-light">Admin Panel</span>
+    </a> -->
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 text-center ">
+            <div class="image">
+                <img src="assets/logo.png" class="img elevation-2" alt="User Image">
+            </div>
+            <br>
+            <br>
+            <div class="info">
+                <a href="#" class="d-block">
+                    <i class="bi bi-columns-gap"></i> Dashboard
+                </a>
+            </div>
+        </div>
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview" role="menu"
+                data-accordion="false">
+                <li class="nav-item menu-open">
+                    <a *ngIf="isAdmin" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AdminDashboard/Employee']">
+                        <i class="fa-solid fa-user-shield fa-xl"></i>
+                        <p>
+                            Admin's
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a *ngIf="isAdmin" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AdminDashboard/Client']">
+                        <i class="fa-regular fa-id-card fa-xl"></i>
+                        <p>
+                            Client's
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a *ngIf="isAdmin" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AdminDashboard/Requirement']">
+                        <i class="fa-solid fa-file-invoice  fa-xl"></i>
+                        <p>
+                            Requirement
+                        </p>
+                    </a>
+                    <a *ngIf="isAccountant" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AccountantDashboard/Requirement']">
+                        <i class="fa-solid fa-file-invoice  fa-xl"></i>
+                        <p>
+                            Requirement
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a *ngIf="isAdmin" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AdminDashboard/Quotation']">
+                        <i class="fa-solid fa-bowling-ball fa-xl"></i>
+                        <p>
+                            Quotation
+                        </p>
+                    </a>
+
+                    <a *ngIf="isAccountant" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AccountantDashboard/Quotation']">
+                        <i class="fa-solid fa-bowling-ball fa-xl"></i>
+                        <p>
+                            Quotation
+                        </p>
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item menu-open">
+                    <a *ngIf="isAdmin" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AdminDashboard/PurchaseOrder']">
+                        <i class="fa-solid fa-hand-holding-hand fa-xl"></i>
+                        <p>
+                            Purchase Order
+                        </p>
+                    </a>
+                    <a *ngIf="isAccountant" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                        [routerLink]="['/AccountantDashboard/PurchaseOrder']">
+                        <i class="fa-solid fa-hand-holding-hand fa-xl"></i>
+                        <p>
+                            Purchase Order
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a *ngIf="isAdmin" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AdminDashboard/WorkOrder']">
+                        <i class="fa-solid fa-industry fa-xl"></i>
+                        <p>
+                            Work Order
+                        </p>
+                    </a>
+
+                    <a *ngIf="isAccountant" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AccountantDashboard/WorkOrder']">
+                        <i class="fa-solid fa-industry fa-xl"></i>
+                        <p>
+                            Work Order
+                        </p>
+                    </a>
+
+                    <a *ngIf="isManager" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/ManagerDashboard/WorkOrder']">
+                        <i class="fa-solid fa-industry fa-xl"></i>
+                        <p>
+                            Work Order
+                        </p>
+                    </a>
+
+                    <a *ngIf="isEmployee" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/EmployeeDashboard/WorkOrder']">
+                        <i class="fa-solid fa-industry fa-xl"></i>
+                        <p>
+                            Work Order
+                        </p>
+                    </a>
+                    <a *ngIf="isQC" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/QCDashboard/WorkOrder']">
+                        <i class="fa-solid fa-industry fa-xl"></i>
+                        <p>
+                            Work Order
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a *ngIf="isAdmin" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AdminDashboard/Bill']">
+                        <i class="fa-solid fa-file-invoice-dollar fa-xl"></i>
+                        <p>
+                            Bill
+                        </p>
+                    </a>
+
+                    <a *ngIf="isAccountant" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AccountantDashboard/Bill']">
+                        <i class="fa-solid fa-file-invoice-dollar fa-xl"></i>
+                        <p>
+                            Bill
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a *ngIf="isAdmin" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AdminDashboard/WorkOrderClose']">
+                        <i class="fa-solid fa-house-signal fa-xl"></i>
+                        <p>
+                            Work Order Close
+                        </p>
+                    </a>
+                    <a *ngIf="isAccountant" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                        [routerLink]="['/AccountantDashboard/WorkOrderClose']">
+                        <i class="fa-solid fa-house-signal fa-xl"></i>
+                        <p>
+                            Work Order Close
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a *ngIf="isAdmin" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AdminDashboard/DeliveryChallan']">
+                        <i class="fa-solid fa-file-signature fa-xl"></i>
+                        <p>
+                            Delivery Challan
+                        </p>
+                    </a>
+                    <a *ngIf="isAccountant " href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                        [routerLink]="['/AccountantDashboard/DeliveryChallan']">
+                        <i class="fa-solid fa-file-signature fa-xl"></i>
+                        <p>
+                            Delivery Challan
+                        </p>
+                    </a>
+                    <a *ngIf="isManager" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                        [routerLink]="['/ManagerDashboard/DeliveryChallan']">
+                        <i class="fa-solid fa-file-signature fa-xl"></i>
+                        <p>
+                            Delivery Challan
+                        </p>
+                    </a>
+                    <a *ngIf="isDispatchManager" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                        [routerLink]="['/DispatchDashboard/DeliveryChallan']">
+                        <i class="fa-solid fa-file-signature fa-xl"></i>
+                        <p>
+                            Delivery Challan
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a *ngIf="isAdmin" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AdminDashboard/Machine']">
+
+                        <i class="fa-solid fa-tachograph-digital fa-xl"></i>
+                        <p>
+                            Machine's
+                        </p>
+                    </a>
+
+                    <a *ngIf="isManager" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/ManagerDashboard/Machine']">
+                        <i class="fa-solid fa-tachograph-digital fa-xl"></i>
+                        <p>
+                            Machine's
+                        </p>
+                    </a>
+
+                    <a *ngIf="isAccountant" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AccountantDashboard/Machine']">
+
+                        <i class="fa-solid fa-tachograph-digital fa-xl"></i>
+                        <p>
+                            Machine's
+                        </p>
+                    </a>
+                    <!-- <a *ngIf="isDispatchManager"
+                        href="#"
+                        class="nav-link"
+                        routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                        [routerLink]="['/DispatchDashboard/Machine']">
+                    
+                        <i class="fa-solid fa-tachograph-digital fa-xl"></i>
+                        <p>
+                            Machine's
+                        </p>
+                    </a> -->
+                </li>
+
+                <li class="nav-item menu-open">
+
+                    <a *ngIf="isAdmin " href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AdminDashboard/Material']">
+                        <i class="fa-solid fa-bowling-ball fa-xl"></i>
+                        <p>
+                            Material's
+                        </p>
+                    </a>
+                    <a *ngIf="isAccountant" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/AccountantDashboard/Material']">
+                        <i class="fa-solid fa-bowling-ball fa-xl"></i>
+                        <p>
+                            Material's
+                        </p>
+                    </a>
+
+                    <a *ngIf="isManager" href="#" class="nav-link" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/ManagerDashboard/Material']">
+                        <i class="fa-solid fa-bowling-ball fa-xl"></i>
+                        <p>
+                            Material's
+                        </p>
+                    </a>
+
+                </li>
+
+                <li class="nav-item menu-open fixed-bottom">
+                    <a href="#" class="nav-link" (click)="Logout()">
+                        <i class="fa-solid fa-power-off fa-xl"></i>
+                        <p>
+                            Logout
+                        </p>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+</aside>

@@ -1,0 +1,96 @@
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand  fixed-top">
+  <!-- Left navbar links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <!-- <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"
+          style="color: #ffffff;"></i></a> -->
+    </li>
+    <div class="text-center">
+      <h2> {{employeedata?.Role}}</h2>
+    </div>
+    <!-- <li class="nav-item d-none d-sm-inline-block">
+        <a href="index3.html" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+      </li> -->
+  </ul>
+
+  <!-- Right navbar links -->
+  <ul class="navbar-nav ml-auto">
+
+    <!-- Navbar Search -->
+    <!-- <li class="nav-item">
+        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+          <i class="fas fa-search"></i>
+        </a>
+        <div class="navbar-search-block">
+          <form class="form-inline">
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li> -->
+
+    <!-- Messages Dropdown Menu -->
+
+    <li class="nav-item">
+      <a class="nav-link text-white" data-bs-toggle="offcanvas" data-bs-target="#employeeOffcanvas" role="button"
+        title="View Employee Details">
+        <!-- <a class="nav-link" style="color: #ffffff;" data-widget="control-sidebar" data-slide="true" href="#"
+        role="button"> -->
+        {{employeedata?.Name}} <i class="fa-regular fa-circle-user fa-xl" style="color: #ffffff;"></i>
+      </a>
+    </li>
+  </ul>
+
+</nav>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="employeeOffcanvas" aria-labelledby="employeeOffcanvasLabel">
+
+  <div class="offcanvas-header">
+    <h5 id="employeeOffcanvasLabel">Employee Details</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+  </div>
+
+  <div class="offcanvas-body">
+
+    <div class="text-center mb-3">
+      <!-- <i class="fa-regular fa-circle-user fa-4x"></i> -->
+      <h5 class="mt-2">{{ employeedata?.Name }}</h5>
+      <span class="badge bg-primary"> <b>{{ employeedata?.Role }}</b> </span>
+    </div>
+
+    <hr>
+
+    <!-- <p> Employee Name : <b>{{employeedata?.Name}}</b> </p> -->
+    <p> Phone No : <b>{{employeedata?.PhoneNo}}</b> </p>
+    <p> Email : <b>{{employeedata?.Email}}</b> </p>
+    <p> Username : <b>{{employeedata?.Username}}</b> </p>
+    <p> Password : <b>{{employeedata?.Password}}</b> </p>
+    <!-- <p> Role : <b>{{employeedata?.Role}}</b> </p> -->
+    <p> Address : <b>{{employeedata?.Address}}</b> </p>
+    <p> Added Date : <b>{{employeedata?.Added_Date | date}}</b> <br> {{employeedata?.Added_Date | date :'hh:mm:ss a'}}
+    </p>
+    <p> Updated Date : <b>{{employeedata?.Updated_Date | date}}</b> <br> {{employeedata?.Updated_Date | date :'hh:mm:ss
+      a'}}</p>
+    <p> Employee Status : <b>{{employeedata?.Status}}</b> </p>
+
+    <hr>
+
+
+  </div>
+</div>
+
+
+<!-- /.navbar -->
