@@ -145,6 +145,7 @@ export class RestService {
 
   AddRequirement(formData: FormData) {
     return this._http.post(this.ApiUrl + '/AddRequirementswithmultipleproduct', formData);
+    // return this._http.post(this.ApiUrl + '/AddRequirementItems', formData);
   }
 
   Requirementdetails(Req_id: number) {

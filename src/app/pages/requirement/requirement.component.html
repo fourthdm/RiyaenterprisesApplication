@@ -1,17 +1,26 @@
 <div class="container"><br><br><br>
     <form [formGroup]="Requirementform" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
 
-        <label for="Client_Name">Client Name</label>
-        <br>
-        <select formControlName="Client_Name" class="Se">
-            <option *ngFor="let mat of AllclientData" [value]="mat.Client_Name">
-                {{mat.Client_Name}}</option>
-        </select> <br>
-
         <div class="row">
-            <label for="Client_Address"> Client Address </label>
-            <br>
-            <textarea class="form-control" formControlName="Client_Address" placeholder="Client Address"></textarea>
+
+            <div class="col-md-6">
+                <label for="Client_Name">Client Name</label>
+                <br>
+                <select formControlName="Client_Name" class="Se">
+                    <option *ngFor="let mat of AllclientData" [value]="mat.Client_Name">
+                        {{mat.Client_Name}}</option>
+                </select> <br>
+                <br>
+            </div><br>
+
+            <div class="col-md-6">
+                <label for="Client_Address"> Client Address </label>
+                <br>
+                <textarea class="form-control" formControlName="Client_Address" placeholder="Client Address"></textarea>
+                <br>
+            </div><br>
+
+
         </div>
 
         <div class="row">
@@ -53,20 +62,43 @@
 
                 <h6>Product {{ i + 1 }}</h6>
 
-                <input class="form-control" formControlName="Product_Name" placeholder="Product Name">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="Product_Name"> Product Name</label>
+                        <input class="form-control" formControlName="Product_Name" placeholder="Product Name">
+                    </div> <br>
 
-                <select class="form-control" formControlName="Material_Type">
-                    <option *ngFor="let mat of AllMaterials" [value]="mat.Material_Name">
-                        {{ mat.Material_Name }}
-                    </option>
-                </select>
+                    <div class="col-md-6">
+                        <label for="Material_Type"> Material Type</label>
+                        <select class="form-control" formControlName="Material_Type">
+                            <option *ngFor="let mat of AllMaterials" [value]="mat.Material_Name">
+                                {{ mat.Material_Name }}
+                            </option>
+                        </select>
+                    </div> <br>
 
-                <input class="form-control" formControlName="Product_Quantity" placeholder="Quantity">
-                <input class="form-control" formControlName="HSN_Code" placeholder="HSN Code">
+                    <div class="col-md-6">
+                        <label for="Product_Quantity"> Product Quantity</label>
+                        <input class="form-control" formControlName="Product_Quantity" placeholder="Quantity">
+                    </div> <br>
 
-                <input type="file" (change)="onDesignFileSelect($event, i)">
-                <input type="file" (change)="onPDFFileSelect($event, i)">
+                    <div class="col-md-6">
+                        <label for="HSN_Code"> HSN Code</label>
+                        <input class="form-control" formControlName="HSN_Code" placeholder="HSN Code">
+                        <br>
+                    </div> <br>
 
+                    <div class="col-md-6">
+                        <label for="">DWG File</label> <br>
+                        <input type="file" (change)="onDesignFileSelect($event, i)">
+                    </div> <br>
+
+                    <div class="col-md-6"> 
+                        <label for="">PDF Design File</label> <br>
+                        <input type="file" (change)="onPDFFileSelect($event, i)">
+                    </div> <br>
+
+                </div>
                 <button type="button" class="btn btn-danger mt-2" (click)="removeProduct(i)">
                     Remove Product
                 </button>
@@ -75,7 +107,7 @@
         </div>
 
         <button type="button" class="btn btn-secondary" (click)="addProduct()">+ Add Product</button>
-
+<br>
         <button type="submit" class="btn btn-primary mt-3">Add Requirement</button>
 
     </form>

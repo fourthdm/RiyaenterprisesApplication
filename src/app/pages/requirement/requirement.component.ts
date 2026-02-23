@@ -15,6 +15,8 @@ export class RequirementComponent {
 
   AllclientData: any[] = [];
 
+  allrequirement: any[] = [];
+
   constructor(private fb: FormBuilder, private _rest: RestService) {
     this.Requirementform = this.fb.group({
       Client_Name: ['', Validators.required],
@@ -34,7 +36,6 @@ export class RequirementComponent {
       .subscribe(clientName => {
         this.autoFillByRequirement(clientName);
       });
-
     this.addProduct();
     this.Allmaterial();
     this.Allclient();
@@ -126,13 +127,16 @@ export class RequirementComponent {
   }
 
   onSubmit() {
+
     if (this.Requirementform.invalid) {
       alert('Fill all required fields');
       return;
     }
 
     const formData = new FormData();
-
+    for (const pair of (formData as any).entries()) {
+      console.log(pair[0], pair[1]);
+    }
     // HEADER DATA
     formData.append('Client_Name', this.Requirementform.value.Client_Name);
     formData.append('Client_Address', this.Requirementform.value.Client_Address);
@@ -142,29 +146,73 @@ export class RequirementComponent {
     formData.append('Status', this.Requirementform.value.Status);
 
     // PRODUCTS DATA
-    this.products.controls.forEach((prod, index) => {
-      formData.append(`products[${index}][Product_Name]`, prod.value.Product_Name);
-      formData.append(`products[${index}][Material_Type]`, prod.value.Material_Type);
-      formData.append(`products[${index}][Product_Quantity]`, prod.value.Product_Quantity);
-      formData.append(`products[${index}][HSN_Code]`, prod.value.HSN_Code);
+    this.products.controls.forEach((p: any, i) => {
 
-      if (prod.value.Design_File) {
-        formData.append(`Design_File_${index}`, prod.value.Design_File);
+      const value = p.value; // ✅ IMPORTANT
+      
+      formData.append(`products[${i}][Product_Name]`, value.Product_Name);
+      formData.append(`products[${i}][Material_Type]`, value.Material_Type);
+      formData.append(`products[${i}][Product_Quantity]`, value.Product_Quantity);
+      formData.append(`products[${i}][HSN_Code]`, value.HSN_Code);
+
+      if (value.Design_File) {
+        formData.append(`Design_File_${i}`, value.Design_File);
       }
 
-      if (prod.value.PDFDesignfile) {
-        formData.append(`PDFDesignfile_${index}`, prod.value.PDFDesignfile);
+      if (value.PDFDesignfile) {
+        formData.append(`PDFDesignfile_${i}`, value.PDFDesignfile);
       }
     });
 
-    this._rest.AddRequirement(formData).subscribe(res => {
+
+    // this.products.controls.forEach((p:any, i) => {
+    //   formData.append(`products[${i}][Product_Name]`, p.Product_Name);
+    //   formData.append(`products[${i}][Material_Type]`, p.Material_Type);
+    //   formData.append(`products[${i}][Product_Quantity]`, p.Product_Quantity);
+    //   formData.append(`products[${i}][HSN_Code]`, p.HSN_Code);
+
+    //   if (p.Design_File) {
+    //     formData.append(`Design_File_${i}`, p.Design_File);
+    //   }
+
+    //   if (p.PDFDesignfile) {
+    //     formData.append(`PDFDesignfile_${i}`, p.PDFDesignfile);
+    //   }
+    // });
+
+    // this.products.controls.forEach((prod, index) => {
+    //   formData.append(`products[${index}][Product_Name]`, prod.value.Product_Name);
+    //   formData.append(`products[${index}][Material_Type]`, prod.value.Material_Type);
+    //   formData.append(`products[${index}][Product_Quantity]`, prod.value.Product_Quantity);
+    //   formData.append(`products[${index}][HSN_Code]`, prod.value.HSN_Code);
+
+    //   if (prod.value.Design_File) {
+    //     formData.append(`Design_File_${index}`, prod.value.Design_File);
+    //   }
+
+    //   if (prod.value.PDFDesignfile) {
+    //     formData.append(`PDFDesignfile_${index}`, prod.value.PDFDesignfile);
+    //   }
+    // });
+
+    this._rest.AddRequirement(formData).subscribe((res: any) => {
+      console.log(res)
       alert('Requirement added with multiple products');
+      this.allrequirement = res.data;
       this.Requirementform.reset();
       this.products.clear();
       this.addProduct();
     });
   }
+  onDesignFileSelect(event: any, index: number) {
+    const file = event.target.files[0];
+    this.products.at(index).patchValue({ Design_File: file });
+  }
 
+  onPDFFileSelect(event: any, index: number) {
+    const file = event.target.files[0];
+    this.products.at(index).patchValue({ PDFDesignfile: file });
+  }
   // -------------------------
   // FILE HANDLERS
   // -------------------------
@@ -187,15 +235,7 @@ export class RequirementComponent {
   //   this.products[index].PDFDesignfile = event.target.files[0];
   // }
 
-  onDesignFileSelect(event: any, index: number) {
-    const file = event.target.files[0];
-    this.products.at(index).patchValue({ Design_File: file });
-  }
 
-  onPDFFileSelect(event: any, index: number) {
-    const file = event.target.files[0];
-    this.products.at(index).patchValue({ PDFDesignfile: file });
-  }
 
   // -------------------------
   // SUBMIT

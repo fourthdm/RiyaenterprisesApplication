@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./machine.component.css']
 })
 export class MachineComponent {
-
 }
