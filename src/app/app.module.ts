@@ -42,6 +42,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ItemrequirementComponent } from './pages/itemrequirement/itemrequirement.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     QuotationComponent,
     WorkorderComponent,
     WorkordercloseComponent,
-    ChallanComponent
+    ChallanComponent,
+    ItemrequirementComponent
   ],
   imports: [
     BrowserModule,

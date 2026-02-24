@@ -1,0 +1,36 @@
+<div class="container">
+    <br><br><br> <br><br>
+    <form [formGroup]="reqForm" (ngSubmit)="submit()">
+
+        <input formControlName="Client_Name" placeholder="Client Name"><br><br>
+        <input formControlName="Client_Address" placeholder="Address"><br><br>
+        <input formControlName="Client_PhoneNo" placeholder="Phone"><br><br>
+        <input formControlName="Client_Email" placeholder="Email"> <br><br>
+        <input formControlName="GST_No" placeholder="GST_No"> <br><br>
+
+        <br><br>
+        <div formArrayName="products">
+            <div *ngFor="let p of products.controls; let i=index" [formGroupName]="i">
+                <input formControlName="Product_Name" placeholder="Product Name"><br><br>
+                <input formControlName="Material_Type" placeholder="Material"><br><br>
+                <input formControlName="Product_Quantity" placeholder="Quantity"><br><br>
+                <input formControlName="HSN_Code" placeholder="HSN_Code"> <br><br>
+
+                <input type="file" (change)="onFileChange($event,i,'dwg')" accept=".dwg">
+                <input type="file" (change)="onFileChange($event,i,'pdf')" accept=".pdf">
+
+                <button type="button" (click)="removeProduct(i)">Remove</button>
+                 <br><br>
+            </div>
+        </div>
+
+        <button type="button" (click)="addProduct()">Add Product</button> <br> <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <hr>
+
+    <!-- <button (click)="fetchRequirement(1)">Fetch Requirement 1</button> -->
+
+    <pre>{{ requirementData | json }}</pre>
+</div>

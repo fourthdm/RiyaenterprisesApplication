@@ -139,6 +139,18 @@ export class RestService {
     return this._http.get(this.ApiUrl + '/AllRequirement');
   }
 
+  createRequirement(formdata: FormData) {
+    return this._http.post(this.ApiUrl + '/requirement', formdata);
+  }
+
+  addRequirement(data: any) {
+    return this._http.post(`${this.ApiUrl}/AddRequirementitemS`, data);
+  }
+
+  getRequirementById(id: number) {
+    return this._http.get(`${this.ApiUrl}/GetRequirement/${id}`);
+  }
+
   // AddRequirement(formData: any) {
   //   return this._http.post(this.ApiUrl + '/AddRequirement', formData);
   // }
