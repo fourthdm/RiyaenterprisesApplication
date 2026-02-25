@@ -1,7 +1,189 @@
 <div class="container">
     <br><br><br> <br><br>
+    <div class="table-responsive">
+
+        <table class="table" id="excel-table">
+            <thead>
+                <tr>
+                    <th>Sr No.</th>
+                    <th>Requirement No</th>
+                    <th>Client Name</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of allrequirement | paginate :{itemsPerPage :10 ,currentPage:pro}, let i = index">
+                    <td>{{a.Req_id}}</td>
+                    <td>
+                        <p title="View Requirement Details"><a href=""
+                                [routerLink]="['/AdminDashboard/RequirementDetails', a.Req_id]">{{a.Requirement_No}}</a>
+                        </p>
+                    </td>
+
+                    <td>{{a.Client_Name}}</td>
+                    <!-- <td>
+                        <p class="">
+                            <a type="button" (click)="editRequirement(a.Req_id)" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal1" title="Edit a Requirement">
+                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                            </a>
+                            <span style="margin-left: 5%;">
+                                <a type="button" (click)="DeleteRequirement(a.Req_id)" title="Delete a Requirement">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </span>
+                        </p>
+                    </td> -->
+
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="text-center">
+            <pagination-controls (pageChange)=" pro = $event "
+                style="background-color: #252847 !important; z-index: -2 !important;"></pagination-controls>
+        </div>
+
+        <!-- <div class="card">
+                    <div class="card-body">
+                    <p class="text-end">
+                         <a type="button" (click)="editRequirement(a.Req_id)" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal1" title="Edit a Requirement">
+                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                        </a>
+                        <span style="margin-left: 5%;"><a (click)="DeleteRequirement(a.Req_id)" title="Delete a Requirement"> <i class="fa-solid fa-trash-can"></i></a></span>
+                    </p>
+
+                        <p title="View Requirement Details" >Requirement Id : <a href="" [routerLink]="['/AdminDashboard/RequirementDetails', a.Req_id]">{{a.Req_id}}</a></p>
+                        <p>Requirement Number : {{a.Requirement_No}}</p>
+                        <p>Client Name :  {{a.Client_Name}}</p>
+                        <p>Product Name :  {{a.Product_Name}}</p>
+                        <p>Material Type:  {{a.Material_Type}}</p>
+                        <p>Phone No :  {{a.Client_PhoneNo}}</p>
+                        <p>Email :  {{a.Client_Email}}</p>
+                        <p>Product Quantity :  {{a.Product_Quantity}}</p>
+                        <p>Client Address :  {{a.Client_Address}}</p>
+                        <p>Status :  {{a.Status}}</p>
+                        <p>Added Date :  {{a.Added_Date | date}} <br>
+                           <span>Added Time : {{a.Added_Date | date :'hh:mm:ss'}}</span> </p>
+                        <p>Updated Date : {{a.Updated_Date | date}} <br> 
+                            <span>Updated Time : </span> {{a.Updated_Date | date :'hh:mm:ss'}}</p>
+                    </div>
+                </div> -->
+    </div>
+    <br><br>
     <form [formGroup]="reqForm" (ngSubmit)="submit()">
 
+        <div class="row">
+
+            <div class="col-md-6">
+                <label for="Client_Name">Client Name</label>
+                <br>
+                <select formControlName="Client_Name" class="Se">
+                    <option *ngFor="let mat of AllclientData" [value]="mat.Client_Name">
+                        {{mat.Client_Name}}</option>
+                </select> <br>
+                <br>
+            </div><br>
+
+            <div class="col-md-6">
+                <label for="Client_Address"> Client Address </label>
+                <br>
+                <textarea class="form-control" formControlName="Client_Address" placeholder="Client Address"></textarea>
+                <br>
+            </div><br>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="Client_Email"> Client Email </label>
+                <br>
+                <input class="form-control" formControlName="Client_Email" placeholder="Client Email">
+            </div>
+            <div class="col-md-6">
+                <label for="Client_PhoneNo"> Phone Number </label>
+                <br>
+                <input class="form-control" formControlName="Client_PhoneNo" placeholder="Phone Number">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="GST_No"> GST Number </label>
+                <br>
+                <input class="form-control" formControlName="GST_No" placeholder="GST Number">
+            </div>
+
+            <div class="col-md-6">
+                <label for="Status"> Status</label>
+                <br>
+                <select class="form-control" formControlName="Status">
+                    <option value="Create">Create</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Complete">Complete</option>
+                    <option value="Cancel">Cancel</option>
+                </select>
+            </div>
+
+        </div>
+        <hr>
+        <div formArrayName="products">
+
+            <div *ngFor="let p of products.controls; let i=index" [formGroupName]="i" class="border p-3 mb-3">
+
+                <h6>Product {{ i + 1 }}</h6>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="Product_Name"> Product Name</label>
+                        <input class="form-control" formControlName="Product_Name" placeholder="Product Name">
+                    </div> <br>
+
+                    <div class="col-md-6">
+                        <label for="Material_Type"> Material Type</label>
+                        <select class="form-control" formControlName="Material_Type">
+                            <option *ngFor="let mat of AllMaterials" [value]="mat.Material_Name">
+                                {{ mat.Material_Name }}
+                            </option>
+                        </select>
+                    </div> <br>
+
+                    <div class="col-md-6">
+                        <label for="Product_Quantity"> Product Quantity</label>
+                        <input class="form-control" formControlName="Product_Quantity" placeholder="Quantity">
+                    </div> <br>
+
+                    <div class="col-md-6">
+                        <label for="HSN_Code"> HSN Code</label>
+                        <input class="form-control" formControlName="HSN_Code" placeholder="HSN Code">
+                        <br>
+                    </div> <br>
+
+                    <div class="col-md-6">
+                        <label for="">DWG File</label> <br>
+                        <input type="file" (change)="onFileChange($event,i,'dwg')" accept=".dwg">
+                    </div> <br>
+
+                    <div class="col-md-6">
+                        <label for="">PDF Design File</label> <br>
+                        <input type="file" (change)="onFileChange($event,i,'pdf')" accept=".pdf">
+                    </div> <br>
+
+                </div>
+                <button type="button" class="btn btn-danger mt-2" (click)="removeProduct(i)">
+                    Remove Product
+                </button>
+
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-secondary" (click)="addProduct()">+ Add Product</button>
+        <br>
+        <button type="submit" class="btn btn-primary mt-3">Add Requirement</button>
+        <!--
         <input formControlName="Client_Name" placeholder="Client Name"><br><br>
         <input formControlName="Client_Address" placeholder="Address"><br><br>
         <input formControlName="Client_PhoneNo" placeholder="Phone"><br><br>
@@ -20,12 +202,12 @@
                 <input type="file" (change)="onFileChange($event,i,'pdf')" accept=".pdf">
 
                 <button type="button" (click)="removeProduct(i)">Remove</button>
-                 <br><br>
+                <br><br>
             </div>
         </div>
 
         <button type="button" (click)="addProduct()">Add Product</button> <br> <br>
-        <button type="submit">Submit</button>
+        <button type="submit">Submit</button> -->
     </form>
 
     <hr>

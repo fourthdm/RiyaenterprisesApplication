@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { distinctUntilChanged } from 'rxjs';
 import { RestService } from 'src/app/services/rest.service';
 
 @Component({
@@ -12,6 +13,12 @@ export class ItemrequirementComponent {
   reqForm!: FormGroup;
   requirementData: any;
 
+  AllMaterials: any[] = [];
+
+  AllclientData: any[] = [];
+
+  allrequirement: any[] = [];
+  pro: any;
   constructor(
     private fb: FormBuilder,
     private _rest: RestService
@@ -28,11 +35,61 @@ export class ItemrequirementComponent {
       products: this.fb.array([])
     });
 
+    this.reqForm.get('Client_Name')!
+      .valueChanges
+      .pipe(distinctUntilChanged())
+      .subscribe(clientName => {
+        this.autoFillByRequirement(clientName);
+      });
     this.addProduct();
+    this.Allmaterial();
+    this.Allclient();
+    this.AllRequirements()
+  }
+
+  Allmaterial() {
+    this._rest.AllMaterials().subscribe((data: any) => {
+      console.log(data);
+      this.AllMaterials = data.data;
+    }, (err: any) => {
+      console.log(err);
+    });
+  }
+
+  Allclient() {
+    this._rest.AllClients().subscribe((data: any) => {
+      console.log(data);
+      this.AllclientData = data.data;
+    }, (err: any) => {
+      console.log(err);
+    });
+  }
+
+  AllRequirements() {
+    this._rest.Allrequirementss().subscribe((data: any) => {
+      console.log(data);
+      this.allrequirement = data.data;
+    }, (err: any) => {
+      console.log(err);
+    });
   }
 
   get products() {
     return this.reqForm.get('products') as FormArray;
+  }
+  autoFillByRequirement(clientName: string) {
+    const req = this.AllclientData.find(
+      (r: any) => r.Client_Name === clientName
+    );
+
+    if (!req) return;
+
+    this.reqForm.patchValue({
+      Client_Address: req.Client_Address,
+      Client_Email: req.Client_Email,
+      Client_PhoneNo: req.Client_PhoneNo,
+      GST_No: req.GST_No
+    }, { emitEvent: false }); // ✅ STOP LOOP
   }
 
   addProduct() {
@@ -50,8 +107,20 @@ export class ItemrequirementComponent {
 
   onFileChange(event: any, index: number, type: 'dwg' | 'pdf') {
     const file = event.target.files[0];
-    this.products.at(index).patchValue({ [type]: file });
+    if (!file) return;
+
+    const controlName =
+      type === 'dwg' ? 'Design_File' : 'PDFDesignfile';
+
+    (this.products.at(index) as FormGroup).patchValue({
+      [controlName]: file
+    });
   }
+
+  // onFileChange(event: any, index: number, type: 'dwg' | 'pdf') {
+  //   const file = event.target.files[0];
+  //   this.products.at(index).patchValue({ [type]: file });
+  // }
 
   submit() {
     const formData = new FormData();
@@ -80,16 +149,21 @@ export class ItemrequirementComponent {
     // Files (VERY IMPORTANT)
     this.reqForm.value.products.forEach((p: any, i: number) => {
       if (p.Design_File) {
-        formData.append(`Design_File_${i}`, p.dwg);
+        formData.append(`Design_File_${i}`, p.Design_File);
       }
       if (p.PDFDesignfile) {
-        formData.append(`PDFDesignfile_${i}`, p.pdf);
+        formData.append(`PDFDesignfile_${i}`, p.PDFDesignfile);
       }
     });
     this._rest.createRequirement(formData).subscribe(res => {
       alert('Requirement created with files');
       console.log(res);
+      this.reqForm.reset();
     });
+  }
+
+  removeProduct(i: number) {
+    this.products.removeAt(i);
   }
 
   // submit() {
@@ -124,7 +198,5 @@ export class ItemrequirementComponent {
   // });
   // }
 
-  removeProduct(i: number) {
-    this.products.removeAt(i);
-  }
+
 }

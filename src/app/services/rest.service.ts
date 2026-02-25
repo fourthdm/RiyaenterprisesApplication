@@ -140,7 +140,11 @@ export class RestService {
   }
 
   createRequirement(formdata: FormData) {
-    return this._http.post(this.ApiUrl + '/requirement', formdata);
+    return this._http.post(this.ApiUrl + '/requirement', formdata);  //Multiple Product are added  in one requirement_id
+  }
+
+  Allrequirementss() {
+    return this._http.get(this.ApiUrl + '/requirementsAll');
   }
 
   addRequirement(data: any) {
@@ -161,7 +165,8 @@ export class RestService {
   }
 
   Requirementdetails(Req_id: number) {
-    return this._http.get(this.ApiUrl + '/Requirementdetails/' + Req_id);
+    return this._http.get(this.ApiUrl + '/DatabyidrequirementsAll/' + Req_id);
+    // return this._http.get(this.ApiUrl + '/Requirementdetails/' + Req_id);
   }
 
   UpdateRequirementss(Req_id: number, formData: any) {

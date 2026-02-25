@@ -1,1 +1,195 @@
-<p>employee works!</p>
+<div class="container-fluid"> <br><br>
+    <br>
+    <div class="text-center">
+        <h2>All Employee Data</h2>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-5">
+            <div class="card">
+                <div class="card-header">Add Employee</div>
+                <div class="card-body">
+                    <form [formGroup]="AddDataForm" (submit)="AddAdmins()">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Employee Name : </label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                formControlName="Name" placeholder="Enter Employee Name">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Employee Phone No : </label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                formControlName="PhoneNo" placeholder="Enter Employee Phone No">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Employee Email : </label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                formControlName="Email" placeholder="Enter Employee Email">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Employee Username : </label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                formControlName="Username" placeholder="Enter Employee Username">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Employee Address : </label>
+                            <textarea type="text" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" formControlName="Address"
+                                placeholder="Enter Employee Address"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Role">Role Name : </label>
+                            <select class="form-select form-select-sm" formControlName="Role"
+                                aria-label="select example">
+                                <option value="SuperAdmin">SuperAdmin </option>
+                                <option value="Admin">Admin </option>
+                                <option value="Manager">Manager </option>
+                                <option value="Accountant">Accountant </option>
+                                <option value="Engineer">Engineer </option>
+                                <option value="QC">QC </option>
+                                <option value="Dispatch Manager">Dispatch Manager </option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-success">Add Employee</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="col-1"></div> -->
+        <br><br>
+
+        <div class="col-7">
+
+            <div class="row">
+                <br>
+                <div class="div">
+                    <label for="">Download Admin Data in Excelsheet </label>
+                    <br> <button class="btn btn-success" (click)="exportexcel()" title="Download excelfile">Download
+                        Excelsheet</button> <br> <br>
+                </div>
+                <br><br><br>
+
+                <div class="col-md-6" *ngFor="let a of AllData, let i = index">
+                    <div class="card">
+                        <div class="card-body">
+                            <td>
+                                <a type="button" (click)="editAdmin(a.Id)" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal1" title="Edit a Admin">
+                                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                </a>
+                                <span style="margin-left:15px;cursor: pointer;" +.><a (click)="DeleteAdmin(a.Id)"
+                                        title="Delete a Admin"> <i class="fa-solid fa-trash-can"></i></a></span>
+                            </td>
+                            <p>Code : {{a.Code}}</p>
+                            <p>Name : {{a.Name}}</p>
+                            <p>Phone No : {{a.PhoneNo}}</p>
+                            <p>Email : {{a.Email}}</p>
+                            <p>Address : {{a.Address}}</p>
+                            <p>Role : {{a.Role}}</p>
+                            <p>Added Date : {{a.Added_Date | date}} <br>
+                                <span>Added Time : {{a.Added_Date | date :'hh:mm:ss:a'}}</span>
+                            </p>
+                            <p>Updated Date : {{a.Updated_Date | date}} <br>
+                                <span>Updated Time : </span> {{a.Updated_Date | date :'hh:mm:ss:a'}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Admin</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12">
+
+                            <form [formGroup]="EditDataForm">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Employee Name : </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" formControlName="Name"
+                                        placeholder="Enter Employee Name">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Employee Phone No : </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" formControlName="PhoneNo"
+                                        placeholder="Enter Employee Phone No">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Employee Email : </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" formControlName="Email"
+                                        placeholder="Enter Employee Email">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Employee Username : </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" formControlName="Username"
+                                        placeholder="Enter Employee Username">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="Password" class="form-label">Employee Password : </label>
+                                    <input type="text" class="form-control" id="Password" aria-describedby="emailHelp"
+                                        formControlName="Password" placeholder="Enter Employee Password">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Employee Address : </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" formControlName="Address"
+                                        placeholder="Enter Employee Address">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="Role">Role Name : </label>
+                                    <select class="form-select form-select-sm" formControlName="Role"
+                                        aria-label="select example">
+                                        <option value="SuperAdmin">SuperAdmin </option>
+                                        <option value="Admin">Admin </option>
+                                        <option value="Manager">Manager </option>
+                                        <option value="Accountant">Accountant </option>
+                                        <option value="Engineer">Engineer </option>
+                                        <option value="QC">QC </option>
+                                        <option value="Dispatch Manager">Dispatch Manager </option>
+                                    </select>
+
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="Status" formControlName="Status"
+                                        (change)="updateStatus($event)">
+                                    <label class="form-check-label" for="Status">Checked Admin is Active or Not</label>
+                                </div>
+                                <br>
+                                <button class="btn btn-success mb-4" (click)="UpdateAdmin()">Update Employee</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <br><br>
+
+</div>
