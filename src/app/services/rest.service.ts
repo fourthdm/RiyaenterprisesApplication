@@ -144,15 +144,16 @@ export class RestService {
   }
 
   Allrequirementss() {
-    return this._http.get(this.ApiUrl + '/requirementsAll');
+    // return this._http.get(this.ApiUrl + '/requirementsAll');
+    return this._http.get(this.ApiUrl + '/GetRequirements');
   }
 
   addRequirement(data: any) {
     return this._http.post(`${this.ApiUrl}/AddRequirementitemS`, data);
   }
 
-  getRequirementById(id: number) {
-    return this._http.get(`${this.ApiUrl}/GetRequirement/${id}`);
+  getRequirementById(Req_id: number) {
+    return this._http.get(`${this.ApiUrl}/GetRequirement/${Req_id}`);
   }
 
   // AddRequirement(formData: any) {

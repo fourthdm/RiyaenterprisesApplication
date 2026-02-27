@@ -19,6 +19,7 @@ export class ItemrequirementComponent {
 
   allrequirement: any[] = [];
   pro: any;
+
   constructor(
     private fb: FormBuilder,
     private _rest: RestService
@@ -197,6 +198,4 @@ export class ItemrequirementComponent {
   //   console.log(res);
   // });
   // }
-
-
 }

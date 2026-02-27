@@ -27,7 +27,7 @@
                             <p><b>Phone :</b> {{ a.Client_PhoneNo }}</p>
                             <p><b>Email :</b> {{ a.Client_Email }}</p>
                             <p><b>Address :</b> {{ a.Client_Address }}</p>
-                            <p><b>GST :</b> {{ a.GST_No }}</p>
+                            <p><b>GST Number :</b> {{ a.GST_No }}</p>
                             <p><b>Status :</b> {{ a.Status }}</p>
                         </div>
 
@@ -38,13 +38,13 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>Sr No</th>
                                         <th>Product Name</th>
-                                        <th>HSN</th>
-                                        <th>Quantity</th>
+                                        <th>HSN Code</th>
+                                        <th>Product Quantity</th>
                                         <th>Material Type</th>
-                                        <th>Material Type</th>
-                                        <th>Material Type</th>
+                                        <th>Design File</th>
+                                        <th>PDF File</th>
                                     </tr>
                                 </thead>
 
@@ -55,6 +55,8 @@
                                         <td>{{ item.HSN_Code }}</td>
                                         <td>{{ item.Product_Quantity }}</td>
                                         <td>{{ item.Material_Type }}</td>
+                                        <td>Download Design File</td>
+                                        <td>Download PDF File</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -62,7 +64,7 @@
                     </div>
 
                     <p class="mt-2">
-                        <b>Updated :</b>
+                        <b>Updated Date :</b>
                         {{ a.Updated_Date | date }} |
                         {{ a.Updated_Date | date:'hh:mm:ss a' }}
                     </p>

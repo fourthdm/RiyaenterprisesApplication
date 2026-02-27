@@ -1,1 +1,343 @@
-<p>quotation works!</p>
+<!-- <div class="container">
+    <br><br><br> <br><br>
+
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Manufacture Cost</th>
+                <th>Material Cost</th>
+                <th>Dispatch Cost</th>
+                <th>Rate</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <div class="div">
+            <form [formGroup]="AddQuotationform" (ngSubmit)="submitQuotation()">
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <label for="Client_Name">Requirement Id</label>
+                        <br>
+                        <select formControlName="Req_id" (change)="onRequirementSelect($event.target.value)">
+                            <option *ngFor="let r of AllRequirementData" [value]="r.Req_id">
+                                {{ r.Req_id }}
+                            </option>
+                        </select>
+                        <select formControlName="Req_id" class="Se">
+                            <option *ngFor="let mat of AllRequirementData" [value]="mat.Req_id">
+                                {{mat.Req_id}}</option>
+                        </select> <br>
+                        <br>
+                    </div><br>
+                    <div class="col-md-6">
+                        <label for="Client_Name">Client Name</label>
+                        <br>
+                        <input type="text" class="form-control" formControlName="Client_Name" placeholder="Client Name">
+                        <br>
+                    </div><br>
+
+                    <div class="col-md-6">
+                        <label for="Client_Address"> Address </label>
+                        <br>
+                        <textarea class="form-control" formControlName="Client_Address"
+                            placeholder="Client Address"></textarea>
+                        <br>
+                    </div><br>
+
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="GST_No"> GST Number </label>
+                        <br>
+                        <input class="form-control" formControlName="GST_No" placeholder="GST Number">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="Quotation_Status"> Quotation Status</label>
+                        <br>
+                        <select class="form-control" formControlName="Quotation_Status">
+                            <option value="Create">Create</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Complete">Complete</option>
+                            <option value="Cancel">Cancel</option>
+                        </select>
+                    </div>
+
+                </div>
+                <hr>
+
+                <tbody formArrayName="items">
+                    <tr *ngFor="let item of items.controls; let i=index" [formGroupName]="i">
+
+                        <td>{{ item.value.Product_Name }}</td>
+                        <td>{{ item.value.Product_Quantity }}</td>
+
+                        <td>
+                            <input type="number" formControlName="Manufacturing_Cost" (input)="calculateItem(i)">
+                        </td>
+
+                        <td>
+                            <input type="number" formControlName="Material_Cost" (input)="calculateItem(i)">
+                        </td>
+
+                        <td>
+                            <input type="number" formControlName="Dispatch_Cost" (input)="calculateItem(i)">
+                        </td>
+
+                        <td>{{ item.value.Rate }}</td>
+                        <td>{{ item.value.Subtotal }}</td>
+                    </tr>
+                </tbody>
+
+                <br>
+                <button type="submit" class="btn btn-primary mt-3">Add Quotation</button>
+
+            </form>
+
+        </div>
+    </table>
+
+
+    <div class="table-responsive">
+
+        <table class="table" id="excel-table">
+            <thead>
+                <tr>
+                    <th>Sr No.</th>
+                    <th>Quotation Number</th>
+                    <th>Client Name</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of AllRequirementData | paginate :{itemsPerPage :10 ,currentPage:pro}, let i = index">
+                    <td>{{a.Req_id}}</td>
+                    <td>
+                        <p title="View Quotation Details"><a href=""
+                                [routerLink]="['/AdminDashboard/QuotationDetails', a.Quotation_Id]">{{a.Quotation_Number}}</a>
+                        </p>
+                    </td>
+
+                    <td>{{a.Client_Name}}</td>
+
+
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="text-center">
+            <pagination-controls (pageChange)=" pro = $event "
+                style="background-color: #252847 !important; z-index: -2 !important;"></pagination-controls>
+        </div>
+
+    </div>
+    <br><br>
+
+    <hr>
+    <pre>{{ AllRequirementData | json }}</pre>
+</div> -->
+
+
+<div class="container mt-4">
+    <h3 class="text-center mb-4">Create Quotation</h3>
+
+    <form [formGroup]="AddQuotationform" (ngSubmit)="submitQuotation()">
+
+        <!-- ================= Requirement & Client ================= -->
+        <div class="row">
+            <div class="col-md-4">
+                <label>Requirement ID</label>
+                <!-- <select formControlName="Req_id" class="Se">
+                            <option *ngFor="let mat of AllRequirementData" [value]="mat.Req_id">
+                                {{mat.Req_id}}</option>
+                        </select> <br> -->
+                <select class="form-control" formControlName="Req_id"
+                    (change)="onRequirementSelect($any($event.target).value)">
+                    <option value="">-- Select Requirement --</option>
+                    <option *ngFor="let r of AllRequirementData" [value]="r.Req_id">
+                        {{ r.Req_id }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label>Client Name</label>
+                <input class="form-control" formControlName="Client_Name" readonly>
+            </div>
+
+            <div class="col-md-4">
+                <label>GST No</label>
+                <input class="form-control" formControlName="GST_No" readonly>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <label>Client Address</label>
+                <textarea class="form-control" formControlName="Client_Address" rows="2"></textarea>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- ================= Products ================= -->
+        <h5 class="mt-3">Products</h5>
+
+        <div formArrayName="items">
+            <table class="table table-bordered" *ngIf="items.length">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Manufacturing</th>
+                        <th>Material</th>
+                        <th>Dispatch</th>
+                        <th>Rate</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+
+                <tbody formArrayName="items">
+                    <tr *ngFor="let item of items.controls; let i=index" [formGroupName]="i">
+
+                        <!-- ✅ AUTO FILLED -->
+                        <td>{{ item.get('Product_Name')?.value }}</td>
+                        <td>{{ item.get('Product_Quantity')?.value }}</td>
+
+                        <!-- Manual input -->
+                        <td>
+                            <input type="number" formControlName="Manufacturing_Cost" (input)="calculateItem(i)">
+                        </td>
+
+                        <td>
+                            <input type="number" formControlName="Material_Cost" (input)="calculateItem(i)">
+                        </td>
+
+                        <td>
+                            <input type="number" formControlName="Dispatch_Cost" (input)="calculateItem(i)">
+                        </td>
+
+                        <!-- Calculated -->
+                        <td>{{ item.get('Rate')?.value }}</td>
+                        <td>{{ item.get('Subtotal')?.value }}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- <table class="table table-bordered mt-2">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Manufacturing</th>
+                        <th>Material</th>
+                        <th>Dispatch</th>
+                        <th>Rate</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+
+                        <td>{{ i + 1 }}</td>
+
+                        <td>
+                            {{ item.get('Product_Name')?.value }}
+                        </td>
+
+                        <td>
+                            {{ item.get('Product_Quantity')?.value }}
+                        </td>
+
+                        <td>
+                            <input type="number" class="form-control" formControlName="Manufacturing_Cost"
+                                (input)="calculateItem(i)">
+                        </td>
+
+                        <td>
+                            <input type="number" class="form-control" formControlName="Material_Cost"
+                                (input)="calculateItem(i)">
+                        </td>
+
+                        <td>
+                            <input type="number" class="form-control" formControlName="Dispatch_Cost"
+                                (input)="calculateItem(i)">
+                        </td>
+
+                        <td>
+                            <input class="form-control" formControlName="Rate" readonly>
+                        </td>
+
+                        <td>
+                            <input class="form-control" formControlName="Subtotal" readonly>
+                        </td>
+                    </tr>
+                </tbody>
+            </table> -->
+        </div>
+
+        <!-- ================= Totals ================= -->
+        <div class="row mt-3">
+            <div class="col-md-4 offset-md-8">
+                <label>Discount</label>
+                <input class="form-control" type="number" formControlName="Discount_Amount">
+            </div>
+        </div>
+
+        <div class="text-end mt-3">
+            <h5>Total Amount : ₹ {{ getGrandTotal() }}</h5>
+        </div>
+
+        <hr>
+
+        <!-- ================= Other Details ================= -->
+        <div class="row">
+            <div class="col-md-4">
+                <label>Payment Term</label>
+                <input class="form-control" formControlName="Payment_term">
+            </div>
+
+            <div class="col-md-4">
+                <label>Shipping Method</label>
+                <input class="form-control" formControlName="Shipping_Method">
+            </div>
+
+            <div class="col-md-4">
+                <label>Validity Date</label>
+                <input type="date" class="form-control" formControlName="Validity_Date">
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <label>Status</label>
+                <select class="form-control" formControlName="Quotation_Status">
+                    <option value="Create">Create</option>
+                    <option value="Sent">Sent</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ================= Submit ================= -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary px-5">
+                Create Quotation
+            </button>
+        </div>
+
+    </form>
+
+    <!-- Debug -->
+    <pre class="mt-3">{{ AddQuotationform.value | json }}</pre>
+</div>
