@@ -20,27 +20,9 @@ export class QuotationComponent implements OnInit {
   SelectedQuotation: any;
 
   constructor(private _rest: RestService, private fb: FormBuilder, private _router: Router) {
-    // this.AddQuotationform = new FormGroup({
-    //   Requirement_No: new FormControl('', [Validators.required]),
-    //   Material_Type: new FormControl('', [Validators.required]),
-    //   Client_Name: new FormControl('', [Validators.required]),
-    //   Product_Name: new FormControl('', [Validators.required]),
-    //   Product_Quantity: new FormControl('', [Validators.required]),
-    //   Rate: new FormControl('', [Validators.required]),
-    //   Manufacturing_Cost: new FormControl('', [Validators.required]),
-    //   Material_Cost: new FormControl('', [Validators.required]),
-    //   Dispatch_Cost: new FormControl('', [Validators.required]),
-    //   Discount_Amount: new FormControl('', [Validators.required]),
-    //   Payment_term: new FormControl('', [Validators.required]),
-    //   Shipping_Method: new FormControl('', [Validators.required]),
-    //   HSN_Code: new FormControl('', [Validators.required]),
-    //   GST_No: new FormControl('', [Validators.required]),
-    //   Client_Address: new FormControl('', [Validators.required]),
-    //   Validity_Date: new FormControl(''),
-    //   Quotation_Status: new FormControl('', [Validators.required])
-    // });
-
+    
     this.AddQuotationform = this.fb.group({
+      Requirement_No: [''],
       Req_id: [''],
       Client_Name: [''],
       Client_Address: [''],
@@ -55,45 +37,11 @@ export class QuotationComponent implements OnInit {
       items: this.fb.array([])   // 🔥 REQUIRED
     });
 
-    // this.AddQuotationform = this.fb.group({
-    //   Req_id: ['', Validators.required],
-    //   Client_Name: ['', Validators.required],
-    //   Client_Address: ['', Validators.required],
-    //   GST_No: ['', Validators.required],
-    //   Payment_term: ['', Validators.required],
-    //   Shipping_Method: ['', Validators.required],
-    //   Quotation_Status: ['', Validators.required],
-    //   Validity_Date: [''],
-    //   Discount_Amount: [0],
-
-    //   items: this.fb.array([])   // ✅ IMPORTANT
-    // });
-
-    // this.EditquotationForm = new FormGroup({
-    //   Quotation_Id: new FormControl(''),
-    //   Quotation_Number: new FormControl(''),
-    //   Requirement_No: new FormControl('', [Validators.required]),
-    //   Material_Type: new FormControl('', [Validators.required]),
-    //   Client_Name: new FormControl('', [Validators.required]),
-    //   Product_Name: new FormControl('', [Validators.required]),
-    //   Product_Quantity: new FormControl('', [Validators.required]),
-    //   Rate: new FormControl('', [Validators.required]),
-    //   Manufacturing_Cost: new FormControl('', [Validators.required]),
-    //   Material_Cost: new FormControl('', [Validators.required]),
-    //   Dispatch_Cost: new FormControl('', [Validators.required]),
-    //   Discount_Amount: new FormControl('', [Validators.required]),
-    //   Payment_term: new FormControl('', [Validators.required]),
-    //   Shipping_Method: new FormControl('', [Validators.required]),
-    //   HSN_Code: new FormControl('', [Validators.required]),
-    //   GST_No: new FormControl('', [Validators.required]),
-    //   Address: new FormControl('', [Validators.required]),
-    //   Validity_Date: new FormControl(''),
-    //   Quotation_Status: new FormControl('', [Validators.required])
-    // });
   }
 
   ngOnInit(): void {
     this.AllRequirements();
+    this.ALLQuotation();
   }
 
   autoFillByRequirement(Req_id: string) {
@@ -104,6 +52,7 @@ export class QuotationComponent implements OnInit {
     if (!req) return;
 
     this.AddQuotationform.patchValue({
+      Requirement_No: req.Requirement_No,
       Client_Address: req.Client_Address,
       Client_Email: req.Client_Email,
       Client_PhoneNo: req.Client_PhoneNo,
@@ -121,7 +70,7 @@ export class QuotationComponent implements OnInit {
   }
 
   ALLQuotation() {
-    this._rest.AllQuotation().subscribe((data: any) => {
+    this._rest.AllQuotationsnew().subscribe((data: any) => {
       console.log(data);
       this.Quotations = data.data;
     }, (err: any) => {
@@ -132,6 +81,91 @@ export class QuotationComponent implements OnInit {
   get items(): FormArray {
     return this.AddQuotationform.get('items') as FormArray;
   }
+
+  
+
+  createItem(product: any): FormGroup {
+    return this.fb.group({
+      Product_Name: [product.Product_Name],
+      Material_Type: [product.Material_Type],
+      HSN_Code: [product.HSN_Code],
+      Product_Quantity: [product.Product_Quantity],
+
+      Manufacturing_Cost: [0],
+      Material_Cost: [0],
+      Dispatch_Cost: [0],
+
+      Rate: [0],
+      Subtotal: [0]
+    });
+  }
+
+  onRequirementSelect(reqId: string) {
+    const selectedReq = this.AllRequirementData.find(
+
+      (r: any) => r.Req_id == reqId
+    );
+
+    if (!selectedReq) return;
+
+    // 🔹 Header auto-fill
+    this.AddQuotationform.patchValue({
+      Requirement_No: selectedReq.Requirement_No,
+      Client_Name: selectedReq.Client_Name,
+      Client_Address: selectedReq.Client_Address,
+      GST_No: selectedReq.GST_No
+    });
+
+    // 🔹 CLEAR OLD PRODUCTS
+    this.items.clear();
+
+    // 🔹 PUSH PRODUCTS INTO FORMARRAY
+    selectedReq.items.forEach((p: any) => {
+      this.items.push(this.createItem(p));
+    });
+  }
+
+  calculateItem(index: number) {
+    const item = this.items.at(index);
+
+    const manu = +item.get('Manufacturing_Cost')!.value || 0;
+    const material = +item.get('Material_Cost')!.value || 0;
+    const dispatch = +item.get('Dispatch_Cost')!.value || 0;
+    const qty = +item.get('Product_Quantity')!.value || 0;
+
+    const rate = manu + material + dispatch;
+    const subtotal = rate * qty;
+
+    item.patchValue({
+      Rate: rate,
+      Subtotal: subtotal
+    }, { emitEvent: false });
+  }
+
+  getGrandTotal() {
+    return this.items.controls.reduce((sum, item) => {
+      return sum + (item.get('Subtotal')?.value || 0);
+    }, 0);
+  }
+
+  submitQuotation() {
+    const payload = this.AddQuotationform.getRawValue();
+
+    console.log(payload); // ✅ MUST SHOW items ARRAY
+
+    this._rest.AddedQuotation(payload).subscribe(res => {
+      alert('Quotation Added Successfully');
+    });
+  }
+  
+  // ALLQuotation() {
+  //   this._rest.AllQuotation().subscribe((data: any) => {
+  //     console.log(data);
+  //     this.Quotations = data.data;
+  //   }, (err: any) => {
+  //     console.log(err);
+  //   });
+  // }
 
   // createItem(product: any): FormGroup {
   //   return this.fb.group({
@@ -148,43 +182,6 @@ export class QuotationComponent implements OnInit {
   //   });
   // }
 
-  createItem(product: any): FormGroup {
-  return this.fb.group({
-    Product_Name: [product.Product_Name],
-    Product_Quantity: [product.Product_Quantity],
-    HSN_Code: [product.HSN_Code],
-
-    Manufacturing_Cost: [0],
-    Material_Cost: [0],
-    Dispatch_Cost: [0],
-
-    Rate: [0],
-    Subtotal: [0]
-  });
-}
-
-onRequirementSelect(reqId: string) {
-  const selectedReq = this.AllRequirementData.find(
-    (r: any) => r.Req_id == reqId
-  );
-
-  if (!selectedReq) return;
-
-  // 🔹 Header auto-fill
-  this.AddQuotationform.patchValue({
-    Client_Name: selectedReq.Client_Name,
-    Client_Address: selectedReq.Client_Address,
-    GST_No: selectedReq.GST_No
-  });
-
-  // 🔹 CLEAR OLD PRODUCTS
-  this.items.clear();
-
-  // 🔹 PUSH PRODUCTS INTO FORMARRAY
-  selectedReq.items.forEach((p: any) => {
-    this.items.push(this.createItem(p));
-  });
-}
   // onRequirementSelect(reqId: string) {
 
   //   const selectedReq = this.AllRequirementData.find(
@@ -239,39 +236,6 @@ onRequirementSelect(reqId: string) {
   //     this.items.push(this.createItem(product));
   //   });
   // }
-
-calculateItem(index: number) {
-  const item = this.items.at(index);
-
-  const manu = +item.get('Manufacturing_Cost')!.value || 0;
-  const material = +item.get('Material_Cost')!.value || 0;
-  const dispatch = +item.get('Dispatch_Cost')!.value || 0;
-  const qty = +item.get('Product_Quantity')!.value || 0;
-
-  const rate = manu + material + dispatch;
-  const subtotal = rate * qty;
-
-  item.patchValue({
-    Rate: rate,
-    Subtotal: subtotal
-  }, { emitEvent: false });
-}
-
-  getGrandTotal() {
-    return this.items.controls.reduce((sum, item) => {
-      return sum + (item.get('Subtotal')?.value || 0);
-    }, 0);
-  }
-
-  submitQuotation() {
-    const payload = this.AddQuotationform.getRawValue();
-
-    console.log(payload); // ✅ MUST SHOW items ARRAY
-
-    this._rest.AddedQuotation(payload).subscribe(res => {
-      alert('Quotation Added Successfully');
-    });
-  }
 
   // submitQuotation() {
   //   const payload = this.AddQuotationform.getRawValue();

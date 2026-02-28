@@ -417,6 +417,13 @@ export class RestService {
   }
   //All Client API End
 
+  AllQuotationsnew() {
+    return this._http.get(this.ApiUrl + '/GetQuotations');
+  }
+
+  QuotationByid(Quotation_Id: any) {
+    return this._http.get(this.ApiUrl + '/GetQuotationbyid/' + Quotation_Id);
+  }
 
 }
 

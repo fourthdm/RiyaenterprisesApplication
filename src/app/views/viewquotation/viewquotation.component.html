@@ -1,1 +1,158 @@
-<p>viewquotation works!</p>
+<div class="container"> <br><br><br>
+    <div class="row">
+        <div class="container">
+            <br><br><br>
+            <pre>{{AllQuotations|json}}</pre>
+
+            <div class="row">
+                <div class="text-center">
+                    <h2>Quotation Details</h2>
+                    <br>
+                </div>
+
+                <!-- 🔹 Requirement loop -->
+                <div class="card mb-3 p-3" *ngFor="let a of AllQuotations; let i = index">
+
+                    <div class="text-end">
+                        <p>
+                            <b>Added Date :</b> {{ a.Added_Date | date }}
+                            <br>
+                            <b>Added Time :</b> {{ a.Added_Date | date:'hh:mm:ss a' }}
+                        </p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <p><b>Client Name :</b> {{ a.Client_Name }}</p>
+                            <p><b>Requirement Number :</b> {{a.Requirement_No}}</p>
+                            <p><b>Address :</b> {{ a.Client_Address }}</p>
+                            <p><b>GST Number :</b> {{ a.GST_No }}</p>
+                            <p><b>Payment Term :</b> {{ a.Payment_term }}</p>
+                            <p><b>Shipping Method :</b> {{ a.Shipping_Method }}</p>
+                            <p><b>Status :</b> {{ a.Quotation_Status }}</p>
+                            <p><b>Validity Date :</b>
+                                {{ a.Validity_Date | date}},
+                                <b>Validity Time :</b> {{ a.Validity_Date | date:'hh:mm:ss a' }}
+                            </p>
+                        </div>
+
+                        <div class="col-12">
+                            <h6 class="mb-2">Products</h6>
+
+                            <!-- 🔹 Product loop -->
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No</th>
+                                        <th>Product Name</th>
+                                        <th>Material Type</th>
+                                        <th>HSN Code</th>
+                                        <th>Product Quantity</th>
+                                        <th>Material Type</th>
+                                        <th>Manufacturing Cost</th>
+                                        <th>Material Cost</th>
+                                        <th>Dispatch Cost</th>
+                                        <th>Rate</th>
+                                        <th>Sub Total</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr *ngFor="let item of a.items; let j = index">
+                                        <td>{{ j + 1 }}</td>
+                                        <td>{{ item.Product_Name }}</td>
+                                        <td>{{ item.Material_Type }}</td>
+                                        <td>{{ item.HSN_Code }}</td>
+                                        <td>{{ item.Product_Quantity }}</td>
+                                        <td>{{ item.Material_Type }}</td>
+                                        <td>{{ item.Manufacturing_Cost }}</td>
+                                        <td>{{ item.Material_Cost }}</td>
+                                        <td>{{ item.Dispatch_Cost }}</td>
+                                        <td>{{ item.Rate }}</td>
+                                        <td>{{ item.Subtotal }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="text-end">
+                                <p> <b>Sub Total Amount : </b> {{a.SubTotal}} &#8377;</p>
+                                <p> <b>CGST Amount : </b> {{a.CGST_amount}} &#8377;</p>
+                                <p> <b>SGST Amount : </b> {{a.SGST_amount}} &#8377;</p>
+                                <p> <b>Discount Amount : </b> {{a.Discount_Amount}} &#8377;</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-end">
+                        <p> <b>Total Amount : </b> {{a.Total_Amount}} &#8377;</p>
+
+                    </div>
+
+                    <p class="mt-2">
+                        <b>Updated Date :</b>
+                        {{ a.Updated_Date | date }} |
+                        {{ a.Updated_Date | date:'hh:mm:ss a' }}
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="text-center">
+            <h2>Requirement Details</h2>
+            <br>
+
+        </div>
+        <div class="card" *ngFor="let a of AllRequirementData, let i= index">
+            <div class="text-end">
+                <p> <b>Added Date : </b> {{ a.Added_Date | date }} <br> {{a.Added_Date | date:'h:mm a' }}</p>
+            </div>
+            <div class="row">
+                <div class="col-5">
+                    <p>Client Name : {{a.Client_Name}}</p>
+                    <p>Product Name : {{a.items.Product_Name}}</p>
+                    <p>Phone No : {{a.Client_PhoneNo}}</p>
+                    <p>Email : {{a.Client_Email}}</p>
+                    <p>Material Name : {{a.Material_Type}}</p>
+                    <p>Product Quantity : {{a.Product_Quantity}}</p>
+                    <p>Client Address : {{a.Client_Address}}</p>
+                    <p>Status : {{a.Status}}</p>
+                    <p>Design File : {{a.Design_File}}</p>
+                    <p>PDF Design Fie : {{a.PDFDesignfile}}</p>
+
+                    <p>Updated Date : {{a.Updated_Date | date}} <br>
+                        <span>Updated Time : </span> {{a.Updated_Date | date :'hh:mm:ss:a'}}
+                    </p>
+                </div><br>
+
+                <div class="col-7"><br><br>
+
+                    <div class="card p-2" *ngIf="designFileUrl">
+  <iframe
+    [src]="designFileUrl"
+    width="100%"
+    height="550"
+    style="border:none;">
+  </iframe>
+
+  <div class="text-center mt-2">
+    <a
+      [href]="AllRequirementData[0].PDFDesignfile"
+      download
+      class="btn btn-primary btn-sm">
+      Download PDF
+    </a>
+  </div>
+</div>
+
+                    <div *ngIf="designFileUrl">
+                        <iframe [src]="designFileUrl | safeurlpipe" width="100%" height="1000px" frameborder="0">
+                        </iframe>
+                    </div>
+                </div><br>
+            </div>
+
+
+        </div> -->
+    </div>
+</div>
