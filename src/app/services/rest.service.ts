@@ -425,5 +425,18 @@ export class RestService {
     return this._http.get(this.ApiUrl + '/GetQuotationbyid/' + Quotation_Id);
   }
 
+  // Purchase Order 
+  AddedPurchaseOrder(data: any) {
+    return this._http.post(this.ApiUrl + '/AddPurchaseOrder', data);
+  }
+
+  AllPurchase() {
+    return this._http.get(this.ApiUrl + '/AllPurchaseOrders');
+  }
+
+  ByidAllPurchaseOrder(Purchase_id: any) {
+    return this._http.get(this.ApiUrl + '/PurchaseOrdersbyid/' + Purchase_id);
+  }
+
 }
 

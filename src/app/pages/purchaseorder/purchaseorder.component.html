@@ -1,1 +1,205 @@
-<p>purchaseorder works!</p>
+<div class="container mt-4">
+    <br><br><br>
+    <div class="container">
+        <table class="table" id="excel-table">
+            <thead>
+                <tr>
+                    <th>Sr No.</th>
+                    <th>Purchase Number</th>
+                    <th>Client Name</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of PurchaseOrder | paginate :{itemsPerPage :20 ,currentPage:pro}, let i = index">
+                    <td>{{a.Purchase_id}}</td>
+                    <td>
+                        <p title="View Quotation Details"><a href=""
+                                [routerLink]="['/AdminDashboard/PurchaseOrderDetails', a.Purchase_id]">{{a.Purchase_Number}}</a>
+                        </p>
+                    </td>
+
+                    <td>{{a.Client_Name}}</td>
+                    <!-- <td>
+                        <p class="">
+                            <a type="button" (click)="editRequirement(a.Req_id)" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal1" title="Edit a Requirement">
+                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                            </a>
+                            <span style="margin-left: 5%;">
+                                <a type="button" (click)="DeleteRequirement(a.Req_id)" title="Delete a Requirement">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </span>
+                        </p>
+                    </td> -->
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3 class="text-center mb-4">Create Purchase Order</h3>
+
+    <form [formGroup]="AddPurchaseorderform" (ngSubmit)="submitPurchaseorder()">
+
+        <!-- ================= Requirement & Client ================= -->
+        <div class="row">
+            <div class="col-md-4">
+                <label>Quotation ID</label>
+                <!-- <select formControlName="Req_id" class="Se">
+                            <option *ngFor="let mat of AllRequirementData" [value]="mat.Req_id">
+                                {{mat.Req_id}}</option>
+                        </select> <br> -->
+                <select class="form-control" formControlName="Quotation_Id"
+                    (change)="onRequirementSelect($any($event.target).value)">
+                    <option value="">-- Select Quotation --</option>
+                    <option *ngFor="let r of AllQuotationsData" [value]="r.Quotation_Id">
+                        {{ r.Quotation_Id }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label>Client Name</label>
+                <input class="form-control" formControlName="Client_Name" readonly>
+            </div>
+
+
+            <div class="col-md-4">
+                <label>Requirement Number</label>
+                <input class="form-control" formControlName="Requirement_No" readonly>
+            </div>
+
+            <div class="col-md-4">
+                <label>GST No</label>
+                <input class="form-control" formControlName="GST_No" readonly>
+            </div>
+
+            <div class="col-md-4">
+                <label>Payment Term</label>
+                <input class="form-control" formControlName="Payment_term" readonly>
+            </div>
+            <div class="col-md-4">
+                <label>Shipping Method</label>
+                <input class="form-control" formControlName="Shipping_Method" readonly>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <label>Client Address</label>
+                <textarea class="form-control" formControlName="Client_Address" rows="2"></textarea>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- ================= Products ================= -->
+        <h5 class="mt-3">Products</h5>
+
+        <div formArrayName="items">
+            <table class="table table-bordered" *ngIf="items.length">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Material</th>
+                        <th>HSN</th>
+                        <th>Qty</th>
+                        <th>Manufacturing</th>
+                        <th>Material</th>
+                        <th>Dispatch</th>
+                        <th>Rate</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let item of items.controls; let i=index" [formGroupName]="i">
+
+                        <!-- AUTO FILLED -->
+                        <td>{{ item.get('Product_Name')?.value }}</td>
+                        <td>{{ item.get('Material_Type')?.value }}</td>
+                        <td>{{ item.get('HSN_Code')?.value }}</td>
+                        <td>{{ item.get('Product_Quantity')?.value }}</td>
+                        <td>{{ item.get('Manufacturing_Cost')?.value }}</td>
+                        <td>{{ item.get('Material_Cost')?.value }}</td>
+                        <td>{{ item.get('Dispatch_Cost')?.value }}</td>
+                        <td>{{ item.get('Rate')?.value }}</td>
+                        <td>{{ item.get('Subtotal')?.value }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ================= Totals ================= -->
+
+        <div class="row">
+            <div class="col-md-4">
+                <label>SubTotal</label>
+                <input class="form-control" formControlName="SubTotal" readonly>
+            </div>
+            <div class="col-md-4">
+                <label>Discount_Amount</label>
+                <input class="form-control" formControlName="Discount_Amount" readonly>
+            </div>
+            <div class="col-md-4">
+                <label>CGST_amount</label>
+                <input class="form-control" formControlName="CGST_amount" readonly>
+            </div>
+            <div class="col-md-4">
+                <label>SGST_amount</label>
+                <input class="form-control" formControlName="SGST_amount" readonly>
+            </div>
+
+            <div class="col-md-4">
+                <label>Total_Amount</label>
+                <input class="form-control" formControlName="Total_Amount" readonly>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- ================= Other Details ================= -->
+        <div class="row">
+            <div class="col-md-4">
+                <label>Purchase Address</label>
+                <input class="form-control" formControlName="Purchase_Address">
+            </div>
+
+            <div class="col-md-4">
+                <label>Delivery Date</label>
+                <input type="date" class="form-control" formControlName="Delivery_Date">
+            </div>
+
+
+            <div class="col-md-4">
+                <label>Status</label>
+                <select class="form-control" formControlName="PurchaseOrder_Status">
+                    <option value="Create">Create</option>
+                    <option value="Sent">Sent</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+            </div>
+
+        </div>
+
+
+        <!-- ================= Submit ================= -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary px-5">
+                Create Purchase Order
+            </button>
+        </div>
+
+    </form>
+
+    <!-- Debug -->
+    <!-- <pre class="mt-3">{{ AddQuotationform.value | json }}</pre> -->
+    <!-- <pre class="mt-3">{{Quotations | json }}</pre> -->
+
+
+</div>
+<br> <br>
