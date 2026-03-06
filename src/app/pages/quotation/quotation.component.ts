@@ -20,7 +20,7 @@ export class QuotationComponent implements OnInit {
   SelectedQuotation: any;
 
   constructor(private _rest: RestService, private fb: FormBuilder, private _router: Router) {
-    
+
     this.AddQuotationform = this.fb.group({
       Requirement_No: [''],
       Req_id: [''],
@@ -82,7 +82,7 @@ export class QuotationComponent implements OnInit {
     return this.AddQuotationform.get('items') as FormArray;
   }
 
-  
+
 
   createItem(product: any): FormGroup {
     return this.fb.group({
@@ -157,7 +157,31 @@ export class QuotationComponent implements OnInit {
       alert('Quotation Added Successfully');
     });
   }
-  
+
+
+  printPdf(Quotation_Id: any) {
+    this._rest.GetQuotationPDF(Quotation_Id)
+      .subscribe((file: Blob) => {
+        const url = window.URL.createObjectURL(file);
+        const win = window.open('', '_blank');
+
+        if (win) {
+          win.document.write(
+            `<iframe src="${url}" style="width:100%;height:100%;border:none;"></iframe>`
+          );
+
+          setTimeout(() => {
+            win.print();
+          }, 800);
+
+          URL.revokeObjectURL(url);
+        }
+      });
+  }
+
+
+
+
   // ALLQuotation() {
   //   this._rest.AllQuotation().subscribe((data: any) => {
   //     console.log(data);
