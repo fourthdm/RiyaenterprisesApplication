@@ -90,11 +90,9 @@ export class QuotationComponent implements OnInit {
       Material_Type: [product.Material_Type],
       HSN_Code: [product.HSN_Code],
       Product_Quantity: [product.Product_Quantity],
-
       Manufacturing_Cost: [0],
       Material_Cost: [0],
       Dispatch_Cost: [0],
-
       Rate: [0],
       Subtotal: [0]
     });
@@ -150,14 +148,13 @@ export class QuotationComponent implements OnInit {
 
   submitQuotation() {
     const payload = this.AddQuotationform.getRawValue();
-
     console.log(payload); // ✅ MUST SHOW items ARRAY
-
     this._rest.AddedQuotation(payload).subscribe(res => {
       alert('Quotation Added Successfully');
+      console.log(res);
+      this.AddQuotationform.reset();
     });
   }
-
 
   printPdf(Quotation_Id: any) {
     this._rest.GetQuotationPDF(Quotation_Id)
@@ -178,9 +175,6 @@ export class QuotationComponent implements OnInit {
         }
       });
   }
-
-
-
 
   // ALLQuotation() {
   //   this._rest.AllQuotation().subscribe((data: any) => {

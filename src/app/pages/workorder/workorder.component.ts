@@ -168,6 +168,8 @@ export class WorkorderComponent implements OnInit {
 
     this._rest.Workorder(payload).subscribe(res => {
       alert('Workorder Added Successfully');
+      this.AddWorkorderform.reset();
+      this.ngOnInit();
     });
   }
 }

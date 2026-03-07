@@ -57,6 +57,7 @@ export class ClientsComponent {
       alert(res.message);
       this.GetAllClient();
       this.AddClientDataForm.reset();
+      this.ngOnInit();
     });
   }
 

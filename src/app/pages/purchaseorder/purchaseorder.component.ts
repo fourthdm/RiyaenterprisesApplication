@@ -22,7 +22,6 @@ export class PurchaseorderComponent implements OnInit {
   SelectedPurchaseorder: any;
 
   constructor(private _rest: RestService, private fb: FormBuilder, private _router: Router) {
-
     this.AddPurchaseorderform = this.fb.group({
       Requirement_No: [''],
       Quotation_Number: [''],
@@ -35,15 +34,14 @@ export class PurchaseorderComponent implements OnInit {
       SubTotal: [''],
       Discount_Amount: [''],
       Total_Amount: [''],
+      Grand_Total: [''],
       Purchase_Address: [''],
       Payment_term: [''],
       Shipping_Method: [''],
       Delivery_Date: [''],
       PurchaseOrder_Status: ['Create'],
-
       items: this.fb.array([])   // 🔥 REQUIRED
     });
-
   }
 
   ngOnInit(): void {
@@ -70,6 +68,7 @@ export class PurchaseorderComponent implements OnInit {
       SubTotal: req.SubTotal,
       Discount_Amount: req.Discount_Amount,
       Total_Amount: req.Total_Amount,
+      Grand_Total: req.Grand_Total,
       Payment_term: req.Payment_term,
       Shipping_Method: req.Shipping_Method
 
@@ -141,6 +140,7 @@ export class PurchaseorderComponent implements OnInit {
       SubTotal: selectedReq.SubTotal,
       Discount_Amount: selectedReq.Discount_Amount,
       Total_Amount: selectedReq.Total_Amount,
+      Grand_Total: selectedReq.Grand_Total,
       Payment_term: selectedReq.Payment_term,
       Shipping_Method: selectedReq.Shipping_Method,
     });
@@ -161,8 +161,29 @@ export class PurchaseorderComponent implements OnInit {
 
     this._rest.AddedPurchaseOrder(payload).subscribe(res => {
       alert('Purchase Order Added Successfully');
+      this.AddPurchaseorderform.reset();
+      this.ngOnInit();
     });
   }
 
+  printPdf(Purchase_id: any) {
+    this._rest.GetPurchaseOrderPDF(Purchase_id)
+      .subscribe((file: Blob) => {
+        const url = window.URL.createObjectURL(file);
+        const win = window.open('', '_blank');
+
+        if (win) {
+          win.document.write(
+            `<iframe src="${url}" style="width:100%;height:100%;border:none;"></iframe>`
+          );
+
+          setTimeout(() => {
+            win.print();
+          }, 800);
+
+          URL.revokeObjectURL(url);
+        }
+      });
+  }
 
 }

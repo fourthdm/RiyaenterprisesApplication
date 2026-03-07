@@ -80,7 +80,8 @@
             <div class="col-md-6">
                 <label for="Client_Name">Client Name</label>
                 <br>
-                <select formControlName="Client_Name" class="Se">
+                <select class="form-control" formControlName="Client_Name">
+                    <option value="">-- Select Client Name --</option>
                     <option *ngFor="let mat of AllclientData" [value]="mat.Client_Name">
                         {{mat.Client_Name}}</option>
                 </select> <br>
@@ -93,8 +94,6 @@
                 <textarea class="form-control" formControlName="Client_Address" placeholder="Client Address"></textarea>
                 <br>
             </div><br>
-
-
         </div>
 
         <div class="row">
@@ -121,6 +120,7 @@
                 <label for="Status"> Status</label>
                 <br>
                 <select class="form-control" formControlName="Status">
+                    <option value="">-- Select Requirement Status --</option>
                     <option value="Create">Create</option>
                     <option value="In Progress">In Progress</option>
                     <option value="Complete">Complete</option>
@@ -145,6 +145,7 @@
                     <div class="col-md-6">
                         <label for="Material_Type"> Material Type</label>
                         <select class="form-control" formControlName="Material_Type">
+                            <option value="">-- Select Material Name --</option>
                             <option *ngFor="let mat of AllMaterials" [value]="mat.Material_Name">
                                 {{ mat.Material_Name }}
                             </option>

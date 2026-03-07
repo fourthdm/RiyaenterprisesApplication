@@ -428,14 +428,18 @@ export class RestService {
   GetQuotationPDF(Quotation_Id: any) {
     return this._http.get(this.ApiUrl + '/QuotationPDF/' + Quotation_Id, { responseType: 'blob' });
   }
-
+  
   // Purchase Order 
   AddedPurchaseOrder(data: any) {
     return this._http.post(this.ApiUrl + '/AddPurchaseOrder', data);
   }
-
+  
   AllPurchase() {
     return this._http.get(this.ApiUrl + '/AllPurchaseOrders');
+  }
+  
+  GetPurchaseOrderPDF(Purchase_id: any) {
+    return this._http.get(this.ApiUrl + '/PurchaseOrderPDF/' + Purchase_id, { responseType: 'blob' });
   }
 
   ByidAllPurchaseOrder(Purchase_id: any) {

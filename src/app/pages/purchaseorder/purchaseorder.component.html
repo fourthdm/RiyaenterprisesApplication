@@ -1,7 +1,7 @@
 <div class="container mt-4">
     <br><br><br>
     <div class="container">
-        <table class="table" id="excel-table">
+        <table class="table table-bordered" id="excel-table">
             <thead>
                 <tr>
                     <th>Sr No.</th>
@@ -21,6 +21,10 @@
                     </td>
 
                     <td>{{a.Client_Name}}</td>
+                    <td>
+                        <a (click)="printPdf(a.Purchase_id)" title="Print a Receipt"> <span
+                                style="margin-left:15px;cursor: pointer;"><i class="fa-solid fa-print"></i></span></a>
+                    </td>
                     <!-- <td>
                         <p class="">
                             <a type="button" (click)="editRequirement(a.Req_id)" data-bs-toggle="modal"
@@ -34,7 +38,6 @@
                             </span>
                         </p>
                     </td> -->
-
                 </tr>
             </tbody>
         </table>
@@ -47,7 +50,7 @@
         <!-- ================= Requirement & Client ================= -->
         <div class="row">
             <div class="col-md-4">
-                <label>Quotation ID</label>
+                <label>Quotation Number</label>
                 <!-- <select formControlName="Req_id" class="Se">
                             <option *ngFor="let mat of AllRequirementData" [value]="mat.Req_id">
                                 {{mat.Req_id}}</option>
@@ -56,7 +59,7 @@
                     (change)="onRequirementSelect($any($event.target).value)">
                     <option value="">-- Select Quotation --</option>
                     <option *ngFor="let r of AllQuotationsData" [value]="r.Quotation_Id">
-                        {{ r.Quotation_Id }}
+                        {{ r.Quotation_Number }}
                     </option>
                 </select>
             </div>
@@ -65,7 +68,6 @@
                 <label>Client Name</label>
                 <input class="form-control" formControlName="Client_Name" readonly>
             </div>
-
 
             <div class="col-md-4">
                 <label>Requirement Number</label>
@@ -144,6 +146,12 @@
                 <label>Discount_Amount</label>
                 <input class="form-control" formControlName="Discount_Amount" readonly>
             </div>
+
+            <div class="col-md-4">
+                <label>Total_Amount</label>
+                <input class="form-control" formControlName="Total_Amount" readonly>
+            </div>
+
             <div class="col-md-4">
                 <label>CGST_amount</label>
                 <input class="form-control" formControlName="CGST_amount" readonly>
@@ -154,8 +162,8 @@
             </div>
 
             <div class="col-md-4">
-                <label>Total_Amount</label>
-                <input class="form-control" formControlName="Total_Amount" readonly>
+                <label>Grand Total</label>
+                <input class="form-control" formControlName="Grand_Total" readonly>
             </div>
         </div>
 

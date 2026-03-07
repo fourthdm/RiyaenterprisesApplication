@@ -248,9 +248,9 @@
                         <th>Material</th>
                         <th>HSN</th>
                         <th>Qty</th>
-                        <th>Manufacturing</th>
-                        <th>Material</th>
-                        <th>Dispatch</th>
+                        <th>Manufacturing Cost</th>
+                        <th>Material Cost</th>
+                        <th>Dispatch Cost</th>
                         <th>Rate</th>
                         <th>Subtotal</th>
                     </tr>
@@ -312,8 +312,17 @@
         <!-- ================= Other Details ================= -->
         <div class="row">
             <div class="col-md-4">
-                <label>Payment Term</label>
-                <input class="form-control" formControlName="Payment_term">
+                <!-- <label>Payment Term</label> -->
+                <label for="Payment_term">Payment term: </label>
+                <select class="form-control" formControlName="Payment_term" aria-label="select example">
+                    <option value="">-- Select Payment Term --</option>
+                    <option value="50% Advance">50% Advance</option>
+                    <option value="Regular">Regular</option>
+                    <option value="30 Days">30 Days </option>
+                    <option value="60 Days">60 Days</option>
+                    <option value="90 Days">90 Days </option>
+                </select>
+                <!-- <input class="form-control" formControlName="Payment_term"> -->
             </div>
 
             <div class="col-md-4">
