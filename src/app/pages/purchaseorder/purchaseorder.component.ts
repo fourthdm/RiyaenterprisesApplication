@@ -24,6 +24,7 @@ export class PurchaseorderComponent implements OnInit {
   constructor(private _rest: RestService, private fb: FormBuilder, private _router: Router) {
     this.AddPurchaseorderform = this.fb.group({
       Requirement_No: [''],
+      Req_id: [''],
       Quotation_Number: [''],
       Quotation_Id: [''],
       Client_Name: [''],
@@ -59,6 +60,7 @@ export class PurchaseorderComponent implements OnInit {
 
     this.AddPurchaseorderform.patchValue({
       Requirement_No: req.Requirement_No,
+      Req_id: req.Req_id,
       Quotation_Number: req.Quotation_Number,
       Client_Name: req.Client_Name,
       Client_Address: req.Client_Address,
@@ -131,6 +133,7 @@ export class PurchaseorderComponent implements OnInit {
     // 🔹 Header auto-fill
     this.AddPurchaseorderform.patchValue({
       Requirement_No: selectedReq.Requirement_No,
+      Req_id: selectedReq.Req_id,
       Quotation_Number: selectedReq.Quotation_Number,
       Client_Name: selectedReq.Client_Name,
       Client_Address: selectedReq.Client_Address,

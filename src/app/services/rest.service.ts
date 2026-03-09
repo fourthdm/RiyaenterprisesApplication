@@ -428,16 +428,16 @@ export class RestService {
   GetQuotationPDF(Quotation_Id: any) {
     return this._http.get(this.ApiUrl + '/QuotationPDF/' + Quotation_Id, { responseType: 'blob' });
   }
-  
+
   // Purchase Order 
   AddedPurchaseOrder(data: any) {
     return this._http.post(this.ApiUrl + '/AddPurchaseOrder', data);
   }
-  
+
   AllPurchase() {
     return this._http.get(this.ApiUrl + '/AllPurchaseOrders');
   }
-  
+
   GetPurchaseOrderPDF(Purchase_id: any) {
     return this._http.get(this.ApiUrl + '/PurchaseOrderPDF/' + Purchase_id, { responseType: 'blob' });
   }
@@ -446,6 +446,9 @@ export class RestService {
     return this._http.get(this.ApiUrl + '/PurchaseOrdersbyid/' + Purchase_id);
   }
 
+  getPurchaseOrderByReq(Req_id: any) {
+    return this._http.get(this.ApiUrl + '/getPurchaseOrderByReq/' + Req_id);
+  }
   //Work Order
 
   Workorder(data: any) {
@@ -458,6 +461,10 @@ export class RestService {
 
   WorkorderbyId(Workorder_Id: any) {
     return this._http.get(this.ApiUrl + '/GetByIdWorkOrder/' + Workorder_Id);
+  }
+
+  DeletenewWorkorders(Workorder_Id: any) {
+    return this._http.delete(this.ApiUrl + '/DeleteWorkorders/' + Workorder_Id);
   }
 
 }

@@ -21,8 +21,6 @@ export class WorkorderComponent implements OnInit {
   pro: any;
 
   AddWorkorderform: FormGroup;
-  // EditquotationForm: FormGroup;
-
   SelectedQuotation: any;
 
   constructor(private _rest: RestService, private fb: FormBuilder, private _router: Router) {
@@ -38,7 +36,6 @@ export class WorkorderComponent implements OnInit {
       DispatchManager_Name: [''],
       WorkOrder_Status: ['Create'],
       Due_Date: [''],
-
       items: this.fb.array([])   // 🔥 REQUIRED
     });
 
@@ -47,7 +44,6 @@ export class WorkorderComponent implements OnInit {
   ngOnInit(): void {
     this.AllRequirements();
     this.ALLWorkorders();
-
     this.AllQC();
     this.AllEngineer();
     this.AllManager();
@@ -98,7 +94,6 @@ export class WorkorderComponent implements OnInit {
 
   AllManager() {
     this._rest.Managerdata().subscribe((data: any) => {
-
       this.AllManagerdata = data.data;
     }, (err: any) => {
       console.log(err);
@@ -134,7 +129,6 @@ export class WorkorderComponent implements OnInit {
       Material_Type: [product.Material_Type],
       Design_File: [product.Design_File],
       PDFDesignfile: [product.PDFDesignfile]
-
     });
   }
 
@@ -144,32 +138,38 @@ export class WorkorderComponent implements OnInit {
     );
 
     if (!selectedReq) return;
-
-    // 🔹 Header auto-fill
+    //  Header auto-fill
     this.AddWorkorderform.patchValue({
       Requirement_No: selectedReq.Requirement_No,
       Client_Name: selectedReq.Client_Name,
-
     });
-
-    // 🔹 CLEAR OLD PRODUCTS
+    //  CLEAR OLD PRODUCTS
     this.items.clear();
-
-    // 🔹 PUSH PRODUCTS INTO FORMARRAY
+    //  PUSH PRODUCTS INTO FORMARRAY
     selectedReq.items.forEach((p: any) => {
       this.items.push(this.createItem(p));
+      this.items.reset();
     });
   }
 
   submitworkorder() {
     const payload = this.AddWorkorderform.getRawValue();
-
     console.log(payload); // ✅ MUST SHOW items ARRAY
-
     this._rest.Workorder(payload).subscribe(res => {
       alert('Workorder Added Successfully');
       this.AddWorkorderform.reset();
       this.ngOnInit();
     });
+  }
+
+  DeleteWorkorder(Workorder_Id: any) {
+    if (confirm('Are You Sure to Delete a Workorder?')) {
+      this._rest.DeletenewWorkorders(Workorder_Id).subscribe((data: any) => {
+        console.log(data);
+        this.ALLWorkorders();
+      }, (err: any) => {
+        console.log(err);
+      });
+    }
   }
 }

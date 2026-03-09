@@ -20,19 +20,19 @@
                     </td>
 
                     <td>{{a.Client_Name}}</td>
-                    <!-- <td>
+                    <td>
                         <p class="">
-                            <a type="button" (click)="editRequirement(a.Req_id)" data-bs-toggle="modal"
+                            <!-- <a type="button" (click)="editRequirement(a.Req_id)" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal1" title="Edit a Requirement">
                                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                            </a>
+                            </a> -->
                             <span style="margin-left: 5%;">
-                                <a type="button" (click)="DeleteRequirement(a.Req_id)" title="Delete a Requirement">
+                                <a type="button" (click)="DeleteWorkorder(a.Workorder_Id)" title="Delete a Requirement">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </a>
                             </span>
                         </p>
-                    </td> -->
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -45,7 +45,7 @@
         <!-- ================= Requirement & Client ================= -->
         <div class="row">
             <div class="col-md-4">
-                <label>Requirement ID</label>
+                <label>Requirement Number</label>
                 <!-- <select formControlName="Req_id" class="Se">
                             <option *ngFor="let mat of AllRequirementData" [value]="mat.Req_id">
                                 {{mat.Req_id}}</option>
@@ -54,7 +54,7 @@
                     (change)="onRequirementSelect($any($event.target).value)">
                     <option value="">-- Select Requirement --</option>
                     <option *ngFor="let r of AllRequirementData" [value]="r.Req_id">
-                        {{ r.Req_id }}
+                        {{ r.Requirement_No }}({{r.Added_Date | date}})
                     </option>
                 </select>
             </div>
@@ -65,8 +65,12 @@
             </div>
 
             <div class="col-md-4">
-                <label>Requirement Number</label>
-                <input class="form-control" formControlName="Requirement_No" readonly>
+                <label>Requirement Id</label>
+                  <input class="form-control" formControlName="Req_id" readonly>
+            </div>
+            <div class="col-md-4">
+                <label>Purchase_Number</label>
+                  <input class="form-control" formControlName="Purchase_Number" readonly>
             </div>
 
         </div>
@@ -115,7 +119,7 @@
             <div class="col-md-4">
                 <label>Manager Name </label>
                 <br>
-                <select class="form-control" formControlName="Manager_Name" class="">
+                <select class="form-control" formControlName="Manager_Name">
                     <option value="">-- Select Manager Name --</option>
                     <option *ngFor="let mat of AllManagerdata" [value]="mat.Name">{{mat.Name}}
                     </option>
@@ -124,8 +128,8 @@
 
             <div class="col-md-4">
                 <label>Engineer Name</label>
-                 <br>
-                <select class="form-control" formControlName="Engineer_Name" class="">
+                <br>
+                <select class="form-control" formControlName="Engineer_Name">
                     <option value="">-- Select Engineer Name --</option>
                     <option *ngFor="let mat of AllEngineerdata" [value]="mat.Name">{{mat.Name}}
                     </option>
@@ -135,8 +139,8 @@
 
             <div class="col-md-4">
                 <label>QC Name</label>
-                 <br>
-                <select class="form-control" formControlName="QC_Name" class="">
+                <br>
+                <select class="form-control" formControlName="QC_Name">
                     <option value="">-- Select QC Name --</option>
                     <option *ngFor="let mat of AllQCdata" [value]="mat.Name">{{mat.Name}}
                     </option>
@@ -144,9 +148,9 @@
             </div>
 
             <div class="col-md-4">
-                <label>Dispatch Manager Name</label> 
+                <label>Dispatch Manager Name</label>
                 <br>
-                <select class="form-control" formControlName="DispatchManager_Name" class="">
+                <select class="form-control" formControlName="DispatchManager_Name">
                     <option value="">-- Select Dispatch Manager Name --</option>
                     <option *ngFor="let mat of AllDispatchManagerdata" [value]="mat.Name">{{mat.Name}}
                     </option>
@@ -178,7 +182,7 @@
             </button>
         </div>
     </form>
-    
+
     <!-- Debug -->
     <!-- <pre class="mt-3">{{ AddQuotationform.value | json }}</pre> -->
     <!-- <pre class="mt-3">{{Quotations | json }}</pre> -->
