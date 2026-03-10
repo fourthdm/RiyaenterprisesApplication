@@ -24,7 +24,6 @@ export class WorkorderComponent implements OnInit {
   SelectedQuotation: any;
 
   constructor(private _rest: RestService, private fb: FormBuilder, private _router: Router) {
-
     this.AddWorkorderform = this.fb.group({
       Requirement_No: [''],
       Req_id: [''],
@@ -38,7 +37,6 @@ export class WorkorderComponent implements OnInit {
       Due_Date: [''],
       items: this.fb.array([])   // 🔥 REQUIRED
     });
-
   }
 
   ngOnInit(): void {
@@ -54,14 +52,18 @@ export class WorkorderComponent implements OnInit {
     const req = this.AllRequirementData.find(
       (r: any) => r.Req_id === Req_id
     );
-
     if (!req) return;
-
     this.AddWorkorderform.patchValue({
       Requirement_No: req.Requirement_No,
       Client_Name: req.Client_Name,
-
     }, { emitEvent: false }); // ✅ STOP LOOP
+
+    this._rest.getPurchaseOrderByReq(Req_id).subscribe((res: any) => {
+
+      this.AddWorkorderform.patchValue({
+        Purchase_Number: res.Purchase_Number
+      });
+    });
   }
 
   AllRequirements() {
@@ -82,10 +84,8 @@ export class WorkorderComponent implements OnInit {
     });
   }
 
-
   AllEngineer() {
     this._rest.Engineerdata().subscribe((data: any) => {
-
       this.AllEngineerdata = data.data;
     }, (err: any) => {
       console.log(err);
@@ -102,7 +102,6 @@ export class WorkorderComponent implements OnInit {
 
   AllQC() {
     this._rest.QCData().subscribe((data: any) => {
-
       this.AllQCdata = data.data;
     }, (err: any) => {
       console.log(err);
@@ -148,7 +147,7 @@ export class WorkorderComponent implements OnInit {
     //  PUSH PRODUCTS INTO FORMARRAY
     selectedReq.items.forEach((p: any) => {
       this.items.push(this.createItem(p));
-      this.items.reset();
+      // this.items.reset();
     });
   }
 
@@ -172,4 +171,5 @@ export class WorkorderComponent implements OnInit {
       });
     }
   }
+
 }

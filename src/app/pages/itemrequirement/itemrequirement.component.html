@@ -163,15 +163,59 @@
                         <br>
                     </div> <br>
 
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <label for="">DWG File</label> <br>
-                        <input type="file" (change)="onFileChange($event,i,'dwg')" accept=".dwg">
-                    </div> <br>
-
+                        <input type="file" (change)="onFileChange($event,i,'dwg')" formControlName="Design_File"
+                            accept=".dwg">
+                    </div> -->
                     <div class="col-md-6">
+                        <label>DWG File</label>
+
+                        <input type="file" (change)="onFileChange($event,i,'dwg')" accept=".dwg" class="form-control">
+
+                        <div *ngIf="p.value.Design_File_Name" class="mt-1">
+
+                            <small class="text-success">
+                                {{p.value.Design_File_Name}}
+                            </small>
+
+                            <!-- <button type="button" class="btn btn-sm btn-danger ms-2" (click)="removeFile(i,'dwg')">
+
+                                Remove
+
+                            </button> -->
+
+                        </div>
+
+                    </div>
+                    <br>
+
+                    <!-- <div class="col-md-6">
                         <label for="">PDF Design File</label> <br>
-                        <input type="file" (change)="onFileChange($event,i,'pdf')" accept=".pdf">
-                    </div> <br>
+                        <input type="file" (change)="onFileChange($event,i,'pdf')" formControlName="PDFDesignfile"
+                            accept=".pdf">
+                    </div>  -->
+                    <div class="col-md-6">
+                        <label>PDF Design File</label>
+
+                        <input type="file" (change)="onFileChange($event,i,'pdf')" accept=".pdf" class="form-control">
+
+                        <div *ngIf="p.value.PDF_File_Name" class="mt-1">
+
+                            <small class="text-success">
+                                {{p.value.PDF_File_Name}}
+                            </small>
+
+                            <!-- <button type="button" class="btn btn-sm btn-danger ms-2" (click)="removeFile(i,'pdf')">
+
+                                Remove
+
+                            </button> -->
+
+                        </div>
+
+                    </div>
+                    <br>
 
                 </div>
                 <button type="button" class="btn btn-danger mt-2" (click)="removeProduct(i)">
@@ -184,7 +228,8 @@
         <button type="button" class="btn btn-secondary" (click)="addProduct()">+ Add Product</button>
         <br>
         <button type="submit" class="btn btn-primary mt-3">Add Requirement</button>
-        <!--
+    </form>
+    <!--
         <input formControlName="Client_Name" placeholder="Client Name"><br><br>
         <input formControlName="Client_Address" placeholder="Address"><br><br>
         <input formControlName="Client_PhoneNo" placeholder="Phone"><br><br>
@@ -209,7 +254,7 @@
 
         <button type="button" (click)="addProduct()">Add Product</button> <br> <br>
         <button type="submit">Submit</button> -->
-    </form>
+
 
     <hr>
 
