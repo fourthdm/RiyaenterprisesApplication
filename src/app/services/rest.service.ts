@@ -477,5 +477,10 @@ export class RestService {
     return this._http.post(this.ApiUrl + '/AddBill', data);
   }
 
+  GetBillPDF(Bill_Id: any) {
+    return this._http.get(this.ApiUrl + '/BillPdf/' + Bill_Id, { responseType: 'blob' });
+  }
+
+ 
 }
 
