@@ -1,0 +1,63 @@
+.card {
+    background-color: #c4c1cfab;
+    color: black;
+}
+
+select {
+    background-color: hsla(264, 9%, 89%, 0.671);
+    width: 100%;
+    color: black;
+}
+
+label {
+    color: black;
+}
+
+.container-fluid {
+    padding-left: 2%;
+}
+
+.Se {
+    height: 50% !important;
+}
+
+.card-header {
+    color: black;
+    font-size: larger;
+}
+
+.modal-content {
+    background-color: #c4c1cfab;
+    color: #000;
+}
+
+th {
+    background-color: #c4c1cfab !important;
+    color: black;
+    /* font-family: 'newcustomfnts'; */
+    font-weight: bold;
+}
+
+td {
+    background-color: #c4c1cfab;
+    color: black;
+    /* font-family: 'newcustomfnts'; */
+}
+
+.btt {
+    border: 1px solid white;
+}
+
+h2 {
+    color: #000;
+}
+
+input {
+    width: 100%;
+    background-color: #c4c1cfab;
+    color: #000;
+}
+
+::placeholder {
+    color: #000;
+}

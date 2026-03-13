@@ -54,6 +54,7 @@ export class WorkorderComponent implements OnInit {
     );
     if (!req) return;
     this.AddWorkorderform.patchValue({
+      Req_id: req.Req_id,
       Requirement_No: req.Requirement_No,
       Client_Name: req.Client_Name,
     }, { emitEvent: false }); // ✅ STOP LOOP
@@ -132,24 +133,60 @@ export class WorkorderComponent implements OnInit {
   }
 
   onRequirementSelect(reqId: string) {
+
     const selectedReq = this.AllRequirementData.find(
       (r: any) => r.Req_id == reqId
     );
 
     if (!selectedReq) return;
-    //  Header auto-fill
+
+    // Header autofill
     this.AddWorkorderform.patchValue({
+      Req_id: selectedReq.Req_id,
       Requirement_No: selectedReq.Requirement_No,
       Client_Name: selectedReq.Client_Name,
     });
-    //  CLEAR OLD PRODUCTS
+
+    // Fetch Purchase Order
+    this._rest.getPurchaseOrderByReq(reqId).subscribe((res: any) => {
+
+      if (res.success && res.data.length > 0) {
+        this.AddWorkorderform.patchValue({
+          Purchase_Number: res.data[0].Purchase_Number
+        });
+      }
+
+    });
+
+    // Clear products
     this.items.clear();
-    //  PUSH PRODUCTS INTO FORMARRAY
+
+    // Add products
     selectedReq.items.forEach((p: any) => {
       this.items.push(this.createItem(p));
-      // this.items.reset();
     });
+
   }
+
+  // onRequirementSelect(reqId: string) {
+  //   const selectedReq = this.AllRequirementData.find(
+  //     (r: any) => r.Req_id == reqId
+  //   );
+
+  //   if (!selectedReq) return;
+  //   //  Header auto-fill
+  //   this.AddWorkorderform.patchValue({
+  //     Requirement_No: selectedReq.Requirement_No,
+  //     Client_Name: selectedReq.Client_Name,
+  //   });
+  //   //  CLEAR OLD PRODUCTS
+  //   this.items.clear();
+  //   //  PUSH PRODUCTS INTO FORMARRAY
+  //   selectedReq.items.forEach((p: any) => {
+  //     this.items.push(this.createItem(p));
+  //     // this.items.reset();
+  //   });
+  // }
 
   submitworkorder() {
     const payload = this.AddWorkorderform.getRawValue();

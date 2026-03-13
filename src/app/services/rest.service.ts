@@ -449,7 +449,13 @@ export class RestService {
   getPurchaseOrderByReq(Req_id: any) {
     return this._http.get(this.ApiUrl + '/getPurchaseOrderByReq/' + Req_id);
   }
+
+  // getPurchaseOrderByReq(Req_id: any) {
+  //   return this._http.get<any>(`${this.ApiUrl}/getPurchaseOrderByReq/${Req_id}`);
+  // }
+
   //Work Order
+
 
   Workorder(data: any) {
     return this._http.post(this.ApiUrl + '/AddWorkOrdersss', data);
@@ -465,6 +471,10 @@ export class RestService {
 
   DeletenewWorkorders(Workorder_Id: any) {
     return this._http.delete(this.ApiUrl + '/DeleteWorkorders/' + Workorder_Id);
+  }
+
+  NewBills(data: any) {
+    return this._http.post(this.ApiUrl + '/AddBill', data);
   }
 
 }

@@ -206,7 +206,8 @@
                     (change)="onRequirementSelect($any($event.target).value)">
                     <option value="">-- Select Requirement --</option>
                     <option *ngFor="let r of AllRequirementData" [value]="r.Req_id">
-                        {{r.Added_Date | date}}_{{r.Requirement_No}} ({{ r.Req_id }})
+                        {{r.Requirement_No}}
+                        <!-- {{r.Added_Date | date}}_({{ r.Req_id }}) -->
                     </option>
                 </select>
             </div>

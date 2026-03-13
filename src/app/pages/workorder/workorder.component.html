@@ -54,7 +54,7 @@
                     (change)="onRequirementSelect($any($event.target).value)">
                     <option value="">-- Select Requirement --</option>
                     <option *ngFor="let r of AllRequirementData" [value]="r.Req_id">
-                        {{ r.Requirement_No }}({{r.Added_Date | date}})
+                        {{ r.Requirement_No }}
                     </option>
                 </select>
             </div>
@@ -70,7 +70,8 @@
             </div>
             <div class="col-md-4">
                 <label>Purchase_Number</label>
-                <input class="form-control" formControlName="Purchase_Number" readonly>
+               <input class="form-control" formControlName="Purchase_Number" readonly placeholder="">
+                <!-- <input class="form-control" formControlName="Purchase_Number" readonly> -->
             </div>
         </div>
         <hr>
