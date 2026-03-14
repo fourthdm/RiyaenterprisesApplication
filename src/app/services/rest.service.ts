@@ -481,6 +481,7 @@ export class RestService {
     return this._http.get(this.ApiUrl + '/BillPdf/' + Bill_Id, { responseType: 'blob' });
   }
 
- 
+  AllBills() {
+    return this._http.get(this.ApiUrl + '/AllBills');
+  }
 }
-

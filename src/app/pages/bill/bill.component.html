@@ -5,7 +5,7 @@
             <thead>
                 <tr>
                     <th>Sr No.</th>
-                    <th>Purchase Number</th>
+                    <th>Bill Number</th>
                     <th>Client Name</th>
                     <th>Action</th>
 
@@ -13,16 +13,16 @@
             </thead>
             <tbody>
                 <tr *ngFor="let a of Bills | paginate :{itemsPerPage :20 ,currentPage:pro}, let i = index">
-                    <td>{{a.Purchase_id}}</td>
+                    <td>{{a.Bill_Id}}</td>
                     <td>
                         <p title="View Quotation Details"><a href=""
-                                [routerLink]="['/AdminDashboard/PurchaseOrderDetails', a.Purchase_id]">{{a.Purchase_Number}}</a>
+                                [routerLink]="['/AdminDashboard/BillDetails', a.Bill_Id]">{{a.Bill_Number}}</a>
                         </p>
                     </td>
 
                     <td>{{a.Client_Name}}</td>
                     <td>
-                        <a (click)="printPdf(a.Purchase_id)" title="Print a Receipt"> <span
+                        <a (click)="printPdf(a.Bill_Id)" title="Print a Receipt"> <span
                                 style="margin-left:15px;cursor: pointer;"><i class="fa-solid fa-print"></i></span></a>
                     </td>
                     <!-- <td>

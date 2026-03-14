@@ -50,6 +50,7 @@ export class BillComponent {
     this.AllRequirements();
     this.ALLQuotation();
     this.ALLPurchaseOrder();
+    this.Abill();
   }
 
   workOrderStatus: any;
@@ -107,7 +108,7 @@ export class BillComponent {
   }
 
   Abill() {
-    this._rest.AllBill().subscribe((data: any) => {
+    this._rest.AllBills().subscribe((data: any) => {
       console.log(data);
       this.Bills = data.data;
     }, (err: any) => {
