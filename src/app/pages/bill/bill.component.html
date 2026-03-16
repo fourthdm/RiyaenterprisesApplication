@@ -43,7 +43,7 @@
         </table>
     </div>
 
-    <h3 class="text-center mb-4">Create Purchase Order</h3>
+    <h3 class="text-center mb-4">Create Bill</h3>
 
     <form [formGroup]="AddBillForm" (ngSubmit)="submitPurchaseorder()">
 
@@ -87,7 +87,7 @@
 
             <div class="col-md-4">
                 <label>Payment Method</label>
-                <input class="form-control" formControlName="Payment_Method" >
+                <input class="form-control" formControlName="Payment_Method">
             </div>
 
             <div class="col-md-4">
@@ -199,6 +199,9 @@
 
         <!-- ================= Submit ================= -->
         <div class="text-center mt-4">
+            <div  class="text-danger mt-2">
+                <!-- Bill can be Generated only after Engineer, QC & Dispatch Status Completion. -->
+            </div>
             <button type="submit" class="btn btn-primary px-5">
                 Create Bill
             </button>
