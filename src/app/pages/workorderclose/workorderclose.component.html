@@ -1,1 +1,122 @@
-<p>workorderclose works!</p>
+<div class="container-fluid"> <br><br><br>
+    <h3 class="text-center">All Close Work Orders</h3>
+    <br>
+    <br>
+
+    <div class="row">
+        <!-- <div class="col-5">
+     <div class="card" style="position: fixed; width: 30%;">
+         <div class="card-header">Add New Work Order</div>
+        <div class="card-body">
+            <form [formGroup]="Addordercloseform" (submit)="AddCloseorder()" >
+
+                <div class="row">                          
+                   <label for="exampleInputEmail1" class="form-label">Work Order Number: </label>
+                      <br>
+                  <select formControlName="WO_Number" class="">
+                      <option *ngFor="let mat of AllWorkOrderData" [value]="mat.WO_Number">{{mat.WO_Number}}({{mat.WO_Number}})</option>
+                  </select>  <br>
+                </div>
+                <br>
+             
+                                 
+            <div class="row">
+            <div class="col-6"> 
+            <div class="mb-3">
+                <label for="Payment_Status">Payment_Status : </label>
+                <select class="form-select form-select-sm" formControlName="Payment_Status" aria-label="select example">
+                                <option value="Partial">Partial</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Pending">Pending</option>
+                </select>
+            </div>
+            </div>
+        
+            <div class="col-6">
+            <div class="mb-3">
+                <label for="Delivery_Status"> Delivery Status  : </label>
+                <select class="form-select form-select-sm" formControlName="Delivery_Status" aria-label="select example">
+                                <option value="Dispatch">Dispatch </option>
+                                <option value="Delivered">Delivered</option>
+                                <option value="Return"> Return </option>
+                                <option value="Close">Close </option>
+                </select>
+            </div>
+            </div>
+            <div class="col-6">
+            <div class="mb-3">
+                <label for="Work_Close_Status">Work Close Status  : </label>
+                <select class="form-select form-select-sm" formControlName="Work_Close_Status" aria-label="select example">
+                                <option value="Open">Open </option>
+                                <option value="Approved">Approved</option>
+                                <option value="Rejected">Rejected </option>
+                                <option value="Close">Close </option>
+                </select>
+            </div>
+            </div>
+
+            <div class="col-6">
+            <div class="mb-3">
+                <label for="Custom_Remark">Custom Remark : </label>
+               <input type="text" formControlName="Custom_Remark">
+            </div>
+            </div>
+
+        </div>
+
+
+            <div class="mb-3">
+            <button type="submit" class="btn btn-success">Add Work Order</button>
+            </div>
+            </form>
+        </div>
+     </div>
+    </div> -->
+
+        <!-- <div class="col-1"></div> -->
+        <br><br>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-md-4" *ngFor="let a of AllorderClose, let i = index">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <!-- <div class="text-end">
+                                <a type="button" (click)="editcloseorder(a.WorkClose_Id)" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal1" title="Edit a Waiting for Approval">
+                                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                </a>
+                                <span style="margin-left:15px;cursor: pointer;"><a
+                                        (click)="DeleteClosedorder(a.WorkClose_Id)" title="Delete a Purchase Order"> <i
+                                            class="fa-solid fa-trash-can"></i></a></span>
+                            </div> -->
+                            <br>
+                            <p>Work Order Number : {{a.WO_Number}}</p>
+                            <p>Purchase Order Number : {{a.Purchase_Number}}</p>
+                            <p>Requirement Number : {{a.Requirement_No}}</p>
+                            <p>Manager Name : {{a.Manager_Name}}</p>
+                            <p>Engineer Name : {{a.Engineer_Name}}</p>
+                            <p>Client Name : {{a.Client_Name}}</p>
+                            <p>Product Quantity No : {{a.Product_Quantity}}</p>
+                            <p>Material Type Used : {{a.Material_Type}}</p>
+                            <p>Payment Status: {{a.Payment_Status}}</p>
+                            <p>Delivery Status: {{a.Delivery_Status}}</p>
+                            <p>Work Order Close Status : {{a.Work_Close_Status}}</p>
+                            <p>Added Date : {{a.Added_Date | date}} <br>
+                                <span>Added Time : {{a.Added_Date | date :'hh:mm:ss:a'}}</span>
+                            </p>
+                            <p>Due Date : {{a.Due_Date | date}} <br>
+                                <span>Due Time : {{a.Due_Date | date :'hh:mm:ss:a'}}</span>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>

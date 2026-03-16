@@ -41,7 +41,7 @@ export class BillComponent {
       Payment_Method: [''],
       Shipping_Method: [''],
       Delivery_Date: [''],
-      Bill_Status: ['Create'],
+      Bill_Status: ['Generate'],
       items: this.fb.array([])   // 🔥 REQUIRED
     });
   }
