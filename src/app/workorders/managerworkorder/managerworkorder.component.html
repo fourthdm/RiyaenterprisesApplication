@@ -1,1 +1,372 @@
-<p>managerworkorder works!</p>
+<div class="container-fluid">
+    <br> <br><br>
+    <!-- <form [formGroup]="AddWorkorderForm" (submit)="AddWorkOrderData()" >
+                <div class="row">
+                    <div class="col-6">
+                          <div class="mb-3">
+                         <label for="Requirement_No">Requirement No</label>
+                            <br>
+                         <select formControlName="Requirement_No" class="Se">
+                            <option *ngFor="let mat of AllPurchaseOrderData" [value]="mat.Requirement_No">{{mat.Requirement_No}}</option>
+                         </select>  <br>
+                         </div>
+                    </div>
+
+
+                    <div class="col-6">
+                         <div class="mb-3">
+                             <label for="Product_Quantity">Product Quantity</label>
+                                 <br>
+                                  <select formControlName="Product_Quantity" class="Se">
+                                      <option *ngFor="let mat of AllPurchaseOrderData" [value]="mat.Product_Quantity">{{mat.Product_Quantity}}({{mat.Requirement_No}})</option>
+                                 </select>  <br>
+                         </div>
+                    </div>
+
+                </div>
+                
+                <div class="row">
+                    <div class="col-6">
+                            <div class="mb-3">
+                             <label for="Product_Name">Product Name </label>
+                                <br>
+                            <select formControlName="Product_Name" class="Se">
+                                <option *ngFor="let mat of AllPurchaseOrderData" [value]="mat.Product_Name">{{mat.Product_Name}} ({{mat.Requirement_No}})</option>
+                            </select>  <br>
+                            </div>
+                    </div>
+                   
+                    <div class="col-6">
+                          <div class="mb-3">
+                             <label for="Purchase_Number">Purchase Number </label>
+                            <br>
+                                 <select formControlName="Purchase_Number" class="Se">
+                                      <option *ngFor="let mat of AllPurchaseOrderData" [value]="mat.Purchase_Number">{{mat.Purchase_Number}}({{mat.Requirement_No}})</option>
+                                 </select>  <br>
+                         </div>
+                    </div>
+                </div>
+
+                <div class="row">                          
+                                     <label for="Client_Name" class="form-label">Client Name : </label>
+                                        <br>
+                                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                        formControlName="Client_Name" placeholder="Enter Client Name">
+                                            </div>
+                <br>
+                <div class="row">
+                 
+                      <div class="col-6">
+                          <div class="mb-3">
+                             <label for="Material_Type">Material Type</label>
+                            <br>
+                                 <select formControlName="Material_Type" class="Se">
+                                      <option *ngFor="let mat of AllPurchaseOrderData" [value]="mat.Material_Type">{{mat.Material_Type}}({{mat.Requirement_No}})</option>
+                                 </select>  <br>
+                         </div>
+                    </div>
+
+                    <div class="col-6">                     
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Manager Name : </label>
+              <br>
+                <select formControlName="Manager_Name" class="">
+                    <option *ngFor="let mat of AllManagerdata" [value]="mat.Name">{{mat.Name}}</option>
+                </select>  <br>
+            </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-6">
+                         <div class="mb-3">
+                             <label for="exampleInputEmail1" class="form-label">QC Name : </label>
+                               <br>
+                           <select formControlName="QC_Name" class="">
+                             <option *ngFor="let mat of AllQCdata" [value]="mat.Name">{{mat.Name}}</option>
+                            </select>  <br>
+                         </div>
+                    </div>
+
+                <div class="col-6">
+                     <div class="mb-3">
+                         <label for="exampleInputEmail1" class="form-label">Engineer Name : </label>
+                         <br>
+                         <select formControlName="Engineer_Name" class="">
+                            <option *ngFor="let mat of AllEngineerdata" [value]="mat.Name">{{mat.Name}}</option>
+                        </select>  <br>
+                     </div>
+                </div>
+
+                </div>
+                 <div class="row">
+            <div class="col-6"> 
+            <div class="mb-3">
+                <label for="Payment_term">Day of Payment: </label>
+                   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                        formControlName="Payment_term" placeholder="Enter Payment term">
+            </div>
+            </div>
+        
+            <div class="col-6">
+            <div class="mb-3">
+                <label for="WorkOrder_Status">Work Order Status  : </label>
+                <select class="form-select form-select-sm" formControlName="WorkOrder_Status" aria-label="select example">
+                                <option value="Created">Created </option>
+                                <option value="Scheduled">Scheduled</option>
+                                <option value="In Progress"> In Progress </option>
+                                <option value="Completed">Completed </option>
+                                <option value="Declined">Declined </option>
+                                <option value="Close">Close </option>
+                </select>
+            </div>
+            </div>
+        
+            <div class="col-6">
+            <div class="mb-3">
+                <label for="Status">Due Date : </label> <br>
+                 <input type="date" formControlName="Due_Date">
+            </div>
+            </div>
+        </div>
+
+            <div class="mb-3">
+            <button type="submit" class="btn btn-success">Add Work Order</button>
+            </div>
+            </form>
+  -->
+
+    <div class="row">
+        <div class="col-6">
+            <label for="">Download A Workorders in Excelsheet </label>
+            <br> <button class="btn btn-success" (click)="exportexcel()" title="Download excelfile">Download
+                Excelsheet</button>
+        </div><br> <br>
+        <div class=""><br>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Sr No.</th>
+                        <th>Work Order Number</th>
+                        <th>Product Name</th>
+                        <th>Product Quantity </th>
+                        <th>Design File</th>
+                        <th>PDFDesign File</th>
+                        <th>Material Type</th>
+                        <th>Client Name</th>
+                        <th>Added Date</th>
+                        <th>Status Updated Time</th>
+                        <th>Due Date</th>
+                        <th>Manager Status</th>
+                        <th>Assign task to </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of AllManagerorders | paginate :{itemsPerPage :10 ,currentPage:pro},let i = index"
+                        [ngClass]="{'Display':a.WorkOrder_Status === 'Completed'}">
+                        <td>{{i+1}}</td>
+                        <!-- <td> {{a.Workorder_Id}}</td> -->
+                        <td>
+                            <p title="View Work Order Details">
+                                <a href=""
+                                    [routerLink]="['/ManagerDashboard/WorkorderDetails',a.Workorder_Id]">{{a.WO_Number}}</a>
+                            </p>
+                        </td>
+                        <td>{{a.Product_Name}}</td>
+                        <td>{{a.Product_Quantity}}</td>
+                        <td><a (click)="downloadFromUrl(a.Design_File)" title="Download a Design File">
+                                <i class="fa-solid fa-download"></i>
+                            </a></td>
+                        <td><a (click)="downloadFromUrl(a.PDFDesign_File)" title="Download a PDF Design File">
+                                <i class="fa-solid fa-download"></i>
+                            </a></td>
+                        <td>{{a.Material_Type}}</td>
+                        <td>{{a.Client_Name}}</td>
+                        <td>{{a.Added_Date | date}} <br> {{a.Added_Date | date : 'h:mm:a'}} </td>
+                        <td>{{a.Manager_Status_Time | date}} <br> {{a.Manager_Status_Time | date : 'h:mm:a'}} </td>
+                        <td>{{a.Due_Date | date }} <br> {{a.Due_Date | date :'h:mm:a'}}</td>
+
+                        <td>
+                            <span style="margin-left:15px;cursor: pointer;" *ngIf="a.Manager_Status">
+
+                                <span *ngIf="a.Manager_Status === 'Completed'">
+                                    <b>Completed </b>
+                                    <i class="fa-solid fa-circle-check fa-lg status-completed"></i>
+                                </span>
+
+                                <!-- <i *ngIf="a.Manager_Status === 'Completed'"
+                                    class="fa-solid fa-circle-check fa-lg status-completed"></i> -->
+                                <span *ngIf="a.Manager_Status === 'Declined'">
+                                    <b>Declined </b>
+                                    <i class="fa-solid fa-circle-xmark fa-lg status-declined"></i>
+                                </span>
+
+                                <span *ngIf="a.Manager_Status === 'Assign Task'">
+                                    <b>Assign Task </b>
+                                    <i class="fa-solid fa-chalkboard-user fa-lg status-Assigned"></i>
+                                </span>
+
+                                <!-- <i *ngIf="a.Manager_Status === 'Assign Task'"
+                                    class="fa-solid fa-chalkboard-user fa-lg status-Assigned"></i> -->
+
+                                <span *ngIf="a.Manager_Status === 'In Progress'">
+                                    <b>In Progress </b>
+                                    <i class="fa-solid fa-people-arrows fa-lg status-inprogress"></i>
+                                </span>
+
+                                <!-- <i *ngIf="a.Manager_Status === 'In Progress'"
+                                    class="fa-solid fa-people-arrows fa-lg status-inprogress"></i> -->
+
+                                <i *ngIf="a.Manager_Status === 'Create'"
+                                    class="fa-solid fa-circle-check fa-lg status-Create"></i>
+
+                                <span *ngIf="a.Manager_Status === 'Schedule'">
+                                    <b>Schedule </b>
+                                    <i class="fa-solid fa-clipboard-check fa-lg status-schedule"></i>
+                                </span>
+
+
+                                <i *ngIf="a.Manager_Status === 'Close'"
+                                    class="fa-solid fa-circle-exclamation fa-lg status-close"></i>
+
+                            </span>
+
+                        </td>
+                        <td>
+                            <a type="button" (click)="EditPurchaseOrder(a.Workorder_Id)" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal1" title="Update a Engineer Name,QC Name, Manager Status">
+                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="text-center">
+                <pagination-controls (pageChange)=" pro = $event "
+                    style="background-color: #252847 !important; z-index: -2 !important;"></pagination-controls>
+            </div>
+
+            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Assign Task to Engineer and QC, Dispatch
+                                Manager and Update a Manager Status </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-md-12">
+
+                                <form [formGroup]="EditWorkorderForm">
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Manager Name :
+                                                </label>
+                                                <br>
+                                                <select formControlName="Manager_Name" class="">
+                                                    <option *ngFor="let mat of AllManagerdata" [value]="mat.Name">
+                                                        {{mat.Name}}</option>
+                                                </select> <br>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="mb-3">
+                                                <label for="Manager_Status" class="form-label">Manager Status : </label>
+                                                <br>
+                                                <select class="form-select form-select-sm"
+                                                    formControlName="Manager_Status" aria-label="select example">
+                                                    <option value="Assign Task">Assign Task</option>
+                                                    <option value="Schedule">Schedule</option>
+                                                    <option value="In Progress"> In Progress </option>
+                                                    <option value="Completed">Completed </option>
+                                                    <option value="Declined">Declined </option>
+                                                    <option value="Close">Close </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">QC Name : </label>
+                                                <br>
+                                                <select formControlName="QC_Name" class="">
+                                                    <option *ngFor="let mat of AllQCdata" [value]="mat.Name">
+                                                        {{mat.Name}}</option>
+                                                </select> <br>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Engineer Name :
+                                                </label>
+                                                <br>
+                                                <select formControlName="Engineer_Name" class="">
+                                                    <option *ngFor="let mat of AllEngineerdata" [value]="mat.Name">
+                                                        {{mat.Name}}</option>
+                                                </select> <br>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="mb-3">
+                                                <label for="DispatchManager_Name" class="form-label">Dispatch Manager
+                                                    Name :
+                                                </label>
+                                                <br>
+                                                <select formControlName="DispatchManager_Name" class="">
+                                                    <option *ngFor="let mat of AllDispatchManagerdata"
+                                                        [value]="mat.Name">
+                                                        {{mat.Name}}</option>
+                                                </select> <br>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-6">
+                                            <div class="mb-3">
+                                                <label for="Status">Due Date : </label>
+                                                <input type="date" formControlName="Due_Date">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="mb-3">
+                                                <label for="WorkOrder_Status">Work Order Status : </label>
+                                                <select class="form-select form-select-sm"
+                                                    formControlName="WorkOrder_Status" aria-label="select example">
+                                                    <option value="Create">Create </option>
+                                                    <option value="Schedule">Schedule</option>
+                                                    <option value="In Progress"> In Progress </option>
+                                                    <option value="Completed">Completed </option>
+                                                    <option value="Declined">Declined </option>
+                                                    <option value="Close">Close </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <br>
+                                    <button class="btn btn-success mb-4" (click)="UpdatePurchaseOrder()">Update Work
+                                        Order By Manager</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

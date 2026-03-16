@@ -1,0 +1,53 @@
+.card {
+    background-color: #c4c1cfab;
+    color: black;
+}
+
+a {
+    color: black;
+}
+
+.modal-content {
+    background-color: #c4c1cfab;
+    color: #000;
+}
+
+select option {
+    background-color: #c4c1cfab;
+}
+
+label{
+    color: #000;
+}
+
+h2{
+    color: black;
+}
+
+
+.status-Create {
+    color: blue;
+}
+
+.status-Assigned {
+    color: blue;
+}
+
+.status-completed {
+    color: green;
+}
+
+.status-inprogress {
+    color: orangered;
+}
+
+.status-close {
+    color: red;
+}
+
+.status-declined {
+    color: red;
+}
+.status-new{
+    color: gray;
+}

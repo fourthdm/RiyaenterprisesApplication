@@ -1,0 +1,73 @@
+.container-fluid {
+    padding: 0% 5% 0% 5%;
+}
+
+th,
+td {
+    background-color: #c4c1cfab;
+    color: black;
+}
+
+th {
+    font-weight: bold;
+}
+
+a {
+    color: black;
+}
+
+.modal-content {
+    background-color: #c4c1cfab;
+    color: #000;
+
+    :is(label) {
+        color: #000;
+    }
+}
+
+option {
+    background-color: #c4c1cfab;
+}
+
+select {
+    width: 100%;
+}
+
+input {
+    width: 100%;
+}
+
+.Display {
+    background-color: green;
+}
+
+.status-Create{
+    color: blue ;
+}
+.status-Assigned {
+    color: blue;
+}
+
+.status-completed {
+    color: green;
+}
+
+.status-schedule {
+    color: yellow;
+}
+
+.status-inprogress {
+    color: orange;
+}
+
+.status-decline {
+    color: red;
+}
+
+.status-close {
+    color: red;
+}
+
+.status-hold {
+    color: gray;
+}

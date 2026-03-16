@@ -1,1 +1,138 @@
-<p>engineerworkorder works!</p>
+<div class="container-fluid">
+    <br>
+    <h2 class="text-center">All Work Orders For Engineer</h2>
+    <br>
+    <div class="row">
+        <div class="col-md-3"
+            *ngFor="let e of AllEngineerorders | paginate:{ itemsPerPage :10 ,currentPage:pro}, let i = index">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="text-end">
+                        <a type="button" (click)="EditPurchaseOrder(e.Workorder_Id)" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal1" title="Add a Engineer Status">
+                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                        </a>
+
+                        <span style="margin-left:15px;cursor: pointer;" *ngIf="e.Engineer_Status">
+
+                            <span *ngIf="!e.Engineer_Status || e.Engineer_Status.trim() === ''">
+                                <b> New </b>
+                                <i class="fa-solid fa-circle-check fa-lg status-New"></i>
+                            </span>
+
+                            <span *ngIf="e.Engineer_Status === 'Completed'">
+                                <b>Completed </b>
+                                <i class="fa-solid fa-circle-check fa-lg status-completed"></i>
+                            </span>
+
+                            <!-- <i *ngIf="a.Manager_Status === 'Completed'"
+                                    class="fa-solid fa-circle-check fa-lg status-completed"></i> -->
+                            <span *ngIf="e.Engineer_Status === 'Declined'">
+                                <b>Declined </b>
+                                <i class="fa-solid fa-circle-xmark fa-lg status-declined"></i>
+                            </span>
+
+                            <span *ngIf="e.Engineer_Status === 'Start'">
+                                <b>Start </b>
+                                <i class="fa-solid fa-circle-play fa-lg status-Assigned"></i>
+                                <!-- <i class="fa-solid  fa-lg status-start"></i> -->
+                            </span>
+
+                            <!-- <i *ngIf="a.Manager_Status === 'Assign Task'"
+                                    class="fa-solid fa-chalkboard-user fa-lg status-Assigned"></i> -->
+
+                            <span *ngIf="e.Engineer_Status === 'In Progress'">
+                                <b>In Progress </b>
+                                <i class="fa-solid fa-chart-line fa-lg status-inprogress"></i>
+                                <!-- <i class="fa-solid "></i> -->
+                            </span>
+
+                            <!-- <i *ngIf="a.Manager_Status === 'In Progress'"
+                                    class="fa-solid fa-people-arrows fa-lg status-inprogress"></i> -->
+
+                            <i *ngIf="e.Engineer_Status === 'Create'"
+                                class="fa-solid fa-circle-check fa-lg status-Create"></i>
+
+                            <span *ngIf="e.Engineer_Status === 'Schedule'">
+                                <b>Schedule </b>
+                                <i class="fa-solid fa-clipboard-check fa-lg status-schedule"></i>
+                            </span>
+
+
+                            <i *ngIf="e.Engineer_Status === 'Close'"
+                                class="fa-solid fa-circle-exclamation fa-lg status-close"></i>
+
+                        </span>
+                    </div>
+                    <br>
+                    <p>Work Order Number : <a href="" title="View Work Order Details"
+                            [routerLink]="['/EmployeeDashboard/WorkorderDetails',e.Workorder_Id]">{{e.WO_Number}}</a>
+                    </p>
+                    <p> Manager Name : {{e.Manager_Name}} </p>
+                    <p>Engineer Name : {{e.Engineer_Name}}</p>
+                    <p>Engineer Status : {{e.Engineer_Status}}</p>
+                    <p>Engineer Updated Time : {{e.Engineer_Status_Time | date:'dd-MM-yyyy, hh:mm a'}}</p>
+                    <p>QC Name : {{e.QC_Name}}</p>
+                    <!-- <p>Product Quantity : {{e.Product_Quantity}}</p>
+                    <p>Material Type : {{e.Material_Type}}</p> -->
+                    <p>Work Order Status : {{e.WorkOrder_Status}}</p>
+                    <p>Added Date : {{e.Added_Date | date}} <br>
+                        <span>Added Time : {{e.Added_Date | date :'hh:mm:ss:a'}}</span>
+                    </p>
+                    <p>Due Date : {{e.Due_Date | date}} <br>
+                        <span>Due Time : {{e.Due_Date | date :'hh:mm:ss:a'}}</span>
+                    </p>
+                    <p><a (click)="downloadFromUrl(e.Design_File)" title="Download a Design File">
+                            Download a DWG file <i class="fa-solid fa-download"></i>
+                        </a></p>
+                    <p><a (click)="downloadFromUrl(e.PDFDesign_File)" title="Download a PDF Design File">
+                            Download a PDF file <i class="fa-solid fa-download"></i>
+                        </a></p>
+                    <!-- <p>Updated Date : {{e.Updated_Date | date}} <br> 
+                            <span>Updated Time : </span> {{e.Updated_Date | date :'hh:mm:ss'}}</p> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <pagination-controls (pageChange)=" pro = $event "
+                style="background-color: #252847 !important; z-index: -2 !important;"></pagination-controls>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add a Engineer Status</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+
+                        <form [formGroup]="EditWorkorderForm">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label for="Engineer_Status">Engineer Status : </label>
+                                        <select class="form-select form-select-sm" formControlName="Engineer_Status"
+                                            aria-label="select example">
+                                            <option value="Start">Start</option>
+                                            <option value="In Progress"> In Progress </option>
+                                            <option value="Completed">Completed </option>
+                                            <option value="Declined">Declined </option>
+                                            <option value="Close">Close </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <button class="btn btn-success mb-4" (click)="UpdatePurchaseOrder()">Engineer Status
+                                Updated</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

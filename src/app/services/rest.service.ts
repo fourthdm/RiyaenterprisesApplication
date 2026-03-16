@@ -382,9 +382,9 @@ export class RestService {
     return this._http.get(this.ApiUrl + '/ChallanbyID/' + Challan_id);
   }
 
-  getBillStatusByPO(po: string) {
-    return this._http.get<any>(`${this.ApiUrl}/BillstatusbyPO/${po}`);
-  }
+  // getBillStatusByPO(po: string) {
+  //   return this._http.get<any>(`${this.ApiUrl}/BillstatusbyPO/${po}`);
+  // }
 
   UpdateChallan(data: any) {
     return this._http.put(this.ApiUrl + '/UpdateChallan/' + data.Challan_id, data);
@@ -484,4 +484,9 @@ export class RestService {
   AllBills() {
     return this._http.get(this.ApiUrl + '/AllBills');
   }
+
+  ViewBills(Bill_Id: any) {
+    return this._http.get(this.ApiUrl + '/Billbyid/' + Bill_Id);
+  }
+
 }

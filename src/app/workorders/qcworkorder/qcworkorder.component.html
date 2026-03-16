@@ -1,1 +1,268 @@
-<p>qcworkorder works!</p>
+<div class="container-fluid">
+    <br>
+    <h2 class="text-center">All Work Orders For QC</h2>
+    <br>
+
+    <!-- <form [formGroup]="AddWorkorderForm" (submit)="AddWorkOrderData()" >
+
+                <div class="row">
+                    <div class="col-6">
+                          <div class="mb-3">
+                         <label for="Requirement_No">Requirement No</label>
+                            <br>
+                         <select formControlName="Requirement_No" class="Se">
+                            <option *ngFor="let mat of AllPurchaseOrderData" [value]="mat.Requirement_No">{{mat.Requirement_No}}</option>
+                         </select>  <br>
+                         </div>
+                    </div>
+
+
+                    <div class="col-6">
+                         <div class="mb-3">
+                             <label for="Product_Quantity">Product Quantity</label>
+                                 <br>
+                                  <select formControlName="Product_Quantity" class="Se">
+                                      <option *ngFor="let mat of AllPurchaseOrderData" [value]="mat.Product_Quantity">{{mat.Product_Quantity}}({{mat.Requirement_No}})</option>
+                                 </select>  <br>
+                         </div>
+                    </div>
+
+                </div>
+                
+                <div class="row">
+                    <div class="col-6">
+                            <div class="mb-3">
+                             <label for="Product_Name">Product Name </label>
+                                <br>
+                            <select formControlName="Product_Name" class="Se">
+                                <option *ngFor="let mat of AllPurchaseOrderData" [value]="mat.Product_Name">{{mat.Product_Name}} ({{mat.Requirement_No}})</option>
+                            </select>  <br>
+                            </div>
+                    </div>
+                   
+                    <div class="col-6">
+                          <div class="mb-3">
+                             <label for="Purchase_Number">Purchase Number </label>
+                            <br>
+                                 <select formControlName="Purchase_Number" class="Se">
+                                      <option *ngFor="let mat of AllPurchaseOrderData" [value]="mat.Purchase_Number">{{mat.Purchase_Number}}({{mat.Requirement_No}})</option>
+                                 </select>  <br>
+                         </div>
+                    </div>
+                </div>
+
+                <div class="row">                          
+                                     <label for="Client_Name" class="form-label">Client Name : </label>
+                                        <br>
+                                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                        formControlName="Client_Name" placeholder="Enter Client Name">
+                                            </div>
+                <br>
+                <div class="row">
+                 
+                      <div class="col-6">
+                          <div class="mb-3">
+                             <label for="Material_Type">Material Type</label>
+                            <br>
+                                 <select formControlName="Material_Type" class="Se">
+                                      <option *ngFor="let mat of AllPurchaseOrderData" [value]="mat.Material_Type">{{mat.Material_Type}}({{mat.Requirement_No}})</option>
+                                 </select>  <br>
+                         </div>
+                    </div>
+
+                    <div class="col-6">                     
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Manager Name : </label>
+              <br>
+                <select formControlName="Manager_Name" class="">
+                    <option *ngFor="let mat of AllManagerdata" [value]="mat.Name">{{mat.Name}}</option>
+                </select>  <br>
+            </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-6">
+                         <div class="mb-3">
+                             <label for="exampleInputEmail1" class="form-label">QC Name : </label>
+                               <br>
+                           <select formControlName="QC_Name" class="">
+                             <option *ngFor="let mat of AllQCdata" [value]="mat.Name">{{mat.Name}}</option>
+                            </select>  <br>
+                         </div>
+                    </div>
+
+                <div class="col-6">
+                     <div class="mb-3">
+                         <label for="exampleInputEmail1" class="form-label">Engineer Name : </label>
+                         <br>
+                         <select formControlName="Engineer_Name" class="">
+                            <option *ngFor="let mat of AllEngineerdata" [value]="mat.Name">{{mat.Name}}</option>
+                        </select>  <br>
+                     </div>
+                </div>
+
+                </div>
+                 <div class="row">
+            <div class="col-6"> 
+            <div class="mb-3">
+                <label for="Payment_term">Day of Payment: </label>
+                   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                        formControlName="Payment_term" placeholder="Enter Payment term">
+            </div>
+            </div>
+        
+            <div class="col-6">
+            <div class="mb-3">
+                <label for="WorkOrder_Status">Work Order Status  : </label>
+                <select class="form-select form-select-sm" formControlName="WorkOrder_Status" aria-label="select example">
+                                <option value="Created">Created </option>
+                                <option value="Scheduled">Scheduled</option>
+                                <option value="In Progress"> In Progress </option>
+                                <option value="Completed">Completed </option>
+                                <option value="Declined">Declined </option>
+                                <option value="Close">Close </option>
+                </select>
+            </div>
+            </div>
+        
+            <div class="col-6">
+            <div class="mb-3">
+                <label for="Status">Due Date : </label> <br>
+                 <input type="date" formControlName="Due_Date">
+            </div>
+            </div>
+        </div>
+
+            <div class="mb-3">
+            <button type="submit" class="btn btn-success">Add Work Order</button>
+            </div>
+            </form>
+  -->
+    <div class="row">
+
+        <div class="col-md-3"
+            *ngFor="let e of Qcworkorders  | paginate :{itemsPerPage :10 ,currentPage:pro}, let i = index">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="text-end">
+                        <a type="button" (click)="EditPurchaseOrder(e.Workorder_Id)" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal1" title="Add a QC Status">
+                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                        </a>
+
+                        <span style="margin-left:15px;cursor: pointer;" *ngIf="e.QC_Status">
+
+                            <span *ngIf="!e.QC_Status || e.QC_Status.trim() === ''">
+                                <b> {{e.QC_Status}} </b>
+                                <i class="fa-solid fa-circle-check fa-lg status-New"></i>
+                            </span>
+
+                            <span *ngIf="e.QC_Status === 'Qualified'">
+                                <b>{{e.QC_Status}} </b>
+                                <i class="fa-solid fa-circle-check fa-lg status-completed"></i>
+                            </span>
+
+                            <!-- <i *ngIf="a.Manager_Status === 'Completed'"
+                                    class="fa-solid fa-circle-check fa-lg status-completed"></i> -->
+                            <span *ngIf="e.QC_Status === 'Reject'">
+                                <b>{{e.QC_Status}} </b>
+                                <i class="fa-solid fa-circle-xmark fa-lg status-declined"></i>
+                            </span>
+
+                            <span *ngIf="e.QC_Status === 'Hold'">
+                                <b>{{e.QC_Status}} </b>
+                                <i class="fa-solid fa-circle-pause fa-lg status-Assigned"></i>
+                                <!-- <i class="fa-solid  fa-lg status-start"></i> -->
+                            </span>
+
+                            <!-- <i *ngIf="a.Manager_Status === 'Assign Task'"
+                                    class="fa-solid fa-chalkboard-user fa-lg status-Assigned"></i> -->
+
+                            <span *ngIf="e.QC_Status === 'Damage'">
+                                <b>{{e.QC_Status}} </b>
+                                <i class="fa-solid fa-circle-exclamation fa-lg status-inprogress"></i>
+                                <!-- <i class="fa-solid "></i> -->
+                            </span>
+
+                        </span>
+                    </div>
+                    <br>
+                    <p>Work Order Number : <a href="" title="View Work Order Details"
+                            [routerLink]="['/QCDashboard/WorkorderDetails',e.Workorder_Id]">{{e.WO_Number}}</a> </p>
+                    <!-- <p>Purchase Order Number : {{e.Purchase_Number}}</p> -->
+                    <!-- <p>Requirement Number :  {{e.Requirement_No}}</p> -->
+                    <p>Manager Name : {{e.Manager_Name}}</p>
+                    <p>Engineer Name : {{e.Engineer_Name}}</p>
+                    <p>Engineer Status : {{e.Engineer_Status}}</p>
+                    <p>Engineer Status Time : {{e.Engineer_Status_Time | date:'dd-MM-yyyy, hh:mm a'}}</p>
+                    <p>QC Name : {{e.QC_Name}}</p>
+                    <p>QC Status : {{e.QC_Status}}</p>
+                    <p>QC Status Time : {{e.QC_Status_Time | date:'dd-MM-yyyy, hh:mm a'}}</p>
+                    <!-- <p>Client Name :  {{e.Client_Name}}</p> -->
+                    <p>Product Quantity : {{e.Product_Quantity}}</p>
+                    <p>Material Type : {{e.Material_Type}}</p>
+                    <!-- <p>Days of Payment :  {{e.Days_of_Payment}}</p> -->
+                    <p>Work Order Status : {{e.WorkOrder_Status}}</p>
+                    <p>Added Date : {{e.Added_Date | date}} <br>
+                        <span>Added Time : {{e.Added_Date | date :'hh:mm:ss:a'}}</span>
+                    </p>
+                    <p>Due Date : {{e.Due_Date | date}} <br>
+                        <span>Due Time : {{e.Due_Date | date :'hh:mm:ss:a'}}</span>
+                    </p>
+                    <!-- <p>Updated Date : {{e.Updated_Date | date}} <br> 
+                            <span>Updated Time : </span> {{e.Updated_Date | date :'hh:mm:ss'}}</p> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <pagination-controls (pageChange)=" pro = $event "
+                style="background-color: #252847 !important; z-index: -2 !important;"></pagination-controls>
+        </div>
+
+        <div class="">
+
+            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add a Qc Status</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-md-12">
+
+                                <form [formGroup]="EditWorkorderForm">
+
+                                    <div class="row">
+
+
+                                        <div class="mb-3">
+                                            <label for="QC_Status" class="form-label">QC Status : </label>
+                                            <br>
+                                            <select class="form-select form-select-sm" formControlName="QC_Status"
+                                                aria-label="select example">
+                                                <option value="Qualified">Qualified</option>
+                                                <option value="Reject">Reject</option>
+                                                <option value="Hold">Hold</option>
+                                                <option value="Damage">Damage </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <br>
+                                    <button class="btn btn-success mb-4" (click)="UpdatePurchaseOrder()">Update Work
+                                        Order</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

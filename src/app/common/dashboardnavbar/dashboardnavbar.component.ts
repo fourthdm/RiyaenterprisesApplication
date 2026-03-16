@@ -33,7 +33,7 @@ export class DashboardnavbarComponent {
     }
     // this.loadNotifications();
 
-    this.billstatus();
+    // this.billstatus();
   }
 
   Logout() {
@@ -93,18 +93,18 @@ export class DashboardnavbarComponent {
   challanAllowed = false;
   PurchaseNumber: string = '';
 
-  billstatus() {
-    this._rest.getBillStatusByPO(this.PurchaseNumber).subscribe((res: any) => {
-      if (res.success) {
-        this.billStatus = res.data;
+  // billstatus() {
+  //   this._rest.getBillStatusByPO(this.PurchaseNumber).subscribe((res: any) => {
+  //     if (res.success) {
+  //       this.billStatus = res.data;
 
-        this.challanAllowed =
-          res.data.Bill_Status === 'Generate'
-      } else {
-        this.challanAllowed = false;
-      }
-    });
-  }
+  //       this.challanAllowed =
+  //         res.data.Bill_Status === 'Generate'
+  //     } else {
+  //       this.challanAllowed = false;
+  //     }
+  //   });
+  // }
 
 
   // isDueSoon(dueDate: string): boolean {

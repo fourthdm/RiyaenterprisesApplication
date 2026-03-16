@@ -1,1 +1,124 @@
-<p>dispatchmanagerworkorder works!</p>
+<div class="container-fluid">
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div>
+            <label for="">Download A Workorders in Excelsheet </label>
+            <br> <button class="btn btn-success" (click)="exportexcel()" title="Download excelfile">Download
+                Excelsheet</button>
+        </div><br>
+        <br><br><br>
+        <div class="col-md-3"
+            *ngFor="let e of AllDispatchWorkorders | paginate:{ itemsPerPage :10 ,currentPage:pro}, let i = index">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 text-start" *ngIf="e.Dispatch_Status">
+
+                            <i *ngIf="e.Dispatch_Status === 'Complete'"
+                                class="fa-solid fa-circle-check fa-lg status-completed"></i>
+
+                            <i *ngIf="e.Dispatch_Status === 'Ready to Dispatch'"
+                                class="fa-solid fa-truck fa-lg status-ready"></i>
+
+                            <i *ngIf="e.Dispatch_Status === 'Damage'"
+                                class="fa-solid fa-spinner fa-lg status-inprogress"></i>
+
+                            <i *ngIf="e.Dispatch_Status === 'Reject'"
+                                class="fa-solid fa-circle-pause fa-lg status-hold"></i>
+
+                            <i *ngIf="e.Dispatch_Status === 'Close'"
+                                class="fa-solid fa-circle-exclamation fa-lg status-pending"></i>
+
+                        </div>
+
+                        <div class="col-6">
+                            <div class="text-end">
+                                <a type="button" (click)="EditPurchaseOrder(e.Workorder_Id)" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal1" title="Add a Dispatch Manager Status">
+                                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                </a>
+                           
+                            </div>
+                        </div>
+
+                    </div>
+                    <br>
+                    <p>
+                        Work Order Number : <a href="" title="View Work Order Details"
+                            [routerLink]="['/DispatchDashboard/WorkorderDetails',e.Workorder_Id]">{{e.WO_Number}}</a>
+                    </p>
+                    <p>Manager Name : {{e.Manager_Name}}</p>
+                    <p>Engineer Name : {{e.Engineer_Name}}</p>
+                    <p>Engineer Status : {{e.Engineer_Status}}</p>
+                    <p>Engineer Status Time : {{e.Engineer_Status_Time | date:'dd-MM-yyyy, hh:mm a'}}</p>
+                    <p>QC Name : {{e.QC_Name}}</p>
+                    <p>QC Status : {{e.QC_Status}}</p>
+                    <p>QC Status Time : {{e.QC_Status_Time | date:'dd-MM-yyyy, hh:mm a'}}</p>
+                    <p>Dispatch Manager Name : {{e.DispatchManager_Name}}</p>
+                    <p>Dispatch Manager Status : {{e.Dispatch_Status}}</p>
+                    <p>Dispatch Manager Status Time : {{e.Dispatchmanager_Status_Time | date:'dd-MM-yyyy, hh:mm a'}}</p>
+                    <p>Product Quantity : {{e.Product_Quantity}}</p>
+                    <p>Material Type : {{e.Material_Type}}</p>
+                    <p>Work Order Status : {{e.WorkOrder_Status}}</p>
+                    <p>Added Date : {{e.Added_Date | date}} <br>
+                        <span>Added Time : {{e.Added_Date | date :'hh:mm:ss:a'}}</span>
+                    </p>
+                    <p>Due Date : {{e.Due_Date | date}} <br>
+                        <span>Due Time : {{e.Due_Date | date :'hh:mm:a'}}</span>
+                    </p>
+                    <button class="btn btn-secondary" title="Download a PDFDesignfile">
+                        <a (click)="downloadFromUrl(e.PDFDesignfile)">Download PDFDesignfile</a>
+                    </button>
+                    <br> <br>
+                    <button class="btn btn-secondary" title="Download a DWG File"> <a
+                            (click)="downloadFromUrl(e.Design_File)">Download DWG File</a>
+                    </button>
+            
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <pagination-controls (pageChange)=" pro = $event "
+                style="background-color: #252847 !important; z-index: -2 !important;"></pagination-controls>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add a Dispatch Manager Status</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+
+                        <form [formGroup]="EditWorkorderForm">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label for="Dispatch_Status">Dispatch Manager Status : </label>
+                                        <select class="form-select form-select-sm" formControlName="Dispatch_Status"
+                                            aria-label="select example">
+                                            <option value="Ready to Dispatch">Ready to Dispatch</option>
+                                            <option value="Complete"> Complete </option>
+                                            <option value="Reject">Reject </option>
+                                            <option value="Damage">Damage </option>
+                                            <option value="Declined">Declined </option>
+                                            <option value="Close">Close </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <button class="btn btn-success mb-4" (click)="UpdatePurchaseOrder()">Dispatch Manager Status
+                                Updated</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

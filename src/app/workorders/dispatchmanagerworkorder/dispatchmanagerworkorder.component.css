@@ -1,0 +1,42 @@
+.card {
+    background-color: #c4c1cfab;
+    color: black;
+}
+
+a {
+    color: black;
+}
+
+.modal-content {
+    background-color: #c4c1cfab;
+    color: #000;
+}
+
+option {
+    background-color: #c4c1cfab;
+}
+
+.Display {
+    color: green;
+}
+
+
+.status-completed {
+    color: blue ;
+}
+
+.status-ready {
+    color: green;
+}
+
+.status-inprogress {
+    color: orange;
+}
+
+.status-pending {
+    color: red;
+}
+
+.status-hold {
+    color: gray;
+}
