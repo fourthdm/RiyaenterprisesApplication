@@ -491,16 +491,22 @@ export class RestService {
 
   //Challan API
   AllChallans() {
-    return this._http.get(this.ApiUrl +'/AllChallans');
-   }
-   
+    return this._http.get(this.ApiUrl + '/AllChallans');
+  }
+
   GetChallanPDF(Challan_Id: any) {
     return this._http.get(this.ApiUrl + '/ChallanPdf/' + Challan_Id, { responseType: 'blob' });
   }
- 
-  deleteRequirementItem(Item_Id: any){
+
+  deleteRequirementItem(Item_Id: any) {
     return this._http.delete(this.ApiUrl + '/deleteRequirementItem/' + Item_Id);
   }
+
+  updateRequirementiems(data: any) {
+    return this._http.put(this.ApiUrl + '/UpdateRequirementitem/' + data.Item_Id, data);
+  }
+
+  
 
   //Challan API
 }

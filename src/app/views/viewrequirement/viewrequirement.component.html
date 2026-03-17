@@ -35,37 +35,48 @@
                             <h5 class="mb-2">Products</h5>
 
                             <!-- 🔹 Product loop -->
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Sr No</th>
-                                        <th>Product Name</th>
-                                        <th>HSN Code</th>
-                                        <th>Product Quantity</th>
-                                        <th>Material Type</th>
-                                        <th>Design File</th>
-                                        <th>PDF File</th>
-                                    </tr>
-                                </thead>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No</th>
+                                            <th>Product Name</th>
+                                            <th>HSN Code</th>
+                                            <th>Product Quantity</th>
+                                            <th>Material Type</th>
+                                            <th>Design File</th>
+                                            <th>PDF File</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
 
-                                <tbody>
-                                    <tr *ngFor="let item of a.items; let j = index">
-                                        <td>{{ j + 1 }}</td>
-                                        <td>{{ item.Product_Name }}</td>
-                                        <td>{{ item.HSN_Code }}</td>
-                                        <td>{{ item.Product_Quantity }}</td>
-                                        <td>{{ item.Material_Type }}</td>
-                                        <td>Download Design File</td>
-                                        <td>Download PDF File</td>
+                                    <tbody>
+                                        <tr *ngFor="let item of a.items; let j = index">
+                                            <td>{{ j + 1 }}</td>
+                                            <td>{{ item.Product_Name }}</td>
+                                            <td>{{ item.HSN_Code }}</td>
+                                            <td>{{ item.Product_Quantity }}</td>
+                                            <td>{{ item.Material_Type }}</td>
+                                            <td>Download Design File</td>
+                                            <td>Download PDF File</td>
 
-                                        <td>
-                                            <button class="btn btn-danger" (click)="deleteItem(item.Item_Id)">
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                            <td> <a type="button" (click)="editrequirementitems(item.Item_Id)"
+                                                    data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                                                    title="Edit a Requirement Items">
+                                                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                                </a>
+                                                <span style="margin-left: 5%;">
+                                                    <a (click)="deleteItem(item.Item_Id)" type="button"
+                                                        title="Delete a Requirement items">
+                                                        <i class="fa-solid fa-trash-can "></i>
+                                                    </a>
+                                                </span>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
@@ -74,6 +85,33 @@
                         {{ a.Updated_Date | date }} |
                         {{ a.Updated_Date | date:'hh:mm:ss a' }}
                     </p>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Requirement Items</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12">
+<form [formGroup]="RequirementitemUpdate">
+
+  <input formControlName="Product_Name" placeholder="Product Name">
+  <input formControlName="Material_Type" placeholder="Material Type">
+  <input formControlName="Product_Quantity" placeholder="Quantity">
+  <input formControlName="HSN_Code" placeholder="HSN Code">
+
+  <button (click)="UpdateRequirementitems()">Update</button>
+
+</form>
+                        </div>
+                    </div>
 
                 </div>
             </div>
