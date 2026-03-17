@@ -493,10 +493,14 @@ export class RestService {
   AllChallans() {
     return this._http.get(this.ApiUrl +'/AllChallans');
    }
-
    
   GetChallanPDF(Challan_Id: any) {
     return this._http.get(this.ApiUrl + '/ChallanPdf/' + Challan_Id, { responseType: 'blob' });
   }
+ 
+  deleteRequirementItem(Item_Id: any){
+    return this._http.delete(this.ApiUrl + '/deleteRequirementItem/' + Item_Id);
+  }
+
   //Challan API
 }

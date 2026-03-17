@@ -15,7 +15,7 @@
                 <tr *ngFor="let a of PurchaseOrder | paginate :{itemsPerPage :20 ,currentPage:pro}, let i = index">
                     <td>{{a.Purchase_id}}</td>
                     <td>
-                        <p title="View Quotation Details"><a href=""
+                        <p title="View Purchase Order Details"><a href=""
                                 [routerLink]="['/AdminDashboard/PurchaseOrderDetails', a.Purchase_id]">{{a.Purchase_Number}}</a>
                         </p>
                     </td>

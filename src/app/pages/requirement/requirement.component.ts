@@ -149,7 +149,7 @@ export class RequirementComponent {
     this.products.controls.forEach((p: any, i) => {
 
       const value = p.value; // ✅ IMPORTANT
-      
+
       formData.append(`products[${i}][Product_Name]`, value.Product_Name);
       formData.append(`products[${i}][Material_Type]`, value.Material_Type);
       formData.append(`products[${i}][Product_Quantity]`, value.Product_Quantity);
@@ -212,6 +212,21 @@ export class RequirementComponent {
   onPDFFileSelect(event: any, index: number) {
     const file = event.target.files[0];
     this.products.at(index).patchValue({ PDFDesignfile: file });
+  }
+
+  deleteItem(Item_Id: any) {
+
+    if (confirm("Delete this product?")) {
+
+      this._rest.deleteRequirementItem(Item_Id).subscribe((res: any) => {
+
+        alert(res.message);
+        this.ngOnInit();
+
+      });
+
+    }
+
   }
   // -------------------------
   // FILE HANDLERS

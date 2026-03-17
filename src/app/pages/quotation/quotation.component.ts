@@ -86,6 +86,7 @@ export class QuotationComponent implements OnInit {
 
   createItem(product: any): FormGroup {
     return this.fb.group({
+      Item_Id: [product.Item_Id],
       Product_Name: [product.Product_Name],
       Material_Type: [product.Material_Type],
       HSN_Code: [product.HSN_Code],

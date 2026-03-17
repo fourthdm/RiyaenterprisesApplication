@@ -28,4 +28,21 @@ export class ViewrequirementComponent {
       });
     });
   }
+
+
+  deleteItem(Item_Id: any) {
+
+    if (confirm("Delete this product?")) {
+
+      this._RestService.deleteRequirementItem(Item_Id).subscribe((res: any) => {
+
+        alert(res.message);
+        // this.AllRequirements();
+
+      });
+
+    }
+
+  }
+
 }

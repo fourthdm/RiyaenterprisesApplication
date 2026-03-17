@@ -245,6 +245,7 @@
             <table class="table table-bordered" *ngIf="items.length">
                 <thead>
                     <tr>
+                        <th>Item_Id</th>
                         <th>Product</th>
                         <th>Material</th>
                         <th>HSN</th>
@@ -261,6 +262,7 @@
                     <tr *ngFor="let item of items.controls; let i=index" [formGroupName]="i">
 
                         <!-- AUTO FILLED -->
+                        <td>{{ item.get('Item_Id')?.value }}</td>
                         <td>{{ item.get('Product_Name')?.value }}</td>
                         <td>{{ item.get('Material_Type')?.value }}</td>
                         <td>{{ item.get('HSN_Code')?.value }}</td>

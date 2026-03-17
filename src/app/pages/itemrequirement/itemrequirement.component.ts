@@ -121,28 +121,44 @@ export class ItemrequirementComponent {
   //   });
   // }
 
-onFileChange(event: any, index: number, type: 'dwg' | 'pdf') {
+  onFileChange(event: any, index: number, type: 'dwg' | 'pdf') {
 
-  const file = event.target.files[0];
-  if (!file) return;
+    const file = event.target.files[0];
+    if (!file) return;
 
-  const product = this.products.at(index) as FormGroup;
+    const product = this.products.at(index) as FormGroup;
 
-  if (type === 'dwg') {
-    product.patchValue({
-      Design_File: file,
-      Design_File_Name: file.name
-    });
+    if (type === 'dwg') {
+      product.patchValue({
+        Design_File: file,
+        Design_File_Name: file.name
+      });
+    }
+
+    if (type === 'pdf') {
+      product.patchValue({
+        PDFDesignfile: file,
+        PDF_File_Name: file.name
+      });
+    }
+
   }
 
-  if (type === 'pdf') {
-    product.patchValue({
-      PDFDesignfile: file,
-      PDF_File_Name: file.name
-    });
-  }
 
-}
+  deleteItem(Item_Id: any) {
+
+    if (confirm("Delete this product?")) {
+
+      this._rest.deleteRequirementItem(Item_Id).subscribe((res: any) => {
+
+        alert(res.message);
+        this.AllRequirements();
+
+      });
+
+    }
+
+  }
 
   // onFileChange(event: any, index: number, type: 'dwg' | 'pdf') {
 
