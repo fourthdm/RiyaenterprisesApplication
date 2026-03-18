@@ -200,7 +200,7 @@
             </div>
         </div><br>
 
-        <div class="col-md-12">
+        <div class="col-md-8">
 
             <h3 class="text-center mb-4">Create Quotation</h3>
 
@@ -346,8 +346,20 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label>Shipping Method</label>
-                        <input class="form-control" formControlName="Shipping_Method">
+                        <!-- <label>Shipping Method</label>
+                        <input class="form-control" formControlName="Shipping_Method"> -->
+
+                        <label for="Shipping_Method" > Shipping Method : </label>
+                        <select class="form-control" formControlName="Shipping_Method" aria-label="select example">
+                            <option value="">-- Select Shipping Method --</option>
+                            <option value="Standard Ground Shipping">Standard Ground Shipping</option>
+                            <option value="Expedited Shipping">Expedited Shipping</option>
+                            <option value="Overnight Shipping">Overnight Shipping</option>
+                            <option value="Same-Day Delivery">Same-Day Delivery</option>
+                            <option value="Two-Day Shipping">Two-Day Shipping</option>
+                            <option value="Freight Shipping">Freight Shipping</option>
+                            <option value="International Shipping">International Shipping</option>
+                        </select>
                     </div>
 
                     <div class="col-md-4">

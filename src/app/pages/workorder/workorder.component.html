@@ -36,6 +36,10 @@
                 </tr>
             </tbody>
         </table>
+        <div class="text-center">
+            <pagination-controls (pageChange)=" pro = $event "
+                style="background-color: #252847 !important; z-index: -2 !important;"></pagination-controls>
+        </div>
     </div>
 
     <h3 class="text-center mb-4">Create Work Order</h3>
@@ -70,7 +74,7 @@
             </div>
             <div class="col-md-4">
                 <label>Purchase_Number</label>
-               <input class="form-control" formControlName="Purchase_Number" readonly placeholder="">
+                <input class="form-control" formControlName="Purchase_Number" readonly placeholder="">
                 <!-- <input class="form-control" formControlName="Purchase_Number" readonly> -->
             </div>
         </div>
