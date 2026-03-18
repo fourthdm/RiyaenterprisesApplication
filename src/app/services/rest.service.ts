@@ -506,7 +506,9 @@ export class RestService {
     return this._http.put(this.ApiUrl + '/UpdateRequirementitem/' + data.Item_Id, data);
   }
 
-  
+  ViewChallans(Challan_Id: any) {
+    return this._http.get(this.ApiUrl + '/ChallanbyId/' + Challan_Id);
+  }
 
   //Challan API
 }
