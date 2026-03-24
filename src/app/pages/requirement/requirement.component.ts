@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { distinctUntilChanged } from 'rxjs';
 import { RestService } from 'src/app/services/rest.service';
@@ -9,6 +9,8 @@ import { RestService } from 'src/app/services/rest.service';
   styleUrls: ['./requirement.component.css']
 })
 export class RequirementComponent {
+
+  @Input() Added_Date: any;
 
   Requirementform!: FormGroup;
   AllMaterials: any[] = [];
@@ -224,10 +226,21 @@ export class RequirementComponent {
         this.ngOnInit();
 
       });
-
     }
-
   }
+
+  requirementbyDate() {
+    this._rest.Requirementbydate({ Added_Date: this.Added_Date }).subscribe((data: any) => {
+      if (data && data.data && data.data.length > 0) {
+        console.log(data);
+        this.allrequirement = data.data;
+      }
+      else {
+        this.ngOnInit();
+      }
+    })
+  }
+
   // -------------------------
   // FILE HANDLERS
   // -------------------------

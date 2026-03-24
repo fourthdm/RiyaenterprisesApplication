@@ -2,6 +2,24 @@
     <br><br><br> <br><br>
     <div class="row">
         <div class="col-md-4">
+            <br>
+            <div>
+                <div>
+                    <label for="Added_Date">Select Date.</label>
+                    <br>
+                    <input type="date" [(ngModel)]="Added_Date">
+                    <!-- <select name="Added_Date" id="Added_Date" [(ngModel)]="Added_Date" class="form-select"
+                            placeholder="Select Material_Type" aria-label="Multiple select example">
+                            <option *ngFor="let b of allrequirement" [value]="b.Added_Date">{{b.Added_Date}}
+                            </option>
+                        </select> -->
+
+                    <button class="btn bttns" type="button" id="button-addon2"><i class="fa-solid fa-magnifying-glass"
+                            (click)="requirementbyDate()"></i></button>
+                </div>
+            </div><br>
+
+
             <div class="table-responsive">
 
                 <table class="table" id="excel-table">
@@ -27,13 +45,12 @@
                             <td>{{a.Client_Name}}</td>
                             <td>
                                 <p class="">
-                                    <a type="button"  data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal1" title="Edit a Requirement">
+                                    <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                                        title="Edit a Requirement">
                                         <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                     </a>
                                     <span style="margin-left: 5%;">
-                                        <a type="button"
-                                            title="Delete a Requirement">
+                                        <a type="button" title="Delete a Requirement">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </a>
                                     </span>

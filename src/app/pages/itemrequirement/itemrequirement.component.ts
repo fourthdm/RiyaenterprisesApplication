@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { distinctUntilChanged } from 'rxjs';
 import { RestService } from 'src/app/services/rest.service';
@@ -10,6 +10,9 @@ import { RestService } from 'src/app/services/rest.service';
   styleUrls: ['./itemrequirement.component.css']
 })
 export class ItemrequirementComponent {
+
+  @Input() Added_Date: any;
+
   reqForm!: FormGroup;
   requirementData: any;
 
@@ -158,6 +161,18 @@ export class ItemrequirementComponent {
 
     }
 
+  }
+
+  requirementbyDate() {
+    this._rest.Requirementbydate({ Added_Date: this.Added_Date }).subscribe((data: any) => {
+      if (data && data.data && data.data.length > 0) {
+        console.log(data);
+        this.allrequirement = data.data;
+      }
+      else {
+        this.ngOnInit();
+      }
+    })
   }
 
   // onFileChange(event: any, index: number, type: 'dwg' | 'pdf') {

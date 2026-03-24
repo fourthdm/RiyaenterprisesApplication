@@ -156,6 +156,10 @@ export class RestService {
     return this._http.get(`${this.ApiUrl}/GetRequirement/${Req_id}`);
   }
 
+  Requirementbydate(data: any) {
+    return this._http.post(this.ApiUrl + '/RequirementsbyDate', data);
+  }
+
   // AddRequirement(formData: any) {
   //   return this._http.post(this.ApiUrl + '/AddRequirement', formData);
   // }
@@ -177,6 +181,8 @@ export class RestService {
   DeleteRequirement(Req_id: number) {
     return this._http.delete(this.ApiUrl + '/DeleteREquirement/' + Req_id);
   }
+
+
 
   //Machine Api Start
   AddMachine(data: any) {
