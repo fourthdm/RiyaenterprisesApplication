@@ -154,6 +154,7 @@ export class QuotationComponent implements OnInit {
       alert('Quotation Added Successfully');
       console.log(res);
       this.AddQuotationform.reset();
+      this.ngOnInit();
     });
   }
 
