@@ -1,0 +1,11 @@
+select {
+    width: 100%;
+}
+
+input {
+    width: 80%;
+}
+
+.card{
+    background-color: #c4c1cfab;
+}

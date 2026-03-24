@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RestService } from 'src/app/services/rest.service';
@@ -9,11 +9,12 @@ import { RestService } from 'src/app/services/rest.service';
   styleUrls: ['./quotation.component.css']
 })
 export class QuotationComponent implements OnInit {
+
+  @Input() Added_Date: any;
+
   AllRequirementData: any[] = [];
   Quotations: any[] = [];
-
   pro: any;
-
   AddQuotationform: FormGroup;
   // EditquotationForm: FormGroup;
 
@@ -176,6 +177,17 @@ export class QuotationComponent implements OnInit {
           URL.revokeObjectURL(url);
         }
       });
+  }
+
+  Quotationbydate() {
+    this._rest.Quotationbydate({ Added_Date: this.Added_Date }).subscribe((data: any) => {
+      if (data && data.data && data.data.length > 0) {
+        console.log(data);
+        this.Quotations = data.data;
+      } else {
+        this.ngOnInit();
+      }
+    })
   }
 
   // ALLQuotation() {

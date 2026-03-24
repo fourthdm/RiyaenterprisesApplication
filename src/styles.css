@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+
+.custom-table {
+    background-color: #c4c1cfab !important;
+    color: black;
+}
+
+.custom-table th {
+    background-color: #c4c1cfab;
+    color: black;
+}
+
+.custom-table thead,
+.custom-table tbody,
+.custom-table td,
+.custom-table tr {
+    background-color: #c4c1cfab;
+    color: black;
+}
+
+.custom-table tbody {
+    background-color: #c4c1cfab !important;
+    color: black;
+
+}

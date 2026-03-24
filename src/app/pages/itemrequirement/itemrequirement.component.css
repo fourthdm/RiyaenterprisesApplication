@@ -1,6 +1,11 @@
-select{
+select {
     width: 100%;
 }
-input{
+
+input {
     width: 80%;
+}
+
+.card{
+    background-color: #c4c1cfab;
 }

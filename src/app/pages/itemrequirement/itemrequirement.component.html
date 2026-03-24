@@ -2,10 +2,14 @@
     <br><br><br> <br><br>
     <div class="row">
         <div class="col-md-4">
-            <br>
             <div>
+                <br>
+                <div class="text-center">
+                    <h5>All Requirement Data</h5>
+                </div>
+                <br>
                 <div>
-                    <label for="Added_Date">Select Date.</label>
+                    <label for="Added_Date">Search a Requirement by Date.</label>
                     <br>
                     <input type="date" [(ngModel)]="Added_Date">
                     <!-- <select name="Added_Date" id="Added_Date" [(ngModel)]="Added_Date" class="form-select"
@@ -14,15 +18,15 @@
                             </option>
                         </select> -->
 
-                    <button class="btn bttns" type="button" id="button-addon2"><i class="fa-solid fa-magnifying-glass"
-                            (click)="requirementbyDate()"></i></button>
+                    <button class="btn bttns" type="button" id="button-addon2" (click)="requirementbyDate()"><i
+                            class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </div><br>
 
 
             <div class="table-responsive">
 
-                <table class="table" id="excel-table">
+                <table class="table custom-table" id="excel-table">
                     <thead>
                         <tr>
                             <th>Sr No.</th>
@@ -98,165 +102,176 @@
 
         <div class="col-md-7">
 
-            <form [formGroup]="reqForm" (ngSubmit)="submit()">
+            <div class="text-center">
+                <h5>Generate New Requirement </h5>
+            </div>
+            <br><br>
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="reqForm" (ngSubmit)="submit()">
 
-                <div class="row">
+                        <div class="row">
 
-                    <div class="col-md-6">
-                        <label for="Client_Name">Client Name</label>
-                        <br>
-                        <select class="form-control" formControlName="Client_Name">
-                            <option value="">-- Select Client Name --</option>
-                            <option *ngFor="let mat of AllclientData" [value]="mat.Client_Name">
-                                {{mat.Client_Name}}</option>
-                        </select> <br>
-                        <br>
-                    </div><br>
+                            <div class="col-md-6">
+                                <label for="Client_Name">Client Name</label>
+                                <br>
+                                <select class="form-control" formControlName="Client_Name">
+                                    <option value="">-- Select Client Name --</option>
+                                    <option *ngFor="let mat of AllclientData" [value]="mat.Client_Name">
+                                        {{mat.Client_Name}}</option>
+                                </select> <br>
+                                <br>
+                            </div><br>
 
-                    <div class="col-md-6">
-                        <label for="Client_Address"> Client Address </label>
-                        <br>
-                        <textarea class="form-control" formControlName="Client_Address"
-                            placeholder="Client Address"></textarea>
-                        <br>
-                    </div><br>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="Client_Email"> Client Email </label>
-                        <br>
-                        <input class="form-control" formControlName="Client_Email" placeholder="Client Email">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="Client_PhoneNo"> Phone Number </label>
-                        <br>
-                        <input class="form-control" formControlName="Client_PhoneNo" placeholder="Phone Number">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="GST_No"> GST Number </label>
-                        <br>
-                        <input class="form-control" formControlName="GST_No" placeholder="GST Number">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="Status"> Status</label>
-                        <br>
-                        <select class="form-control" formControlName="Status">
-                            <option value="">-- Select Requirement Status --</option>
-                            <option value="Create">Create</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Complete">Complete</option>
-                            <option value="Cancel">Cancel</option>
-                        </select>
-                    </div>
-
-                </div>
-                <hr>
-                <div formArrayName="products">
-
-                    <div *ngFor="let p of products.controls; let i=index" [formGroupName]="i" class="border p-3 mb-3">
-
-                        <h6>Product {{ i + 1 }}</h6>
+                            <div class="col-md-6">
+                                <label for="Client_Address"> Client Address </label>
+                                <br>
+                                <textarea class="form-control" formControlName="Client_Address"
+                                    placeholder="Client Address"></textarea>
+                                <br>
+                            </div><br>
+                        </div>
 
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="Product_Name"> Product Name</label>
-                                <input class="form-control" formControlName="Product_Name" placeholder="Product Name">
-                            </div> <br>
-
-                            <div class="col-md-6">
-                                <label for="Material_Type"> Material Type</label>
-                                <select class="form-control" formControlName="Material_Type">
-                                    <option value="">-- Select Material Name --</option>
-                                    <option *ngFor="let mat of AllMaterials" [value]="mat.Material_Name">
-                                        {{ mat.Material_Name }}
-                                    </option>
-                                </select>
-                            </div> <br>
-
-                            <div class="col-md-6">
-                                <label for="Product_Quantity"> Product Quantity</label>
-                                <input class="form-control" formControlName="Product_Quantity" placeholder="Quantity">
-                            </div> <br>
-
-                            <div class="col-md-6">
-                                <label for="HSN_Code"> HSN Code</label>
-                                <input class="form-control" formControlName="HSN_Code" placeholder="HSN Code">
+                                <label for="Client_Email"> Client Email </label>
                                 <br>
-                            </div> <br>
+                                <input class="form-control" formControlName="Client_Email" placeholder="Client Email">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="Client_PhoneNo"> Phone Number </label>
+                                <br>
+                                <input class="form-control" formControlName="Client_PhoneNo" placeholder="Phone Number">
+                            </div>
+                        </div>
 
-                            <!-- <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="GST_No"> GST Number </label>
+                                <br>
+                                <input class="form-control" formControlName="GST_No" placeholder="GST Number">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="Status"> Status</label>
+                                <br>
+                                <select class="form-control" formControlName="Status">
+                                    <option value="">-- Select Requirement Status --</option>
+                                    <option value="Create">Create</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Complete">Complete</option>
+                                    <option value="Cancel">Cancel</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <hr>
+                        <div formArrayName="products">
+
+                            <div *ngFor="let p of products.controls; let i=index" [formGroupName]="i"
+                                class="border p-3 mb-3">
+
+                                <h6>Product {{ i + 1 }}</h6>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="Product_Name"> Product Name</label>
+                                        <input class="form-control" formControlName="Product_Name"
+                                            placeholder="Product Name">
+                                    </div> <br>
+
+                                    <div class="col-md-6">
+                                        <label for="Material_Type"> Material Type</label>
+                                        <select class="form-control" formControlName="Material_Type">
+                                            <option value="">-- Select Material Name --</option>
+                                            <option *ngFor="let mat of AllMaterials" [value]="mat.Material_Name">
+                                                {{ mat.Material_Name }}
+                                            </option>
+                                        </select>
+                                    </div> <br>
+
+                                    <div class="col-md-6">
+                                        <label for="Product_Quantity"> Product Quantity</label>
+                                        <input class="form-control" formControlName="Product_Quantity"
+                                            placeholder="Quantity">
+                                    </div> <br>
+
+                                    <div class="col-md-6">
+                                        <label for="HSN_Code"> HSN Code</label>
+                                        <input class="form-control" formControlName="HSN_Code" placeholder="HSN Code">
+                                        <br>
+                                    </div> <br>
+
+                                    <!-- <div class="col-md-6">
                         <label for="">DWG File</label> <br>
                         <input type="file" (change)="onFileChange($event,i,'dwg')" formControlName="Design_File"
                             accept=".dwg">
                     </div> -->
-                            <div class="col-md-6">
-                                <label>DWG File</label>
+                                    <div class="col-md-6">
+                                        <label>DWG File</label>
 
-                                <input type="file" (change)="onFileChange($event,i,'dwg')" accept=".dwg"
-                                    class="form-control">
+                                        <input type="file" (change)="onFileChange($event,i,'dwg')" accept=".dwg"
+                                            class="form-control">
 
-                                <div *ngIf="p.value.Design_File_Name" class="mt-1">
+                                        <div *ngIf="p.value.Design_File_Name" class="mt-1">
 
-                                    <small class="text-success">
-                                        {{p.value.Design_File_Name}}
-                                    </small>
+                                            <small class="text-success">
+                                                {{p.value.Design_File_Name}}
+                                            </small>
 
-                                    <!-- <button type="button" class="btn btn-sm btn-danger ms-2" (click)="removeFile(i,'dwg')">
+                                            <!-- <button type="button" class="btn btn-sm btn-danger ms-2" (click)="removeFile(i,'dwg')">
 
                                 Remove
 
                             </button> -->
 
-                                </div>
+                                        </div>
 
-                            </div>
-                            <br>
+                                    </div>
+                                    <br>
 
-                            <!-- <div class="col-md-6">
+                                    <!-- <div class="col-md-6">
                         <label for="">PDF Design File</label> <br>
                         <input type="file" (change)="onFileChange($event,i,'pdf')" formControlName="PDFDesignfile"
                             accept=".pdf">
                     </div>  -->
-                            <div class="col-md-6">
-                                <label>PDF Design File</label>
+                                    <div class="col-md-6">
+                                        <label>PDF Design File</label>
 
-                                <input type="file" (change)="onFileChange($event,i,'pdf')" accept=".pdf"
-                                    class="form-control">
+                                        <input type="file" (change)="onFileChange($event,i,'pdf')" accept=".pdf"
+                                            class="form-control">
 
-                                <div *ngIf="p.value.PDF_File_Name" class="mt-1">
+                                        <div *ngIf="p.value.PDF_File_Name" class="mt-1">
 
-                                    <small class="text-success">
-                                        {{p.value.PDF_File_Name}}
-                                    </small>
+                                            <small class="text-success">
+                                                {{p.value.PDF_File_Name}}
+                                            </small>
 
-                                    <!-- <button type="button" class="btn btn-sm btn-danger ms-2" (click)="removeFile(i,'pdf')">
+                                            <!-- <button type="button" class="btn btn-sm btn-danger ms-2" (click)="removeFile(i,'pdf')">
 
                                 Remove
 
                             </button> -->
 
+                                        </div>
+
+                                    </div>
+                                    <br>
+
                                 </div>
+                                <button type="button" class="btn btn-danger mt-2" (click)="removeProduct(i)">
+                                    Remove Product
+                                </button>
 
                             </div>
-                            <br>
-
                         </div>
-                        <button type="button" class="btn btn-danger mt-2" (click)="removeProduct(i)">
-                            Remove Product
-                        </button>
 
-                    </div>
+                        <button type="button" class="btn btn-secondary" (click)="addProduct()">+ Add Product</button>
+                        <br>
+                        <button type="submit" class="btn btn-primary mt-3">Add Requirement</button>
+                    </form>
                 </div>
-
-                <button type="button" class="btn btn-secondary" (click)="addProduct()">+ Add Product</button>
-                <br>
-                <button type="submit" class="btn btn-primary mt-3">Add Requirement</button>
-            </form>
+            </div>
         </div>
     </div>
 

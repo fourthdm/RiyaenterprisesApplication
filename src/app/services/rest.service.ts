@@ -423,6 +423,7 @@ export class RestService {
   }
   //All Client API End
 
+  //All Quotations API Start 
   AllQuotationsnew() {
     return this._http.get(this.ApiUrl + '/GetQuotations');
   }
@@ -434,6 +435,11 @@ export class RestService {
   GetQuotationPDF(Quotation_Id: any) {
     return this._http.get(this.ApiUrl + '/QuotationPDF/' + Quotation_Id, { responseType: 'blob' });
   }
+
+  Quotationbydate(data: any) {
+    return this._http.post(this.ApiUrl + '/QuotationbyDate', data);
+  }
+  //All Quotations API End 
 
   // Purchase Order 
   AddedPurchaseOrder(data: any) {
