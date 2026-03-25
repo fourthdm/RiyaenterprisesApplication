@@ -8,10 +8,21 @@
                 <div class="text-center">
                     <h3>All Challans</h3>
                 </div><br>
-                <label for="">Download a Delivery Challan Excelsheet</label>
-                <br>
-                <button class="btn btn-success" (click)="exportexcel()" title="Download excelfile">Download
-                    Excelsheet</button>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="">Download a Delivery Challan Excelsheet</label>
+                        <br>
+                        <button class="btn btn-success" (click)="exportexcel()" title="Download excelfile">Download
+                            Excelsheet</button>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Added_Date">Search Challan Data by Date</label><br>
+                        <input type="date" [(ngModel)]="Added_Date" width="80">
+                        <button (click)="challanBydate()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </div>
+
                 <br> <br>
 
                 <table class="table table-bordered" id="excel-table">

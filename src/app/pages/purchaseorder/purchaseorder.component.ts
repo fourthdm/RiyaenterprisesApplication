@@ -196,6 +196,7 @@ export class PurchaseorderComponent implements OnInit {
         console.log(data);
         this.PurchaseOrder = data.data;
       } else {
+        alert(data.message);
         this.ngOnInit();
       }
     });

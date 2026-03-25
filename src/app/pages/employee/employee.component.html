@@ -71,12 +71,24 @@
 
             <div class="row">
                 <br>
-                <div class="div">
-                    <label for="">Download Admin Data in Excelsheet </label>
-                    <br> <button class="btn btn-success" (click)="exportexcel()" title="Download excelfile">Download
-                        Excelsheet</button> <br> <br>
-                </div>
+             
                 <br><br><br>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="">Download Admin Data in Excelsheet </label>
+                        <br> <button class="btn btn-success" (click)="exportexcel()" title="Download excelfile">Download
+                            Excelsheet</button> <br> <br>
+                    </div>
+                    <br>
+                    <div class="col-md-6">
+                        <label for="Added_Date">Search Employee Data by Date</label>
+                        <br>
+                        <input type="date" [(ngModel)]="Added_Date">
+                        <button (click)="Bydate()"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+                    </div>
+                </div>
 
                 <div class="col-md-6" *ngFor="let a of AllData, let i = index">
                     <div class="card">

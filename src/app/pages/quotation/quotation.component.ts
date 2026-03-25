@@ -185,6 +185,7 @@ export class QuotationComponent implements OnInit {
         console.log(data);
         this.Quotations = data.data;
       } else {
+        alert(data.message);
         this.ngOnInit();
       }
     })

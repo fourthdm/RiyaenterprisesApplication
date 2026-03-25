@@ -149,18 +149,12 @@ export class ItemrequirementComponent {
 
 
   deleteItem(Item_Id: any) {
-
     if (confirm("Delete this product?")) {
-
       this._rest.deleteRequirementItem(Item_Id).subscribe((res: any) => {
-
         alert(res.message);
         this.AllRequirements();
-
       });
-
     }
-
   }
 
   requirementbyDate() {
@@ -170,6 +164,7 @@ export class ItemrequirementComponent {
         this.allrequirement = data.data;
       }
       else {
+        alert(data.message);
         this.ngOnInit();
       }
     })

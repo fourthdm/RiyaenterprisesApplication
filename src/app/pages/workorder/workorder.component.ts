@@ -217,6 +217,7 @@ export class WorkorderComponent implements OnInit {
         this.WorkOrder = data.data;
       } else {
         alert(data.message);
+        this.ngOnInit();
       }
     })
   }

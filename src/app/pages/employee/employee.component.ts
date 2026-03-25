@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RestService } from 'src/app/services/rest.service';
@@ -11,7 +11,10 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent {
- AllData: any[] = [];
+
+  @Input() Added_Date: any;
+
+  AllData: any[] = [];
   AddDataForm: FormGroup;
   EditDataForm: FormGroup;
 
@@ -131,4 +134,17 @@ export class EmployeeComponent {
     XLSX.writeFile(workbook, 'Workorder.xlsx');
 
   }
+
+  Bydate() {
+    this._rest.AdmindatabyDate({ Added_Date: this.Added_Date }).subscribe((data: any) => {
+      if (data && data.data && data.data.length > 0) {
+        console.log(data);
+        this.AllData = data.data;
+      }else{
+        alert(data.message);
+        this.ngOnInit();
+      }
+    });
+  }
+
 }

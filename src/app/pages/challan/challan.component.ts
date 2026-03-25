@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RestService } from 'src/app/services/rest.service';
@@ -9,6 +9,7 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./challan.component.css']
 })
 export class ChallanComponent {
+  @Input() Added_Date: any;
 
   AllRequirementData: any[] = [];
   AllQuotationsData: any[] = [];
@@ -276,6 +277,17 @@ export class ChallanComponent {
 
     // STEP 4.5 – Download Excel file
     XLSX.writeFile(workbook, 'Challans.xlsx');
+  }
+
+  challanBydate() {
+    this._rest.Challanbydate({ Added_Date: this.Added_Date }).subscribe((data: any) => {
+      if (data && data.data && data.data.length > 0) {
+        console.log(data);
+        this.Challans = data.data;
+      } else {
+        alert(data.message);
+      }
+    });
   }
 
 

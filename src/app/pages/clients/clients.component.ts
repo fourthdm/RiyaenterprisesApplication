@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RestService } from 'src/app/services/rest.service';
@@ -11,6 +11,8 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./clients.component.css']
 })
 export class ClientsComponent {
+
+  @Input() Added_Date: any;
 
   AllData: any[] = [];
   AddClientDataForm: FormGroup;
@@ -128,6 +130,17 @@ export class ClientsComponent {
 
     // STEP 4.5 – Download Excel file
     XLSX.writeFile(workbook, 'Client.xlsx');
+  }
 
+  ByDate() {
+    this._rest.Clientdatabydate({ Added_Date: this.Added_Date }).subscribe((data: any) => {
+      if (data && data.data && data.data.length > 0) {
+        console.log(data);
+        this.AllData = data.data;
+      }else{
+        alert(data.message);
+        this.ngOnInit();
+      }
+    });
   }
 }

@@ -47,6 +47,11 @@ export class RestService {
   QCData() {
     return this._http.get(this.ApiUrl + '/AllQCData');
   }
+
+  AdmindatabyDate(data: any) {
+    return this._http.post(this.ApiUrl + '/Admindatabydate', data);
+  }
+
   //AdminAPi Ends
 
   // Quotation API Start
@@ -421,6 +426,10 @@ export class RestService {
   Clientdatabyid(Client_id: any) {
     return this._http.get(this.ApiUrl + '/DatabyClientid/' + Client_id);
   }
+
+  Clientdatabydate(data: any) {
+    return this._http.post(this.ApiUrl + '/Clientdatabydate', data);
+  }
   //All Client API End
 
   //All Quotations API Start 
@@ -509,10 +518,10 @@ export class RestService {
     return this._http.get(this.ApiUrl + '/Billbyid/' + Bill_Id);
   }
 
-  BillbyDate (data:any){
-    return this._http.post(this.ApiUrl + '/BillByDate',data);
+  BillbyDate(data: any) {
+    return this._http.post(this.ApiUrl + '/BillByDate', data);
   }
-  
+
   //API for Bills Ends
 
   //Challan API Start
@@ -535,5 +544,10 @@ export class RestService {
   ViewChallans(Challan_Id: any) {
     return this._http.get(this.ApiUrl + '/ChallanbyId/' + Challan_Id);
   }
+
+  Challanbydate(data: any) {
+    return this._http.post(this.ApiUrl + '/Challanbydate', data);
+  }
+
   //Challan API Ends
 }
