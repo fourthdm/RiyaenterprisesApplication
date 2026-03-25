@@ -512,6 +512,7 @@ export class RestService {
   BillbyDate (data:any){
     return this._http.post(this.ApiUrl + '/BillByDate',data);
   }
+  
   //API for Bills Ends
 
   //Challan API Start

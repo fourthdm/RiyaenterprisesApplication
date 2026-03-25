@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { tick } from '@angular/core/testing';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RestService } from 'src/app/services/rest.service';
@@ -9,6 +10,8 @@ import { RestService } from 'src/app/services/rest.service';
   styleUrls: ['./bill.component.css']
 })
 export class BillComponent {
+
+  @Input() Added_Date: any;
 
   AllRequirementData: any[] = [];
   AllQuotationsData: any[] = [];
@@ -214,6 +217,18 @@ export class BillComponent {
           URL.revokeObjectURL(url);
         }
       });
+  }
+
+  ByDate() {
+    this._rest.BillbyDate({ Added_Date: this.Added_Date }).subscribe((data: any) => {
+      if (data && data.data && data.data.length > 0) {
+        console.log(data);
+        this.Bills = data.data;
+      } else {
+        alert(data.message);
+        this.ngOnInit();
+      }
+    });
   }
 
 }
