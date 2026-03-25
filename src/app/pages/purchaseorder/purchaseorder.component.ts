@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RestService } from 'src/app/services/rest.service';
@@ -9,6 +9,7 @@ import { RestService } from 'src/app/services/rest.service';
   styleUrls: ['./purchaseorder.component.css']
 })
 export class PurchaseorderComponent implements OnInit {
+  @Input() Added_Date: any;
 
   AllRequirementData: any[] = [];
   AllQuotationsData: any[] = [];
@@ -187,6 +188,17 @@ export class PurchaseorderComponent implements OnInit {
           URL.revokeObjectURL(url);
         }
       });
+  }
+
+  BYDate() {
+    this._rest.PurchaseorderbyDate({ Added_Date: this.Added_Date }).subscribe((data: any) => {
+      if (data && data.data && data.data.length > 0) {
+        console.log(data);
+        this.PurchaseOrder = data.data;
+      } else {
+        this.ngOnInit();
+      }
+    });
   }
 
 }

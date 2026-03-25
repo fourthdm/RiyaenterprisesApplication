@@ -1,8 +1,11 @@
 <div class="container-fluid mt-4">
     <br><br><br>
-
     <div class="row">
         <div class="col-md-4">
+            <label for="Added_Date">Search Purchase Order By Date</label>
+            <input type="date" [(ngModel)]="Added_Date">
+            <button (click)="BYDate()"><i class="fa-solid fa-magnifying-glass"></i></button>
+
             <div class="container">
                 <table class="table table-bordered" id="excel-table">
                     <thead>
@@ -11,7 +14,6 @@
                             <th>Purchase Number</th>
                             <th>Client Name</th>
                             <th>Action</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -23,7 +25,6 @@
                                         [routerLink]="['/AdminDashboard/PurchaseOrderDetails', a.Purchase_id]">{{a.Purchase_Number}}</a>
                                 </p>
                             </td>
-
                             <td>{{a.Client_Name}}</td>
                             <td>
                                 <a (click)="printPdf(a.Purchase_id)" title="Print a Receipt"> <span
@@ -226,5 +227,5 @@
     <!-- <pre class="mt-3">{{ AddQuotationform.value | json }}</pre> -->
     <!-- <pre class="mt-3">{{Quotations | json }}</pre> -->
 
-    
+
 </div>

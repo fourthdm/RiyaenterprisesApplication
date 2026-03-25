@@ -462,6 +462,10 @@ export class RestService {
     return this._http.get(this.ApiUrl + '/getPurchaseOrderByReq/' + Req_id);
   }
 
+  PurchaseorderbyDate(data: any) {
+    return this._http.post(this.ApiUrl + '/PurchaseorderbyDate', data);
+  }
+
   // getPurchaseOrderByReq(Req_id: any) {
   //   return this._http.get<any>(`${this.ApiUrl}/getPurchaseOrderByReq/${Req_id}`);
   // }
