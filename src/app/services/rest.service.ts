@@ -470,9 +470,7 @@ export class RestService {
   //   return this._http.get<any>(`${this.ApiUrl}/getPurchaseOrderByReq/${Req_id}`);
   // }
 
-  //Work Order
-
-
+  //Work Order Start 
   Workorder(data: any) {
     return this._http.post(this.ApiUrl + '/AddWorkOrdersss', data);
   }
@@ -489,6 +487,12 @@ export class RestService {
     return this._http.delete(this.ApiUrl + '/DeleteWorkorders/' + Workorder_Id);
   }
 
+  WorkOrderByDate(data: any) {
+    return this._http.post(this.ApiUrl + '/Workorderbydate', data);
+  }
+  //Work Order API Ends
+
+  //API for Bills
   NewBills(data: any) {
     return this._http.post(this.ApiUrl + '/AddBill', data);
   }
@@ -505,7 +509,12 @@ export class RestService {
     return this._http.get(this.ApiUrl + '/Billbyid/' + Bill_Id);
   }
 
-  //Challan API
+  BillbyDate (data:any){
+    return this._http.post(this.ApiUrl + '/BillByDate',data);
+  }
+  //API for Bills Ends
+
+  //Challan API Start
   AllChallans() {
     return this._http.get(this.ApiUrl + '/AllChallans');
   }
@@ -525,6 +534,5 @@ export class RestService {
   ViewChallans(Challan_Id: any) {
     return this._http.get(this.ApiUrl + '/ChallanbyId/' + Challan_Id);
   }
-
-  //Challan API
+  //Challan API Ends
 }

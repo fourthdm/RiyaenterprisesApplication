@@ -2,6 +2,11 @@
     <br><br><br>
     <div class="row">
         <div class="col-md-5">
+            <h3 class="text-center ">All Work Order Data</h3> <br>
+            <label for="Added_Date">Search Work Order By Date</label><br>
+            <input type="date" [(ngModel)]="Added_Date">
+            <button (click)="OrderbyDate()"><i class="fa-solid fa-magnifying-glass"></i></button>
+<br><br>
             <div class="container">
                 <table class="table" id="excel-table">
                     <thead>

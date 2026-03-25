@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RestService } from 'src/app/services/rest.service';
@@ -9,6 +9,8 @@ import { RestService } from 'src/app/services/rest.service';
   styleUrls: ['./workorder.component.css']
 })
 export class WorkorderComponent implements OnInit {
+
+  @Input() Added_Date: any;
 
   AllManagerdata: any[] = [];
   AllEngineerdata: any[] = [];
@@ -155,7 +157,6 @@ export class WorkorderComponent implements OnInit {
           Purchase_Number: res.data[0].Purchase_Number
         });
       }
-
     });
 
     // Clear products
@@ -207,6 +208,17 @@ export class WorkorderComponent implements OnInit {
         console.log(err);
       });
     }
+  }
+
+  OrderbyDate() {
+    this._rest.WorkOrderByDate({ Added_Date: this.Added_Date }).subscribe((data: any) => {
+      if (data && data.data && data.data.length > 0) {
+        console.log(data);
+        this.WorkOrder = data.data;
+      } else {
+        alert(data.message);
+      }
+    })
   }
 
 }
