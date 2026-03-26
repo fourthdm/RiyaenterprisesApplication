@@ -1,16 +1,104 @@
 <div class="container"> <br><br><br>
     <div class="row">
-        <div class="container">
+
+        <div class="card mb-3 p-3">
+
+  <!-- Requirement Details -->
+  <div class="text-end">
+    <p>
+      <b>Added Date :</b> {{ RequirementDetails.Added_Date | date }}
+      <br>
+      {{ RequirementDetails.Added_Date | date:'h:mm a' }}
+    </p>
+  </div>
+
+  <div class="row">
+    <div class="col-4">
+      <p><b>Client Name :</b> {{ RequirementDetails.Client_Name }}</p>
+      <p><b>Phone :</b> {{ RequirementDetails.Client_PhoneNo }}</p>
+      <p><b>Email :</b> {{ RequirementDetails.Client_Email }}</p>
+      <p><b>Address :</b> {{ RequirementDetails.Client_Address }}</p>
+      <p><b>GST Number :</b> {{ RequirementDetails.GST_No }}</p>
+      <p><b>Status :</b> {{ RequirementDetails.Status }}</p>
+    </div>
+
+    <!-- ✅ Items Table -->
+    <div class="col-8">
+      <h5>Products</h5>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Sr No</th>
+            <th>Product Name</th>
+            <th>HSN Code</th>
+            <th>Quantity</th>
+            <th>Material</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of AllRequirementData; let j = index">
+            <td>{{ j + 1 }}</td>
+            <td>{{ item.Product_Name }}</td>
+            <td>{{ item.HSN_Code }}</td>
+            <td>{{ item.Product_Quantity }}</td>
+            <td>{{ item.Material_Type }}</td>
+
+            <td>
+              <button (click)="editrequirementitems(item.Item_Id)"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal1">
+                Edit
+              </button>
+
+              <button (click)="deleteItem(item.Item_Id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Requirement Items</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12">
+<form [formGroup]="RequirementitemUpdate">
+
+  <input formControlName="Product_Name" placeholder="Product Name">
+  <input formControlName="Material_Type" placeholder="Material Type">
+  <input formControlName="Product_Quantity" placeholder="Quantity">
+  <input formControlName="HSN_Code" placeholder="HSN Code">
+
+  <button (click)="UpdateRequirementitems()">Update</button>
+
+</form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+</div>
+
+
+        <!-- <div class="container">
             <br><br><br>
-            <!-- <pre>{{AllRequirementData|json}}</pre> -->
 
             <div class="row">
                 <div class="text-center">
                     <h2>Requirement Details</h2>
                     <br>
                 </div>
-
-                <!-- 🔹 Requirement loop -->
                 <div class="card mb-3 p-3" *ngFor="let a of AllRequirementData; let i = index">
 
                     <div class="text-end">
@@ -34,7 +122,6 @@
                         <div class="col-8">
                             <h5 class="mb-2">Products</h5>
 
-                            <!-- 🔹 Product loop -->
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
@@ -115,7 +202,7 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- <div class="text-center">
             <h2>Requirement Details</h2>
