@@ -53,6 +53,7 @@ export class QuotationComponent implements OnInit {
     if (!req) return;
 
     this.AddQuotationform.patchValue({
+      Req_id : req.Req_id,
       Requirement_No: req.Requirement_No,
       Client_Address: req.Client_Address,
       Client_Email: req.Client_Email,
@@ -110,6 +111,7 @@ export class QuotationComponent implements OnInit {
 
     // 🔹 Header auto-fill
     this.AddQuotationform.patchValue({
+       Req_id : selectedReq.Req_id,
       Requirement_No: selectedReq.Requirement_No,
       Client_Name: selectedReq.Client_Name,
       Client_Address: selectedReq.Client_Address,
