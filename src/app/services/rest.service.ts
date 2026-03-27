@@ -187,7 +187,9 @@ export class RestService {
     return this._http.delete(this.ApiUrl + '/DeleteREquirement/' + Req_id);
   }
 
-
+  UpdateFullrequirement(Req_id: any, data: any) {
+    return this._http.put(this.ApiUrl + '/UpdateFullRequirement/' + Req_id, data);
+  }
 
   //Machine Api Start
   AddMachine(data: any) {

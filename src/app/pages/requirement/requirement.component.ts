@@ -13,14 +13,28 @@ export class RequirementComponent {
   @Input() Added_Date: any;
 
   Requirementform!: FormGroup;
+  UpdateRequirementform: FormGroup;
+
   AllMaterials: any[] = [];
 
   AllclientData: any[] = [];
 
   allrequirement: any[] = [];
+  Selectedrequirement: any = undefined;
 
   constructor(private fb: FormBuilder, private _rest: RestService) {
     this.Requirementform = this.fb.group({
+      Client_Name: ['', Validators.required],
+      Client_Address: ['', Validators.required],
+      Client_PhoneNo: ['', Validators.required],
+      Client_Email: ['', [Validators.required, Validators.email]],
+      GST_No: ['', [Validators.required]],
+      Status: ['', Validators.required],
+      products: this.fb.array([])
+    });
+
+    this.UpdateRequirementform = this.fb.group({
+      Req_id: [''],
       Client_Name: ['', Validators.required],
       Client_Address: ['', Validators.required],
       Client_PhoneNo: ['', Validators.required],
@@ -217,14 +231,10 @@ export class RequirementComponent {
   }
 
   deleteItem(Item_Id: any) {
-
     if (confirm("Delete this product?")) {
-
       this._rest.deleteRequirementItem(Item_Id).subscribe((res: any) => {
-
         alert(res.message);
         this.ngOnInit();
-
       });
     }
   }
@@ -240,6 +250,39 @@ export class RequirementComponent {
       }
     })
   }
+
+  editRequirement(Req_id: any) {
+    const Requireselect = this.allrequirement.find(requirement => requirement.Req_id === Req_id);
+    if (Requireselect) {
+      this.Selectedrequirement = 1,
+        this.UpdateRequirementform.patchValue(Requireselect);
+    }
+  }
+
+  updateRequirement() {
+
+    const payload = {
+      Client_Name: this.UpdateRequirementform.value.Client_Name,
+      Client_Address: this.UpdateRequirementform.value.Client_Address,
+      Client_PhoneNo: this.UpdateRequirementform.value.Client_PhoneNo,
+      Client_Email: this.UpdateRequirementform.value.Client_Email,
+      GST_No: this.UpdateRequirementform.value.GST_No,
+      Status: this.UpdateRequirementform.value.Status,
+
+      // items: this.itemsArray // 👈 important
+    };
+
+    // this._rest.UpdateFullrequirement(this.Req_id, payload)
+    //   .subscribe({
+    //     next: (res: any) => {
+    //       alert("Updated Successfully");
+    //     },
+    //     error: (err) => {
+    //       console.error(err);
+    //     }
+    //   });
+  }
+
 
   // -------------------------
   // FILE HANDLERS

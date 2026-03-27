@@ -16,17 +16,29 @@ export class ItemrequirementComponent {
   reqForm!: FormGroup;
   requirementData: any;
 
+  UpdateRequirementform: FormGroup;
+  Selectedrequirement: any = undefined;
+
   AllMaterials: any[] = [];
-
   AllclientData: any[] = [];
-
   allrequirement: any[] = [];
   pro: any;
 
   constructor(
     private fb: FormBuilder,
     private _rest: RestService
-  ) { }
+  ) {
+    this.UpdateRequirementform = this.fb.group({
+      Req_id: [''],
+      Client_Name: ['', Validators.required],
+      Client_Address: ['', Validators.required],
+      Client_PhoneNo: ['', Validators.required],
+      Client_Email: ['', [Validators.required, Validators.email]],
+      GST_No: ['', [Validators.required]],
+      Status: ['', Validators.required],
+      items: this.fb.array([])
+    });
+  }
 
   ngOnInit() {
     this.reqForm = this.fb.group({
@@ -82,6 +94,27 @@ export class ItemrequirementComponent {
     return this.reqForm.get('products') as FormArray;
   }
 
+  get items(): FormArray {
+    return this.UpdateRequirementform.get('items') as FormArray;
+  }
+
+
+  addUpdateItem(data: any = null) {
+    this.items.push(
+      this.fb.group({
+        Item_Id: [data?.Item_Id || null], // 👈 important
+        Product_Name: [data?.Product_Name || ''],
+        Material_Type: [data?.Material_Type || ''],
+        Product_Quantity: [data?.Product_Quantity || ''],
+        HSN_Code: [data?.HSN_Code || ''],
+        Rate: [data?.Rate || 0],
+        Manufacturing_Cost: [data?.Manufacturing_Cost || 0],
+        Material_Cost: [data?.Material_Cost || 0],
+        Dispatch_Cost: [data?.Dispatch_Cost || 0]
+      })
+    );
+  }
+
   autoFillByRequirement(clientName: string) {
     const req = this.AllclientData.find(
       (r: any) => r.Client_Name === clientName
@@ -125,7 +158,6 @@ export class ItemrequirementComponent {
   // }
 
   onFileChange(event: any, index: number, type: 'dwg' | 'pdf') {
-
     const file = event.target.files[0];
     if (!file) return;
 
@@ -144,9 +176,7 @@ export class ItemrequirementComponent {
         PDF_File_Name: file.name
       });
     }
-
   }
-
 
   deleteItem(Item_Id: any) {
     if (confirm("Delete this product?")) {
@@ -233,6 +263,90 @@ export class ItemrequirementComponent {
     });
   }
 
+  removeProduct(i: number) {
+    this.products.removeAt(i);
+  }
+
+  editRequirement(Req_id: any) {
+
+    const req = this.allrequirement.find(r => r.Req_id === Req_id);
+
+    if (!req) return;
+
+    this.Selectedrequirement = 1;
+
+    this.UpdateRequirementform.patchValue({
+      Req_id: req.Req_id,
+      Client_Name: req.Client_Name,
+      Client_Address: req.Client_Address,
+      Client_PhoneNo: req.Client_PhoneNo,
+      Client_Email: req.Client_Email,
+      GST_No: req.GST_No,
+      Status: req.Status
+    });
+
+    // ✅ CLEAR OLD ITEMS
+    this.items.clear();
+
+    // ✅ LOAD ITEMS (IMPORTANT)
+    req.items.forEach((item: any) => {
+      this.addUpdateItem(item);
+    });
+  }
+
+  // editRequirement(Req_id: any) {
+  //   const Requireselect = this.allrequirement.find(requirement => requirement.Req_id === Req_id);
+  //   if (Requireselect) {
+  //     this.Selectedrequirement = 1,
+  //       this.UpdateRequirementform.patchValue(Requireselect);
+  //   }
+  // }
+
+  updateRequirement() {
+
+    const payload = {
+      ...this.UpdateRequirementform.value,
+      items: this.UpdateRequirementform.value.items // ✅ correct
+    };
+
+    const Req_id = this.UpdateRequirementform.value.Req_id;
+
+    this._rest.UpdateFullrequirement(Req_id, payload)
+      .subscribe({
+        next: (res: any) => {
+          alert("Updated Successfully");
+          this.AllRequirements();
+        },
+        error: (err) => {
+          console.error(err);
+        }
+      });
+  }
+
+  // updateRequirement() {
+
+  //   const payload = {
+  //     Client_Name: this.UpdateRequirementform.value.Client_Name,
+  //     Client_Address: this.UpdateRequirementform.value.Client_Address,
+  //     Client_PhoneNo: this.UpdateRequirementform.value.Client_PhoneNo,
+  //     Client_Email: this.UpdateRequirementform.value.Client_Email,
+  //     GST_No: this.UpdateRequirementform.value.GST_No,
+  //     Status: this.UpdateRequirementform.value.Status,
+
+  //     items: this.itemsArray // 👈 important
+  //   };
+
+  //   this._rest.UpdateFullrequirement(this.Req_id, payload)
+  //     .subscribe({
+  //       next: (res: any) => {
+  //         alert("Updated Successfully");
+  //       },
+  //       error: (err) => {
+  //         console.error(err);
+  //       }
+  //     });
+  // }
+
   // submit() {
   //   const formData = new FormData();
 
@@ -272,10 +386,6 @@ export class ItemrequirementComponent {
   //     this.reqForm.reset();
   //   });
   // }
-
-  removeProduct(i: number) {
-    this.products.removeAt(i);
-  }
 
   // submit() {
   //   const formData = new FormData();
