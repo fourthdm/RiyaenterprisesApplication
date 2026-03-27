@@ -14,6 +14,7 @@
 
             <div class="row">
                 <div class="col-4">
+                    <p><b>Requirement Number :</b> {{RequirementDetails.Requirement_No}}</p>
                     <p><b>Client Name :</b> {{ RequirementDetails.Client_Name }}</p>
                     <p><b>Phone :</b> {{ RequirementDetails.Client_PhoneNo }}</p>
                     <p><b>Email :</b> {{ RequirementDetails.Client_Email }}</p>
@@ -47,14 +48,15 @@
                                 <td>{{ item.Material_Type }}</td>
 
                                 <td>
-                                    <button (click)="editrequirementitems(item.Item_Id)" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal1">
-                                        Edit
-                                    </button>
+                                    <p  style="cursor: pointer;" (click)="editrequirementitems(item.Item_Id)" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal1" title="Update a Product">
+                                        <i class="fa-solid fa-pen-to-square"></i>
 
-                                    <button (click)="deleteItem(item.Item_Id)">
-                                        Delete
-                                    </button>
+
+                                        <span style="padding-left: 5%; cursor: pointer;" (click)="deleteItem(item.Item_Id)" title="Delete a Product">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </span>
+                                    </p>
                                 </td>
                             </tr>
                         </tbody>
@@ -73,14 +75,28 @@
                         <div class="modal-body">
                             <div class="col-md-12">
                                 <form [formGroup]="RequirementitemUpdate">
-
-                                    <input formControlName="Product_Name" placeholder="Product Name">
-                                    <input formControlName="Material_Type" placeholder="Material Type">
-                                    <input formControlName="Product_Quantity" placeholder="Quantity">
-                                    <input formControlName="HSN_Code" placeholder="HSN Code">
-
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="Product_Name">Product Name</label><br>
+                                            <input formControlName="Product_Name" placeholder="Product Name"> <br>
+                                        </div>
+                                        <br>
+                                        <div class="col-md-6">
+                                            <label for="Material_Type">Material Type </label><br>
+                                            <input formControlName="Material_Type" placeholder="Material Type"><br>
+                                        </div><br>
+                                        <div class="col-md-6">
+                                            <label for="Product_Quantity">Product Quantity</label><br>
+                                            <input formControlName="Product_Quantity" placeholder="Quantity"><br>
+                                        </div>
+                                        <br>
+                                        <div class="col-md-6">
+                                            <label for="HSN_Code">HSN Code</label> <br>
+                                            <input formControlName="HSN_Code" placeholder="HSN Code"><br>
+                                        </div>
+                                    </div>
+                                    <br>
                                     <button (click)="UpdateRequirementitems()">Update</button>
-
                                 </form>
                             </div>
                         </div>
