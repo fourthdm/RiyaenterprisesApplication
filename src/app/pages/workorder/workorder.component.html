@@ -4,9 +4,21 @@
         <div class="col-md-5">
             <h3 class="text-center ">All Work Order Data</h3> <br>
             <label for="Added_Date">Search Work Order By Date</label><br>
-            <input type="date" [(ngModel)]="Added_Date">
-            <button (click)="OrderbyDate()"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <!-- <input type="date" [(ngModel)]="Added_Date"> -->
+
+            <div class="input-group">
+                <input type="date" class="form-control input" id="inlineFormInputGroup" placeholder="Date"
+                    [(ngModel)]="Added_Date">
+                <div class="input-group-prepend">
+                    <div class="input-group-text" (click)="OrderbyDate()"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+            </div>
             <br><br>
+            <!-- <button class="btn bttns" type="button" id="button-addon2" (click)="OrderbyDate()"><i
+                    class="fa-solid fa-magnifying-glass"></i></button> -->
+
+            <!-- <br><br> -->
             <div class="container">
                 <table class="table custom-table" id="excel-table">
                     <thead>
@@ -59,7 +71,7 @@
 
                         <!-- ================= Requirement & Client ================= -->
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Requirement Number</label>
                                 <!-- <select formControlName="Req_id" class="Se">
                             <option *ngFor="let mat of AllRequirementData" [value]="mat.Req_id">
@@ -74,16 +86,16 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Client Name</label>
                                 <input class="form-control" formControlName="Client_Name" readonly>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Requirement Id</label>
                                 <input class="form-control" formControlName="Req_id" readonly>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Purchase_Number</label>
                                 <input class="form-control" formControlName="Purchase_Number" readonly placeholder="">
                                 <!-- <input class="form-control" formControlName="Purchase_Number" readonly> -->
@@ -93,12 +105,12 @@
 
                         <!-- ================= Other Details ================= -->
                         <div class="row">
-                            <!-- <div class="col-md-4">
+                            <!-- <div class="col-md-6">
                 <label>Payment Term</label>
                 <input class="form-control" formControlName="Payment_term">
             </div> -->
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Manager Name </label>
                                 <br>
                                 <select class="form-control" formControlName="Manager_Name">
@@ -108,7 +120,7 @@
                                 </select> <br>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Engineer Name</label>
                                 <br>
                                 <select class="form-control" formControlName="Engineer_Name">
@@ -119,7 +131,7 @@
 
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>QC Name</label>
                                 <br>
                                 <select class="form-control" formControlName="QC_Name">
@@ -129,7 +141,7 @@
                                 </select> <br>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Dispatch Manager Name</label>
                                 <br>
                                 <select class="form-control" formControlName="DispatchManager_Name">
@@ -139,12 +151,12 @@
                                 </select> <br>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Due Date</label>
                                 <input type="date" class="form-control" formControlName="Due_Date">
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
 
                                 <label>Status</label>
                                 <select class="form-control" formControlName="WorkOrder_Status">

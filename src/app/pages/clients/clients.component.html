@@ -57,9 +57,17 @@
 
             <label for="Added_Date">Search Client Data by Date</label>
             <br>
-            <input type="date" [(ngModel)]="Added_Date">
-            <button (click)="ByDate()"><i class="fa-solid fa-magnifying-glass"></i></button>
-
+            <!-- <input type="date" [(ngModel)]="Added_Date">
+            <button class="btn bttns" type="button" id="button-addon2" (click)="ByDate()"><i class="fa-solid fa-magnifying-glass"></i></button> -->
+            <div class="input-group">
+                <input type="date" class="form-control input" id="inlineFormInputGroup" placeholder="Date"
+                    [(ngModel)]="Added_Date">
+                <div class="input-group-prepend">
+                    <div class="input-group-text" (click)="ByDate()"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+            </div>
+            <br><br>
             <br><br>
             <div class="row">
                 <br>

@@ -5,11 +5,10 @@ select {
 input {
     width: 100%;
 }
-
-.input {
-    width: 70%;
+.input-group{
+    width: 50%;
 }
 
-.card {
+.card { 
     background-color: #c4c1cfab;
 }

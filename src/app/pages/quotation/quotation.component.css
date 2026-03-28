@@ -3,9 +3,13 @@ select {
 }
 
 input {
-    width: 80%;
+    width: 100%;
 }
 
-.card{
+.input-group{
+    width: 50%;
+}
+
+.card {
     background-color: #c4c1cfab;
 }

@@ -18,8 +18,19 @@
                     </div>
                     <div class="col-md-6">
                         <label for="Added_Date">Search Challan Data by Date</label><br>
-                        <input type="date" [(ngModel)]="Added_Date" width="80">
-                        <button (click)="challanBydate()"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+                        <div class="input-group">
+                            <input type="date" class="form-control input" id="inlineFormInputGroup" placeholder="Date"
+                                [(ngModel)]="Added_Date">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" (click)="challanBydate()"><i
+                                        class="fa-solid fa-magnifying-glass"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
+                        <!-- <input type="date" [(ngModel)]="Added_Date" width="80">
+                        <button class="btn bttns" type="button" id="button-addon2" (click)="challanBydate()"><i class="fa-solid fa-magnifying-glass"></i></button> -->
                     </div>
                 </div>
 

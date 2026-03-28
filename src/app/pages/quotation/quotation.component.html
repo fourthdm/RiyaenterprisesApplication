@@ -151,9 +151,19 @@
         <div class="col-md-4">
             <h3 class="text-center ">All Quotation Data</h3> <br>
             <label for="Added_Date">Search Quotation By Date</label> <br>
-            <input type="date" [(ngModel)]="Added_Date">
-            <button (click)="Quotationbydate()"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <!-- <input type="date" [(ngModel)]="Added_Date" class="input">
+            <button class="btn bttns" type="button" id="button-addon2" (click)="Quotationbydate()"><i class="fa-solid fa-magnifying-glass"></i></button> -->
+            <div class="input-group">
+                <input type="date" class="form-control input" id="inlineFormInputGroup" placeholder="Date"
+                    [(ngModel)]="Added_Date">
+                <div class="input-group-prepend">
+                    <div class="input-group-text" (click)="Quotationbydate()"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+            </div>
             <br><br>
+          
+            <!-- <br><br> -->
             <div class="table-responsive">
                 <table class="table custom-table" id="excel-table">
                     <thead>
@@ -201,7 +211,7 @@
 
                         <!-- ================= Requirement & Client ================= -->
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Requirement Number</label>
                                 <!-- <select formControlName="Req_id" class="Se">
                             <option *ngFor="let mat of AllRequirementData" [value]="mat.Req_id">
@@ -217,18 +227,18 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Client Name</label>
                                 <input class="form-control" formControlName="Client_Name" readonly>
                             </div>
 
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Requirement Id</label>
                                 <input class="form-control" formControlName="Req_id" readonly>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>GST No</label>
                                 <input class="form-control" formControlName="GST_No" readonly>
                             </div>
@@ -309,24 +319,20 @@
                         </div>
 
                         <!-- ================= Totals ================= -->
-                        <div class="text-end mt-3">
+                        <div class="text-end">
                             <h5>Total Amount : ₹ {{ getGrandTotal() }}</h5>
                         </div>
 
-                        <div class="row mt-3">
-                            <div class="col-md-4 offset-md-8">
+                        <div class="row ">
+                            <div class="col-md-6 offset-md-6">
                                 <label>Discount</label>
                                 <input class="form-control" type="number" formControlName="Discount_Amount">
                             </div>
                         </div>
-
-
-
                         <hr>
-
                         <!-- ================= Other Details ================= -->
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <!-- <label>Payment Term</label> -->
                                 <label for="Payment_term">Payment term: </label>
                                 <select class="form-control" formControlName="Payment_term" aria-label="select example">
@@ -340,7 +346,7 @@
                                 <!-- <input class="form-control" formControlName="Payment_term"> -->
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <!-- <label>Shipping Method</label>
                         <input class="form-control" formControlName="Shipping_Method"> -->
 
@@ -358,14 +364,14 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Validity Date</label>
                                 <input type="date" class="form-control" formControlName="Validity_Date">
                             </div>
                         </div>
 
                         <div class="row mt-3">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Status</label>
                                 <select class="form-control" formControlName="Quotation_Status">
                                     <option value="Create">Create</option>

@@ -5,3 +5,7 @@ select {
 .card {
     background-color: #c4c1cfab;
 }
+
+.input-group{
+    width: 50%;
+}

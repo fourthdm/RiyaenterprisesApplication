@@ -2,6 +2,16 @@ select {
     width: 100%;
 }
 
-.input {
-width: 100%;
+/* .input {
+    width: 100%;
+} */.input-group{
+    width: 50%;
+}
+
+.card {
+    background-color: #c4c1cfab;
+}
+
+.bttns{
+    border: 1px solid #c4c1cfab;
 }

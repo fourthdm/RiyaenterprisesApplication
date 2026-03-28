@@ -11,9 +11,19 @@
                 <div>
                     <label for="Added_Date">Search a Requirement by Date.</label>
                     <br>
-                    <input type="date" [(ngModel)]="Added_Date" class="input">
+                    <div class="input-group">
+                        <input type="date" class="form-control input" id="inlineFormInputGroup" placeholder="Date"
+                            [(ngModel)]="Added_Date">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text" (click)="requirementbyDate()"><i
+                                    class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                    <!-- <input type="date" [(ngModel)]="Added_Date" class="input">
                     <button class="btn bttns" type="button" id="button-addon2" (click)="requirementbyDate()"><i
-                            class="fa-solid fa-magnifying-glass"></i></button>
+                            class="fa-solid fa-magnifying-glass"></i></button> -->
                 </div>
             </div><br>
 

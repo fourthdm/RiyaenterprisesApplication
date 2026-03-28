@@ -9,9 +9,19 @@
                     <h3>All Bill</h3>
                 </div>
                 <label for="Added_Date">Search Bill by Date</label><br>
-                <input type="date" [(ngModel)]="Added_Date" width="80">
-                <button (click)="ByDate()"><i class="fa-solid fa-magnifying-glass"></i></button>
-                <br> <br>
+                <div class="input-group">
+                    <input type="date" class="form-control input" id="inlineFormInputGroup" placeholder="Date"
+                        [(ngModel)]="Added_Date">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" (click)="ByDate()"><i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                <!-- <input type="date" [(ngModel)]="Added_Date" width="80">
+                <button class="btn bttns" type="button" id="button-addon2" (click)="ByDate()"><i class="fa-solid fa-magnifying-glass"></i></button> -->
+                <!-- <br> <br> -->
+
                 <table class="table custom-table" id="excel-table">
                     <thead>
                         <tr>
@@ -63,171 +73,174 @@
         <div class="col-md-7">
             <br><br>
             <h3 class="text-center mb-4">Create Bill</h3>
+            <div class="card">
+                <div class="card-body">
 
-            <form [formGroup]="AddBillForm" (ngSubmit)="submitPurchaseorder()">
+                    <form [formGroup]="AddBillForm" (ngSubmit)="submitPurchaseorder()">
 
-                <!-- ================= Requirement & Client ================= -->
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>Quotation Number</label>
-                        <!-- <select formControlName="Req_id" class="Se">
+                        <!-- ================= Requirement & Client ================= -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Quotation Number</label>
+                                <!-- <select formControlName="Req_id" class="Se">
                             <option *ngFor="let mat of AllRequirementData" [value]="mat.Req_id">
                                 {{mat.Req_id}}</option>
                         </select> <br> -->
-                        <select class="form-control" formControlName="Purchase_Number"
-                            (change)="onRequirementSelect($any($event.target).value)">
-                            <option value="">-- Select Purchase Number --</option>
-                            <option *ngFor="let r of AllPurchaseOrder" [value]="r.Purchase_Number">
-                                {{ r.Purchase_Number }}
-                            </option>
-                        </select>
-                    </div>
+                                <select class="form-control" formControlName="Purchase_Number"
+                                    (change)="onRequirementSelect($any($event.target).value)">
+                                    <option value="">-- Select Purchase Number --</option>
+                                    <option *ngFor="let r of AllPurchaseOrder" [value]="r.Purchase_Number">
+                                        {{ r.Purchase_Number }}
+                                    </option>
+                                </select>
+                            </div>
 
-                    <div class="col-md-4">
-                        <label>Client Name</label>
-                        <input class="form-control" formControlName="Client_Name" readonly>
-                    </div>
+                            <div class="col-md-6">
+                                <label>Client Name</label>
+                                <input class="form-control" formControlName="Client_Name" readonly>
+                            </div>
 
-                    <div class="col-md-4">
-                        <label>Requirement Number</label>
-                        <input class="form-control" formControlName="Requirement_No" readonly>
-                    </div>
+                            <div class="col-md-6">
+                                <label>Requirement Number</label>
+                                <input class="form-control" formControlName="Requirement_No" readonly>
+                            </div>
 
-                    <div class="col-md-4">
-                        <label>GST No</label>
-                        <input class="form-control" formControlName="GST_No" readonly>
-                    </div>
+                            <div class="col-md-6">
+                                <label>GST No</label>
+                                <input class="form-control" formControlName="GST_No" readonly>
+                            </div>
 
-                    <div class="col-md-4">
-                        <label>Payment Term</label>
-                        <input class="form-control" formControlName="Payment_term" readonly>
-                    </div>
+                            <div class="col-md-6">
+                                <label>Payment Term</label>
+                                <input class="form-control" formControlName="Payment_term" readonly>
+                            </div>
 
 
-                    <div class="col-md-4">
-                        <label>Payment Method</label>
-                        <input class="form-control" formControlName="Payment_Method">
-                    </div>
+                            <div class="col-md-6">
+                                <label>Payment Method</label>
+                                <input class="form-control" formControlName="Payment_Method">
+                            </div>
 
-                    <div class="col-md-4">
-                        <label>Shipping Method</label>
-                        <input class="form-control" formControlName="Shipping_Method" readonly>
-                    </div>
+                            <div class="col-md-6">
+                                <label>Shipping Method</label>
+                                <input class="form-control" formControlName="Shipping_Method" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <label>Billing Address</label>
+                                <textarea class="form-control" formControlName="Client_Address" rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!-- ================= Products ================= -->
+                        <h5 class="mt-3">Products</h5>
+
+                        <div formArrayName="items">
+                            <table class="table custom-table table-bordered" *ngIf="items.length">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Material</th>
+                                        <th>HSN</th>
+                                        <th>Qty</th>
+                                        <th>Rate</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr *ngFor="let item of items.controls; let i=index" [formGroupName]="i">
+
+                                        <!-- AUTO FILLED -->
+                                        <td>{{ item.get('Product_Name')?.value }}</td>
+                                        <td>{{ item.get('Material_Type')?.value }}</td>
+                                        <td>{{ item.get('HSN_Code')?.value }}</td>
+                                        <td>{{ item.get('Product_Quantity')?.value }}</td>
+                                        <td>{{ item.get('Rate')?.value }}</td>
+                                        <td>{{ item.get('Subtotal')?.value }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <!-- ================= Totals ================= -->
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>SubTotal</label>
+                                <input class="form-control" formControlName="SubTotal" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Discount_Amount</label>
+                                <input class="form-control" formControlName="Discount_Amount" readonly>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Total_Amount</label>
+                                <input class="form-control" formControlName="Total_Amount" readonly>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>CGST_amount</label>
+                                <input class="form-control" formControlName="CGST_amount" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label>SGST_amount</label>
+                                <input class="form-control" formControlName="SGST_amount" readonly>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Grand Total</label>
+                                <input class="form-control" formControlName="Grand_Total" readonly>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!-- ================= Other Details ================= -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Delivery Address</label>
+                                <input class="form-control" formControlName="Purchase_Address" readonly>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Delivery Date</label> <br>
+                                <input type="date" class="input" formControlName="Delivery_Date">
+                                <!-- <input type="date" class="form-control" formControlName="Delivery_Date"> -->
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <label>Bill Status</label>
+                                <select class="form-control" formControlName="Bill_Status">
+                                    <option value="Generate">Generate</option>
+                                    <option value="Sent">Sent</option>
+                                    <option value="Approved">Approved</option>
+                                    <option value="Rejected">Rejected</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= Submit ================= -->
+                        <div class="text-center mt-4">
+                            <div class="text-danger mt-2">
+                                <!-- Bill can be Generated only after Engineer, QC & Dispatch Status Completion. -->
+                            </div>
+                            <button type="submit" class="btn btn-primary px-5">
+                                Create Bill
+                            </button>
+                        </div>
+                    </form>
                 </div>
-
-                <div class="row mt-2">
-                    <div class="col-md-12">
-                        <label>Billing Address</label>
-                        <textarea class="form-control" formControlName="Client_Address" rows="2"></textarea>
-                    </div>
-                </div>
-
-                <hr>
-
-                <!-- ================= Products ================= -->
-                <h5 class="mt-3">Products</h5>
-
-                <div formArrayName="items">
-                    <table class="table table-bordered" *ngIf="items.length">
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Material</th>
-                                <th>HSN</th>
-                                <th>Qty</th>
-                                <th>Rate</th>
-                                <th>Subtotal</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr *ngFor="let item of items.controls; let i=index" [formGroupName]="i">
-
-                                <!-- AUTO FILLED -->
-                                <td>{{ item.get('Product_Name')?.value }}</td>
-                                <td>{{ item.get('Material_Type')?.value }}</td>
-                                <td>{{ item.get('HSN_Code')?.value }}</td>
-                                <td>{{ item.get('Product_Quantity')?.value }}</td>
-                                <td>{{ item.get('Rate')?.value }}</td>
-                                <td>{{ item.get('Subtotal')?.value }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-
-                <!-- ================= Totals ================= -->
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>SubTotal</label>
-                        <input class="form-control" formControlName="SubTotal" readonly>
-                    </div>
-                    <div class="col-md-4">
-                        <label>Discount_Amount</label>
-                        <input class="form-control" formControlName="Discount_Amount" readonly>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label>Total_Amount</label>
-                        <input class="form-control" formControlName="Total_Amount" readonly>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label>CGST_amount</label>
-                        <input class="form-control" formControlName="CGST_amount" readonly>
-                    </div>
-                    <div class="col-md-4">
-                        <label>SGST_amount</label>
-                        <input class="form-control" formControlName="SGST_amount" readonly>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label>Grand Total</label>
-                        <input class="form-control" formControlName="Grand_Total" readonly>
-                    </div>
-                </div>
-
-                <hr>
-
-                <!-- ================= Other Details ================= -->
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>Delivery Address</label>
-                        <input class="form-control" formControlName="Purchase_Address" readonly>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label>Delivery Date</label> <br>
-                        <input type="date" class="input" formControlName="Delivery_Date">
-                        <!-- <input type="date" class="form-control" formControlName="Delivery_Date"> -->
-                    </div>
-
-
-                    <div class="col-md-4">
-                        <label>Bill Status</label>
-                        <select class="form-control" formControlName="Bill_Status">
-                            <option value="Generate">Generate</option>
-                            <option value="Sent">Sent</option>
-                            <option value="Approved">Approved</option>
-                            <option value="Rejected">Rejected</option>
-                        </select>
-                    </div>
-
-                </div>
-
-
-                <!-- ================= Submit ================= -->
-                <div class="text-center mt-4">
-                    <div class="text-danger mt-2">
-                        <!-- Bill can be Generated only after Engineer, QC & Dispatch Status Completion. -->
-                    </div>
-                    <button type="submit" class="btn btn-primary px-5">
-                        Create Bill
-                    </button>
-                </div>
-
-            </form>
+            </div>
 
         </div><br>
     </div>
