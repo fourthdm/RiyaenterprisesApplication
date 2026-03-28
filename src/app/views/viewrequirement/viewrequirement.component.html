@@ -46,14 +46,13 @@
                                 <td>{{ item.HSN_Code }}</td>
                                 <td>{{ item.Product_Quantity }}</td>
                                 <td>{{ item.Material_Type }}</td>
-
                                 <td>
-                                    <p  style="cursor: pointer;" (click)="editrequirementitems(item.Item_Id)" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal1" title="Update a Product">
+                                    <p style="cursor: pointer;" (click)="editrequirementitems(item.Item_Id)"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal1" title="Update a Product">
                                         <i class="fa-solid fa-pen-to-square"></i>
 
-
-                                        <span style="padding-left: 5%; cursor: pointer;" (click)="deleteItem(item.Item_Id)" title="Delete a Product">
+                                        <span style="padding-left: 5%; cursor: pointer;"
+                                            (click)="deleteItem(item.Item_Id)" title="Delete a Product">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </span>
                                     </p>
@@ -105,8 +104,6 @@
                 </div>
             </div>
         </div>
-
-
         <!-- <div class="container">
             <br><br><br>
 
