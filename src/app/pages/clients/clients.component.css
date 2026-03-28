@@ -1,3 +1,12 @@
-.input-group{
+.input-group {
     width: 50%;
+}
+
+.card {
+    background-color: #c4c1cfab;
+    color: black;
+}
+
+label{
+    color: black;
 }
