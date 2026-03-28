@@ -1,12 +1,12 @@
 <div class="container"> <br><br><br>
     <div class="row">
         <div class="container">
-            <br><br><br>
+            <br><br>
             <!-- <pre>{{AllQuotations|json}}</pre> -->
 
             <div class="row">
                 <div class="text-center">
-                    <h2>Challan Details</h2>
+                    <h2>Challan Detail</h2>
                     <br>
                 </div>
 
@@ -33,7 +33,7 @@
                             <p><b>Payment Method :</b> {{ a.Payment_Method }}</p>
                             <p><b>Shipping Method :</b> {{ a.Shipping_Method }}</p>
                             <p><b>Delivery Address:</b> {{ a.Purchase_Address }}</p>
-                            <p><b>Status :</b> {{ a.Bill_Status }}</p>
+                            <p><b>Status :</b> {{ a.Challan_Status }}</p>
                             <p><b>Delivery Date :</b>
                                 {{ a.Delivery_Date | date}},
                                 <b>Delivery Time :</b> {{ a.Delivery_Date | date:'hh:mm:ss a' }}
@@ -41,10 +41,9 @@
                         </div>
 
                         <div class="col-12">
-                            <h5 class="mb-2">Products</h5>
-
+                            <h5 class="mb-2">Products :</h5>
                             <!-- 🔹 Product loop -->
-                            <table class="table table-bordered">
+                            <table class="table custom-table">
                                 <thead>
                                     <tr>
                                         <th>Sr No</th>
@@ -91,9 +90,8 @@
                         {{ a.Updated_Date | date }} |
                         {{ a.Updated_Date | date:'hh:mm:ss a' }}
                     </p>
-
                 </div>
-            </div>
+            </div><br><br><br>
         </div>
 
         <!-- <div class="text-center">

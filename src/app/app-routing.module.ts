@@ -53,7 +53,7 @@ const routes: Routes = [
       { path: 'PurchaseOrderDetails/:Purchase_id', component: ViewpurchaseorderComponent },
       { path: 'WorkorderDetails/:Workorder_Id', component: ViewworkorderComponent },
       { path: 'BillDetails/:Bill_Id', component: ViewbillComponent },
-      { path: 'ChallanDetails/:Challan_id', component: ViewchallanComponent },
+      { path: 'ChallanDetails/:Challan_Id', component: ViewchallanComponent },
       { path: '**', redirectTo: 'AdminDashboard' }
     ]
   },
