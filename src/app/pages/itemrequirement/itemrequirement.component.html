@@ -11,7 +11,7 @@
                 <div>
                     <label for="Added_Date">Search a Requirement by Date.</label>
                     <br>
-                    <input type="date" [(ngModel)]="Added_Date">
+                    <input type="date" [(ngModel)]="Added_Date" class="input">
                     <button class="btn bttns" type="button" id="button-addon2" (click)="requirementbyDate()"><i
                             class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
@@ -19,7 +19,6 @@
 
 
             <div class="table-responsive">
-
                 <table class="table custom-table" id="excel-table">
                     <thead>
                         <tr>
@@ -27,7 +26,6 @@
                             <th>Requirement No</th>
                             <th>Client Name</th>
                             <th>Action</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -54,7 +52,6 @@
                                     </span>
                                 </p>
                             </td>
-
                         </tr>
                     </tbody>
                 </table>
