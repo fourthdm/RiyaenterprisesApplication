@@ -450,6 +450,10 @@ export class RestService {
   Quotationbydate(data: any) {
     return this._http.post(this.ApiUrl + '/QuotationbyDate', data);
   }
+
+  DeleteQuotationNew(Quotation_Id: any) {
+    return this._http.delete(this.ApiUrl + '/Deletequotations/' + Quotation_Id);
+  }
   //All Quotations API End 
 
   // Purchase Order 
@@ -475,6 +479,10 @@ export class RestService {
 
   PurchaseorderbyDate(data: any) {
     return this._http.post(this.ApiUrl + '/PurchaseorderbyDate', data);
+  }
+
+  DeletePurchaseorder(Purchase_id: any) {
+    return this._http.delete(this.ApiUrl + '/DeletePurchaseorder/' + Purchase_id);
   }
 
   // getPurchaseOrderByReq(Req_id: any) {
@@ -522,6 +530,10 @@ export class RestService {
 
   BillbyDate(data: any) {
     return this._http.post(this.ApiUrl + '/BillByDate', data);
+  }
+
+  Deletebills(Bill_Id: any) {
+    return this._http.delete(this.ApiUrl + '/DeleteBill/' + Bill_Id);
   }
 
   //API for Bills Ends
