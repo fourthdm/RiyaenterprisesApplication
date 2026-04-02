@@ -36,6 +36,7 @@ export class ItemrequirementComponent {
       Client_Email: ['', [Validators.required, Validators.email]],
       GST_No: ['', [Validators.required]],
       Status: ['', Validators.required],
+      Discount_Amount: [0],
       items: this.fb.array([])
     });
   }
@@ -98,19 +99,53 @@ export class ItemrequirementComponent {
     return this.UpdateRequirementform.get('items') as FormArray;
   }
 
+  // addUpdateItem(item: any = null) {
+  //   this.items.push(
+  //     this.fb.group({
+  //       Item_Id: [item?.Item_Id || null],   // ✅ IMPORTANT
+  //       Product_Name: [item?.Product_Name || ''],
+  //       Material_Type: [item?.Material_Type || ''],
+  //       Product_Quantity: [item?.Product_Quantity || ''],
+  //       HSN_Code: [item?.HSN_Code || ''],
+  //       Rate: [item?.Rate || 0],                         // ✅ FIX
+  //       Manufacturing_Cost: [item?.Manufacturing_Cost || 0], // ✅ FIX
+  //       Material_Cost: [item?.Material_Cost || 0],       // ✅ FIX
+  //       Dispatch_Cost: [item?.Dispatch_Cost || 0]        // ✅ FIX
+  //     })
+  //   );
+  // }
 
-  addUpdateItem(data: any = null) {
+  // addUpdateItem(data: any = null) {
+  //   this.items.push(
+  //     this.fb.group({
+  //       //  👈 important
+  //       Item_Id: [data?.Item_Id || null], //
+  //       Product_Name: [data?.Product_Name || ''],
+  //       Material_Type: [data?.Material_Type || ''],
+  //       Product_Quantity: [data?.Product_Quantity || ''],
+  //       HSN_Code: [data?.HSN_Code || ''],
+  //       Rate: [data?.Rate || 0],
+  //       Manufacturing_Cost: [data?.Manufacturing_Cost || 0],
+  //       Material_Cost: [data?.Material_Cost || 0],
+  //       Dispatch_Cost: [data?.Dispatch_Cost || 0]
+  //     })
+  //   );
+  // }
+
+  addUpdateItem(item: any = null) {
     this.items.push(
       this.fb.group({
-        Item_Id: [data?.Item_Id || null], // 👈 important
-        Product_Name: [data?.Product_Name || ''],
-        Material_Type: [data?.Material_Type || ''],
-        Product_Quantity: [data?.Product_Quantity || ''],
-        HSN_Code: [data?.HSN_Code || ''],
-        Rate: [data?.Rate || 0],
-        Manufacturing_Cost: [data?.Manufacturing_Cost || 0],
-        Material_Cost: [data?.Material_Cost || 0],
-        Dispatch_Cost: [data?.Dispatch_Cost || 0]
+        Item_Id: [item?.Item_Id || null],
+        Product_Name: [item?.Product_Name || ''],
+        Material_Type: [item?.Material_Type || ''],
+        Product_Quantity: [item?.Product_Quantity || ''],
+        HSN_Code: [item?.HSN_Code || ''],
+
+        // ✅ THESE ARE THE MAIN FIX
+        Rate: [item?.Rate || 0],
+        Manufacturing_Cost: [item?.Manufacturing_Cost || 0],
+        Material_Cost: [item?.Material_Cost || 0],
+        Dispatch_Cost: [item?.Dispatch_Cost || 0]
       })
     );
   }
@@ -266,6 +301,13 @@ export class ItemrequirementComponent {
   removeProduct(i: number) {
     this.products.removeAt(i);
   }
+  // editRequirement(Req_id: any) {
+  //   const Requireselect = this.allrequirement.find(requirement => requirement.Req_id === Req_id);
+  //   if (Requireselect) {
+  //     this.Selectedrequirement = 1,
+  //       this.UpdateRequirementform.patchValue(Requireselect);
+  //   }
+  // }
 
   editRequirement(Req_id: any) {
 
@@ -282,7 +324,8 @@ export class ItemrequirementComponent {
       Client_PhoneNo: req.Client_PhoneNo,
       Client_Email: req.Client_Email,
       GST_No: req.GST_No,
-      Status: req.Status
+      Status: req.Status,
+      Discount_Amount: req.Discount_Amount || 0
     });
 
     // ✅ CLEAR OLD ITEMS
@@ -294,18 +337,11 @@ export class ItemrequirementComponent {
     });
   }
 
-  // editRequirement(Req_id: any) {
-  //   const Requireselect = this.allrequirement.find(requirement => requirement.Req_id === Req_id);
-  //   if (Requireselect) {
-  //     this.Selectedrequirement = 1,
-  //       this.UpdateRequirementform.patchValue(Requireselect);
-  //   }
-  // }
-
   updateRequirement() {
 
     const payload = {
       ...this.UpdateRequirementform.value,
+      Discount_Amount: this.UpdateRequirementform.value.Discount_Amount || 0, // ✅ FIX
       items: this.UpdateRequirementform.value.items // ✅ correct
     };
 
@@ -321,6 +357,15 @@ export class ItemrequirementComponent {
           console.error(err);
         }
       });
+  }
+
+  DeleteRequirement(Req_id: any) {
+    if (confirm("Delete this requirement?")) {
+      this._rest.DeleteRequirement(Req_id).subscribe((res: any) => {
+        alert(res.message);
+        this.AllRequirements();
+      });
+    }
   }
 
   // updateRequirement() {

@@ -184,7 +184,7 @@ export class RestService {
   }
 
   DeleteRequirement(Req_id: number) {
-    return this._http.delete(this.ApiUrl + '/DeleteREquirement/' + Req_id);
+    return this._http.delete(this.ApiUrl + '/DeleteRequirement/' + Req_id);
   }
 
   UpdateFullrequirement(Req_id: any, data: any) {

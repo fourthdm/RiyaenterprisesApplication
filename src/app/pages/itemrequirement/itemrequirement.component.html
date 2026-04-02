@@ -55,7 +55,7 @@
                                         title="Edit a Requirement" (click)="editRequirement(a.Req_id)">
                                         <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                     </a>
-                                    <span style="margin-left: 5%;">
+                                    <span style="margin-left: 5%;" (click)="DeleteRequirement(a.Req_id)">
                                         <a type="button" title="Delete a Requirement">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </a>
@@ -307,6 +307,12 @@
                                     </select>
                                 </div>
 
+                                <div class="col-md-6">
+                                    <label for="Discount_Amount"> Discount Amount</label>
+                                    <br>
+                                    <input class="form-control" formControlName="Discount_Amount"
+                                        placeholder="Discount Amount">
+                                </div>
                             </div>
                             <hr>
                             <div formArrayName="items">
@@ -345,6 +351,34 @@
                                                 placeholder="HSN Code">
                                             <br>
                                         </div> <br>
+
+                                        <div class="col-md-6">
+                                            <label for="Rate"> Rate</label>
+                                            <input class="form-control" type="number" formControlName="Rate"
+                                                placeholder="Rate">
+                                            <br>
+                                        </div> <br>
+
+                                        <div class="col-md-6">
+                                            <label for="Manufacturing_Cost"> Manufacturing Cost</label>
+                                            <input class="form-control" type="number"
+                                                formControlName="Manufacturing_Cost" placeholder="Manufacturing Cost">
+                                        </div> <br>
+
+                                        <div class="col-md-6">
+                                            <label for="Material_Cost"> Material Cost</label>
+                                            <input class="form-control" type="number" formControlName="Material_Cost"
+                                                placeholder="Material Cost">
+                                        </div> <br>
+
+                                        <div class="col-md-6">
+                                            <label for="Dispatch_Cost"> Dispatch Cost</label>
+                                            <input class="form-control" type="number" formControlName="Dispatch_Cost"
+                                                placeholder="Dispatch Cost">
+                                        </div> <br>
+
+
+
 
                                         <!-- <div class="col-md-6">
                                             <label>DWG File</label>

@@ -9,3 +9,8 @@ select {
 .input-group{
     width: 50%;
 }
+
+.Display {
+    color: white;
+    background-color: green;
+}

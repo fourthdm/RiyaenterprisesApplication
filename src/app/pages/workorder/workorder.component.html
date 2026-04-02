@@ -30,7 +30,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let a of WorkOrder | paginate :{itemsPerPage :8 ,currentPage:pro}, let i = index">
+                        <tr *ngFor="let a of WorkOrder | paginate :{itemsPerPage :8 ,currentPage:pro}, let i = index"
+                            [ngClass]="{'Display': a.WorkOrder_Status === 'Completed'} ">
                             <td>{{a.Workorder_Id}}</td>
                             <td>
                                 <p title="View Quotation Details"><a href=""
