@@ -195,6 +195,7 @@ export class BillComponent {
     this._rest.AddBill(payload).subscribe(res => {
       alert('Bill Added Successfully');
       this.AddBillForm.reset();
+      this.Abill();
       this.ngOnInit();
     });
   }

@@ -67,7 +67,7 @@ export class ManagerworkorderComponent {
   ngOnInit(): void {
     this.Allworkorderss();
     this.Allrequirements();
-    this.AllPurchaseOrder();
+    // this.AllPurchaseOrder();
     this.AllQC();
     this.AllEngineer();
     this.AllManager();
@@ -115,7 +115,7 @@ export class ManagerworkorderComponent {
   }
 
   Allrequirements() {
-    this._rest.AllRequirement().subscribe((res: any) => {
+    this._rest.Allrequirementss().subscribe((res: any) => {
       this.AllRequirementData = res.data;
     }, (err: any) => {
       console.error('Error fetching requirements:', err);

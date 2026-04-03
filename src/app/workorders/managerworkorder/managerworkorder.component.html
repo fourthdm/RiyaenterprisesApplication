@@ -148,11 +148,6 @@
                     <tr>
                         <th>Sr No.</th>
                         <th>Work Order Number</th>
-                        <th>Product Name</th>
-                        <th>Product Quantity </th>
-                        <th>Design File</th>
-                        <th>PDFDesign File</th>
-                        <th>Material Type</th>
                         <th>Client Name</th>
                         <th>Added Date</th>
                         <th>Status Updated Time</th>
@@ -172,7 +167,7 @@
                                     [routerLink]="['/ManagerDashboard/WorkorderDetails',a.Workorder_Id]">{{a.WO_Number}}</a>
                             </p>
                         </td>
-                        <td>{{a.Product_Name}}</td>
+                        <!-- <td>{{a.Product_Name}}</td>
                         <td>{{a.Product_Quantity}}</td>
                         <td><a (click)="downloadFromUrl(a.Design_File)" title="Download a Design File">
                                 <i class="fa-solid fa-download"></i>
@@ -180,7 +175,7 @@
                         <td><a (click)="downloadFromUrl(a.PDFDesign_File)" title="Download a PDF Design File">
                                 <i class="fa-solid fa-download"></i>
                             </a></td>
-                        <td>{{a.Material_Type}}</td>
+                        <td>{{a.Material_Type}}</td> -->
                         <td>{{a.Client_Name}}</td>
                         <td>{{a.Added_Date | date}} <br> {{a.Added_Date | date : 'h:mm:a'}} </td>
                         <td>{{a.Manager_Status_Time | date}} <br> {{a.Manager_Status_Time | date : 'h:mm:a'}} </td>
@@ -368,5 +363,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div><br><br>
 </div>

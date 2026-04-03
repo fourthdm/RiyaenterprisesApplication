@@ -7,7 +7,9 @@ import { StateService } from './state.service';
 })
 export class RestService {
 
-  ApiUrl = 'http://localhost:3000';
+  // ApiUrl = 'http://localhost:3000';
+  ApiUrl = 'https://ysurveillance.com/Riyaenterprises';
+
   // ApiUrl = 'https://ysurveillance.com/Software';
 
   constructor(private _http: HttpClient, private _State: StateService) { }
@@ -58,6 +60,8 @@ export class RestService {
   AddedQuotation(data: any) {
     return this._http.post(this.ApiUrl + '/Addquotation', data);
   }
+
+
 
   AllQuotation() {
     return this._http.get(this.ApiUrl + '/AllQuotation');
@@ -396,7 +400,7 @@ export class RestService {
   }
 
   getBillStatusByPO(po: string) {
-    return this._http.get<any>(`${this.ApiUrl}/BillstatusbyPO/${po}`);
+    return this._http.get<any>(`${this.ApiUrl}/getBillstatusbyPO/${po}`);
   }
 
   UpdateChallan(data: any) {

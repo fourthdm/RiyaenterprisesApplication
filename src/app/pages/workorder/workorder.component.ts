@@ -190,14 +190,42 @@ export class WorkorderComponent implements OnInit {
   // }
 
   submitworkorder() {
+
     const payload = this.AddWorkorderform.getRawValue();
-    console.log(payload); // ✅ MUST SHOW items ARRAY
-    this._rest.Workorder(payload).subscribe(res => {
-      alert('Workorder Added Successfully');
-      this.AddWorkorderform.reset();
-      this.ngOnInit();
+    console.log(payload);
+
+    this._rest.Workorder(payload).subscribe({
+
+      next: (res: any) => {
+        alert(res.message || 'Workorder Added Successfully');
+        this.AddWorkorderform.reset();
+        this.ngOnInit();
+      },
+
+      error: (err) => {
+        console.log(err);
+
+        // 🔥 show backend message
+        if (err.error && err.error.message) {
+          alert(err.error.message);
+        } else {
+          alert('Something went wrong');
+        }
+      }
+
     });
   }
+
+  // submitworkorder() {
+  //   const payload = this.AddWorkorderform.getRawValue();
+  //   console.log(payload); // ✅ MUST SHOW items ARRAY
+  //   this._rest.Workorder(payload).subscribe(res => {
+
+  //     alert('Workorder Added Successfully');
+  //     this.AddWorkorderform.reset();
+  //     this.ngOnInit();
+  //   });
+  // }
 
   DeleteWorkorder(Workorder_Id: any) {
     if (confirm('Are You Sure to Delete a Workorder?')) {

@@ -1,6 +1,58 @@
 <div class="container-fluid">
     <br><br><br> <br><br>
-    <div class="row">
+
+    <div class="row" *ngIf="isAccountant">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="text-center">
+                    <h5>All Requirement Data</h5>
+                </div>
+                <br>
+                <div class="table-responsive">
+                    <table class="table custom-table" id="excel-table">
+                        <thead>
+                            <tr>
+                                <th>Sr No.</th>
+                                <th>Requirement No</th>
+                                <th>Client Name</th>
+                                <th>Client Address</th>
+                                <th>GST No</th>
+                                <th>Status</th>
+                                <th>Added Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let a of allrequirement | paginate :{itemsPerPage :10 ,currentPage:pro}, let i = index">
+                                <td>{{a.Req_id}}</td>
+                                <td>
+                                    <p title="View Requirement Details"><a href=""
+                                            [routerLink]="['/AdminDashboard/RequirementDetails', a.Req_id]">{{a.Requirement_No}}</a>
+                                    </p>
+                                </td>
+
+                                <td>{{a.Client_Name}}</td>
+                                <td>{{a.Client_Address}}</td>
+                                <td>{{a.GST_No}}</td>
+                                <td>{{a.Status}}</td>
+                                <td>{{a.Added_Date | date:'dd/MM/yyyy'}}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="text-center">
+                        <pagination-controls (pageChange)=" pro = $event "
+                            style="background-color: #252847 !important; z-index: -2 !important;"></pagination-controls>
+                    </div>
+
+                </div>
+                <br><br>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="isAdmin">
         <div class="col-md-4">
             <div>
                 <br>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { jwtDecode } from 'jwt-decode';
 import { distinctUntilChanged } from 'rxjs';
 import { RestService } from 'src/app/services/rest.service';
 
@@ -12,6 +13,8 @@ import { RestService } from 'src/app/services/rest.service';
 export class ItemrequirementComponent {
 
   @Input() Added_Date: any;
+  isAccountant: boolean = false;
+  isAdmin: boolean = false;
 
   reqForm!: FormGroup;
   requirementData: any;
@@ -42,6 +45,8 @@ export class ItemrequirementComponent {
   }
 
   ngOnInit() {
+    this.getAccountant();
+    this.getAdmin();
     this.reqForm = this.fb.group({
       Client_Name: [''],
       Client_Address: [''],
@@ -62,6 +67,31 @@ export class ItemrequirementComponent {
     this.Allmaterial();
     this.Allclient();
     this.AllRequirements()
+  }
+
+
+  getAccountant() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decoded: any = jwtDecode(token);
+      if (decoded.Role === 'Accountant') {
+        this.isAccountant = true;
+      } else {
+        this.isAccountant = false;
+      }
+    }
+  }
+
+  getAdmin() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decoded: any = jwtDecode(token);
+      if (decoded.Role === 'SuperAdmin') {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+      }
+    }
   }
 
   Allmaterial() {
