@@ -78,6 +78,12 @@
                             <option *ngFor="let mat of AllRequirementData" [value]="mat.Req_id">
                                 {{mat.Req_id}}</option>
                         </select> <br> -->
+                                <div *ngIf="woMessage" [ngClass]="isWOExists ? 'text-danger' : 'text-success'"
+                                    class="mt-2">
+
+                                    {{ woMessage }}
+
+                                </div>
                                 <select class="form-control" formControlName="Req_id"
                                     (change)="onRequirementSelect($any($event.target).value)">
                                     <option value="">-- Select Requirement --</option>

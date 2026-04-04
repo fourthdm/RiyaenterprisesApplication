@@ -11,6 +11,8 @@ import { RestService } from 'src/app/services/rest.service';
 export class WorkorderComponent implements OnInit {
 
   @Input() Added_Date: any;
+  isWOExists: boolean = false;
+  woMessage: string = '';
 
   AllManagerdata: any[] = [];
   AllEngineerdata: any[] = [];
@@ -19,7 +21,6 @@ export class WorkorderComponent implements OnInit {
 
   AllRequirementData: any[] = [];
   WorkOrder: any[] = [];
-
   pro: any;
 
   AddWorkorderform: FormGroup;
@@ -136,6 +137,20 @@ export class WorkorderComponent implements OnInit {
 
   onRequirementSelect(reqId: string) {
 
+    if (!reqId) return;
+
+    this._rest.CheckWorkOrder(reqId).subscribe((res: any) => {
+
+      if (res.exists) {
+        this.isWOExists = true;
+        this.woMessage = 'Work Order already exists for this Requirement';
+      } else {
+        this.isWOExists = false;
+        this.woMessage = 'No Work Order exists. You can create one';
+      }
+
+    });
+
     const selectedReq = this.AllRequirementData.find(
       (r: any) => r.Req_id == reqId
     );
@@ -190,6 +205,10 @@ export class WorkorderComponent implements OnInit {
   // }
 
   submitworkorder() {
+    if (this.isWOExists) {
+      alert('❌ Work Order already exists. Cannot create again.');
+      return;
+    }
 
     const payload = this.AddWorkorderform.getRawValue();
     console.log(payload);

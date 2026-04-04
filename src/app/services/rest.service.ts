@@ -7,8 +7,8 @@ import { StateService } from './state.service';
 })
 export class RestService {
 
-  // ApiUrl = 'http://localhost:3000';
-  ApiUrl = 'https://ysurveillance.com/Riyaenterprises';
+  ApiUrl = 'http://localhost:3000';
+  // ApiUrl = 'https://ysurveillance.com/Riyaenterprises';
 
   // ApiUrl = 'https://ysurveillance.com/Software';
 
@@ -513,6 +513,10 @@ export class RestService {
   WorkOrderByDate(data: any) {
     return this._http.post(this.ApiUrl + '/Workorderbydate', data);
   }
+
+  CheckWorkOrder(Req_id: any) {
+    return this._http.get(this.ApiUrl + '/CheckWorkOrder/' + Req_id);
+  }
   //Work Order API Ends
 
   //API for Bills
@@ -540,6 +544,10 @@ export class RestService {
     return this._http.delete(this.ApiUrl + '/DeleteBill/' + Bill_Id);
   }
 
+  CheckBill(Requirement_No: any) {
+    return this._http.get(this.ApiUrl + '/CheckBill/' + Requirement_No);
+  }
+
   //API for Bills Ends
 
   //Challan API Start
@@ -565,6 +573,10 @@ export class RestService {
 
   Challanbydate(data: any) {
     return this._http.post(this.ApiUrl + '/Challanbydate', data);
+  }
+
+  CheckChallan(Requirement_No: any) {
+    return this._http.get(this.ApiUrl + '/CheckChallan/' + Requirement_No);
   }
 
   //Challan API Ends
